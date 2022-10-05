@@ -7,6 +7,9 @@ Use [lsiutil](https://github.com/exactassembly/meta-xa-stm/blob/master/recipes-s
 to crossflash between IT/IR firmwares from Linux, without vendor/product ID
 restrictions.
 
+IT = HBA (ZFS)
+IR = RAID
+
 ## Quick guide to cleanly crossflash between IT/IR firmwares
 
 `# lsiutil -e`
@@ -37,6 +40,7 @@ module (not necessary if you're not booting from the adapter).
 
 Exit lsiutil.
 
+`# lspci | grep -i SAS2008`
 `# ./lsirec 0000:01:00.0 readsbr sbr_backup.bin`
 
 Where 0000:01:00.0 is your PCI device ID.
