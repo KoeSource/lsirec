@@ -42,11 +42,14 @@ module (not necessary if you're not booting from the adapter).
 Exit lsiutil.
 
 `# lspci | grep -i SAS2008`
+
 `# ./lsirec 0000:01:00.0 readsbr sbr_backup.bin`
 
 Where 0000:01:00.0 is your PCI device ID.
 
 `# python3 sbrtool.py parse sbr_backup.bin sbr.cfg`
+
+Use the example .cfg
 
 Edit sbr.cfg with your favorite text editor. You may want to add
 `SASAddr = 0xYOUR_SAS_WWID` to make the SAS WWID persist in the SBR (I'm not
