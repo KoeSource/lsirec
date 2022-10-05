@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html class="client-js ve-available" dir="ltr" lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<title>Crossflashing Controllers - Unraid | Docs</title>
+<script async="" src="Crossflashing%20Controllers%20-%20Unraid%20|%20Docs-Dateien/analytics.js"></script><script>document.documentElement.className="client-js";RLCONF={"wgCanonicalNamespace":"","wgCanonicalSpecialPageName":!1,"wgNamespaceNumber":0,"wgPageName":"Crossflashing_Controllers","wgTitle":"Crossflashing Controllers","wgCurRevisionId":10204,"wgRevisionId":10204,"wgArticleId":2678,"wgIsArticle":!0,"wgIsRedirect":!1,"wgAction":"view","wgUserName":null,"wgUserGroups":["*"],"wgCategories":["Customising unRAID","How To","Hardware"],"wgBreakFrames":!1,"wgPageContentLanguage":"en","wgPageContentModel":"wikitext","wgSeparatorTransformTable":["",""],"wgDigitTransformTable":["",""],"wgDefaultDateFormat":"dmy","wgMonthNames":["","January","February","March","April","May","June","July","August","September","October","November","December"],"wgMonthNamesShort":["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"wgRelevantPageName":"Crossflashing_Controllers","wgRelevantArticleId":2678,"wgRequestId":"9c40b2aadf91e518afaade3b","wgCSPNonce":!1,"wgIsProbablyEditable"
+:!1,"wgRelevantPageIsProbablyEditable":!1,"wgRestrictionEdit":[],"wgRestrictionMove":[],"wgVisualEditor":{"pageLanguageCode":"en","pageLanguageDir":"ltr","pageVariantFallbacks":"en"},"wgEditSubmitButtonLabelPublish":!1};RLSTATE={"site.styles":"ready","noscript":"ready","user.styles":"ready","user":"ready","user.options":"ready","user.tokens":"loading","mediawiki.legacy.shared":"ready","mediawiki.legacy.commonPrint":"ready","mediawiki.toc.styles":"ready","skins.tweeki.styles":"ready","skins.tweeki.bootstraptheme.styles":"ready","skins.tweeki.externallinks.styles":"ready","skins.tweeki.awesome.styles":"ready","ext.visualEditor.desktopArticleTarget.noscript":"ready"};RLPAGEMODULES=["site","mediawiki.page.startup","mediawiki.page.ready","mediawiki.toc","mediawiki.searchSuggest","ext.visualEditor.desktopArticleTarget.init","ext.visualEditor.targetLoader","skins.tweeki.messages","skins.tweeki.scripts"];</script>
+<script>(RLQ=window.RLQ||[]).push(function(){mw.loader.implement("user.tokens@tffin",function($,jQuery,require,module){/*@nomin*/mw.user.tokens.set({"editToken":"+\\","patrolToken":"+\\","watchToken":"+\\","csrfToken":"+\\"});
+});});</script>
+<link rel="stylesheet" href="Crossflashing%20Controllers%20-%20Unraid%20|%20Docs-Dateien/load_002.css">
+<script async="" src="Crossflashing%20Controllers%20-%20Unraid%20|%20Docs-Dateien/load.es"></script>
+<style>
+.mw-editfont-monospace{font-family:monospace,monospace}.mw-editfont-sans-serif{font-family:sans-serif}.mw-editfont-serif{font-family:serif} .mw-editfont-monospace,.mw-editfont-sans-serif,.mw-editfont-serif{font-size:13px; }.mw-editfont-monospace.oo-ui-textInputWidget,.mw-editfont-sans-serif.oo-ui-textInputWidget,.mw-editfont-serif.oo-ui-textInputWidget{font-size:inherit}.mw-editfont-monospace > .oo-ui-inputWidget-input,.mw-editfont-sans-serif > .oo-ui-inputWidget-input,.mw-editfont-serif > .oo-ui-inputWidget-input{font-size:13px}
+.ve-init-mw-progressBarWidget{height:1em;overflow:hidden;margin:0 25%}.ve-init-mw-progressBarWidget-bar{height:1em;width:0} .ve-init-mw-progressBarWidget{height:0.75em;border:1px solid #36c;background:#fff;border-radius:2px;box-shadow:0 0.1em 0 0 rgba(0,0,0,0.15)}.ve-init-mw-progressBarWidget-bar{height:0.75em;background:#36c}
+.suggestions{overflow:hidden;position:absolute;top:0;left:0;width:0;border:0;z-index:1099;padding:0;margin:-1px 0 0 0}.suggestions-special{position:relative;background-color:#fff;cursor:pointer;border:1px solid #a2a9b1;margin:0;margin-top:-2px;display:none;padding:0.25em 0.25em;line-height:1.25em}.suggestions-results{background-color:#fff;cursor:pointer;border:1px solid #a2a9b1;padding:0;margin:0}.suggestions-result{color:#000;margin:0;line-height:1.5em;padding:0.01em 0.25em;text-align:left; overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.suggestions-result-current{background-color:#2a4b8d;color:#fff}.suggestions-special .special-label{color:#72777d;text-align:left}.suggestions-special .special-query{color:#000;font-style:italic;text-align:left}.suggestions-special .special-hover{background-color:#c8ccd1}.suggestions-result-current .special-label,.suggestions-result-current .special-query{color:#fff}.highlight{font-weight:bold}
+@media screen {
+	.tochidden,.toctoggle{-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;user-select:none}.toctoggle{font-size:94%}}
+@media print {
+	.toc.tochidden,.toctoggle{display:none}}</style><style>
+.suggestions a.mw-searchSuggest-link,.suggestions a.mw-searchSuggest-link:hover,.suggestions a.mw-searchSuggest-link:active,.suggestions a.mw-searchSuggest-link:focus{color:#000;text-decoration:none}.suggestions-result-current a.mw-searchSuggest-link,.suggestions-result-current a.mw-searchSuggest-link:hover,.suggestions-result-current a.mw-searchSuggest-link:active,.suggestions-result-current a.mw-searchSuggest-link:focus{color:#fff}.suggestions a.mw-searchSuggest-link .special-query{ overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ve-init-mw-tempWikitextEditorWidget{border:0;padding:0;color:inherit;line-height:1.5em;width:100%; }.ve-init-mw-tempWikitextEditorWidget:focus{outline:0;padding:0}.ve-init-mw-tempWikitextEditorWidget::selection{background:rgba(109,169,247,0.5); }</style><style>
+.ve-activated .ve-init-mw-desktopArticleTarget-editableContent #toc,.ve-activated #siteNotice,.ve-activated .mw-indicators,.ve-activated #t-print,.ve-activated #t-permalink,.ve-activated #p-coll-print_export,.ve-activated #t-cite,.ve-deactivating .ve-ui-surface,.ve-active .ve-init-mw-desktopArticleTarget-editableContent,.ve-active .ve-init-mw-tempWikitextEditorWidget{display:none} .ve-activating .ve-ui-surface{height:0;padding:0 !important; overflow:hidden} .ve-loading #content > :not(.ve-init-mw-desktopArticleTarget-loading-overlay), .ve-activated .ve-init-mw-desktopArticleTarget-uneditableContent{pointer-events:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;opacity:0.5}.ve-activated #firstHeading{ -webkit-user-select:text;-moz-user-select:text;-ms-user-select:text;user-select:text;pointer-events:auto;cursor:text}.ve-activated #firstHeading a{ pointer-events:none}.ve-activated #catlinks{cursor:pointer}.ve-activated #catlinks a{opacity:1}.ve-activated #content{position:relative} .ve-init-mw-desktopArticleTarget-loading-overlay{position:absolute;top:1.25em;left:0;right:0;z-index:1;margin-top:-0.5em}.ve-init-mw-desktopArticleTarget-toolbarPlaceholder{transition:height 250ms ease;height:0; } .oo-ui-element-hidden{display:none !important; } .mw-editsection{white-space:nowrap; unicode-bidi:-moz-isolate;unicode-bidi:-webkit-isolate;unicode-bidi:isolate}.mw-editsection-divider{color:#54595d} .ve-init-mw-desktopArticleTarget-toolbarPlaceholder{border-bottom:1px solid #c8ccd1;box-shadow:0 1px 1px 0 rgba(0,0,0,0.1)}.ve-init-mw-desktopArticleTarget-toolbarPlaceholder-open{height:42px}</style><meta name="ResourceLoaderDynamicStyles" content="">
+<link rel="stylesheet" href="Crossflashing%20Controllers%20-%20Unraid%20|%20Docs-Dateien/load.css">
+<meta name="generator" content="MediaWiki 1.34.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="https://wiki.unraid.net/favicon.ico">
+<link rel="search" type="application/opensearchdescription+xml" href="https://wiki.unraid.net/opensearch_desc.php" title="Unraid | Docs (en)">
+<link rel="EditURI" type="application/rsd+xml" href="https://wiki.unraid.net/api.php?action=rsd">
+<link rel="alternate" type="application/atom+xml" title="Unraid | Docs Atom feed" href="https://wiki.unraid.net/index.php?title=Special:RecentChanges&amp;feed=atom">
+<link rel="stylesheet" href="Crossflashing%20Controllers%20-%20Unraid%20|%20Docs-Dateien/ymm4lqb.css">
+<!--[if lt IE 9]><script src="/resources/lib/html5shiv/html5shiv.js"></script><![endif]-->
+</head>
+<body class="mediawiki ltr sitedir-ltr mw-hide-empty-elt ns-0 ns-subject page-Crossflashing_Controllers rootpage-Crossflashing_Controllers skin-tweeki action-view tweeki-animateLayout tweeki-non-advanced tweeki-user-anon">
+
+        <!-- navbar -->
+        <div id="mw-navigation" class="navbar navbar-default navbar-fixed-top navbar-expand-lg fixed-top navbar-light bg-light" role="navigation">
+            <h2>Navigation menu</h2>
+            <div id="mw-head" class="navbar-inner">
+                <div class="container">
+                    <!-- unraid header -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+
+                      <a href="https://unraid.net/" class="navbar-brand"><svg class="Nav__logo--gradient" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 222.4 39">
+						<linearGradient id="SVGID_1_" x1="47.53" x2="170.708" y1="79.101" y2="-44.077" gradientUnits="userSpaceOnUse">
+						<stop offset="0" stop-color="#e32929"></stop><stop offset="1" stop-color="#ff8d30"></stop>
+						</linearGradient>
+						<path fill="url(#SVGID_1_)" d="M146.70000000000002 29.5H135l-3 9h-6.5L138.9 0h8l13.4 38.5h-7.1L142.6 6.9l-5.8 16.9h8.2l1.7 5.7zM29.7 0v25.4c0 8.9-5.8 13.6-14.9 13.6C5.8 39 0 34.3 0 25.4V0h6.5v25.4c0 5.2 3.2 7.9 8.2 7.9 5.2 0 8.4-2.7 8.4-7.9V0h6.6zm21.2 12v26.5h-6.5V0h6.1l17 26.5V0H74v38.5h-6.1L50.9 12zM171.3 0h6.5v38.5h-6.5V0zm51.1 24.7c0 9-5.9 13.8-15.2 13.8h-14.5V0h14.6c9.2 0 15.1 4.8 15.1 13.8v10.9zm-6.6-10.9c0-5.3-3.3-8.1-8.5-8.1h-8.1v27.1h8c5.3 0 8.6-2.8 8.6-8.1V13.8zM108.3 23.9c4.3-1.6 6.9-5.3 6.9-11.5 0-8.7-5.1-12.4-12.8-12.4H88.8v38.5h6.5V5.7h6.9c3.8 0 6.2 1.8 6.2 6.7s-2.4 6.8-6.2 6.8h-3.4l9.2 19.4h7.5l-7.2-14.7z"></path>
+					</svg></a>
+                    </div>
+
+                    <div id="navbar" class="navbar-collapse collapse">
+                                                <ul class="nav navbar-nav">
+                            <li class="nav"><a href="https://unraid.net/product" id="n-https:.2F.2Funraid.net.2Fproduct" rel="nofollow">PRODUCT</a></li><li class="nav"><a href="https://unraid.net/pricing" id="n-https:.2F.2Funraid.net.2Fpricing" rel="nofollow">PRICING</a></li><li class="nav"><a href="https://unraid.net/community" id="n-https:.2F.2Funraid.net.2Fcommunity" rel="nofollow">COMMUNITY</a></li><li class="nav"><a href="https://unraid.net/community/apps" id="n-https:.2F.2Funraid.net.2Fcommunity.2Fapps" rel="nofollow">APPS</a></li><li class="nav"><a href="https://unraid.net/blog" id="n-https:.2F.2Funraid.net.2Fblog" rel="nofollow">BLOG</a></li><li class="nav"><a href="https://wiki.unraid.net/Documentation" id="n-Documentation">DOCS</a></li>                          </ul>
+                      
+                                              <ul class="nav navbar-nav navbar-right">
+                          <li class="nav"><a href="https://unraid.net/download" id="n-https:.2F.2Funraid.net.2Fdownload" rel="nofollow">DOWNLOAD</a></li>                        </ul>
+                    </div>
+                  
+                </div>
+            </div>
+        </div>
+        <!-- /navbar -->
+    
+        <div id="mw-page-base"></div>
+        <div id="mw-head-base"></div>
+        <a id="top"></a>
+
+        <!-- content -->
+              <!-- subnav -->
+        <div id="page-header" class="subnav row">
+            <div class="container ">
+                <ul class="wiki-subnav navigation nav nav-pills pull-right justify-content-end">
+                  <li class="nav nav-item btn-group"><a href="https://wiki.unraid.net/index.php?title=Crossflashing_Controllers&amp;action=edit" id="ca-edit" class="nav-link" title="Edit this page [Alt+Umschalt+e]" accesskey="e"><span class="glyphicon glyphicon-pencil"></span> Edit </a></li><li class="nav nav-item btn-group"><a href="https://wiki.unraid.net/Special:UserLogin" id="n-Special:UserLogin" class="nav-link">SIGN IN</a></li><li class="nav nav-item btn-group"><a href="#" id="t-tools" class="nav-link dropdown-toggle" data-toggle="dropdown"><span class="fa fa-cog"></span> <b class="caret"></b></a><ul class="dropdown-menu dropdown-menu-right" role="menu"><li id="t-info"><a href="https://wiki.unraid.net/index.php?title=Crossflashing_Controllers&amp;action=info" tabindex="-1" title="More information about this page">Page information</a></li><li id="t-permalink"><a href="https://wiki.unraid.net/index.php?title=Crossflashing_Controllers&amp;oldid=10204" tabindex="-1" title="Permanent link to this revision of the page">Permanent link</a></li><li id="t-print"><a href="https://wiki.unraid.net/index.php?title=Crossflashing_Controllers&amp;printable=yes" rel="alternate" tabindex="-1" title="Printable version of this page [Alt+Umschalt+p]" accesskey="p">Printable version</a></li><li class="divider"></li><li id="t-specialpages"><a href="https://wiki.unraid.net/Special:SpecialPages" tabindex="-1" title="A list of all special pages [Alt+Umschalt+q]" accesskey="q">Special pages</a></li><li id="t-recentchangeslinked"><a href="https://wiki.unraid.net/Special:RecentChangesLinked/Crossflashing_Controllers" rel="nofollow" tabindex="-1" title="Recent changes in pages linked from this page [Alt+Umschalt+k]" accesskey="k">Related changes</a></li><li class="divider"></li><li id="t-whatlinkshere"><a href="https://wiki.unraid.net/Special:WhatLinksHere/Crossflashing_Controllers" tabindex="-1" title="A list of all wiki pages that link here [Alt+Umschalt+j]" accesskey="j">What links here</a></li></ul></li><li class="nav dropdown">
+				<form action="/index.php" id="searchform">
+					<div class="form-group"><input type="search" name="search" placeholder="Search" title="Search Unraid | Docs [Alt+Umschalt+f]" accesskey="f" id="searchInput" class="search-query form-control" autocomplete="off"><input type="submit" name="go" value="Go" title="Go to a page with this exact name if it exists" id="mw-searchButton" class="searchButton btn hidden">
+					</div>
+				</form></li>                </ul>
+                <ul id="article-sub-nav">
+                                      <li class="nav"><a href="https://wiki.unraid.net/Documentation" id="nav-breadcrumbs" rel="nofollow">&lt; Docs</a>
+                      
+                                      </li></ul>
+            </div>
+        </div>
+        <!-- /subnav -->
+            <div id="contentwrapper" class="user-loggedout not-editable container with-navbar with-navbar-fixed">
+
+            <div class="row">
+                <div class="col-md-offset-0 col-md-12" role="main">
+                        <div class="mw-body" id="content">
+          <div id="mw-js-message" style="display:none;"></div>
+                            <h1 id="firstHeading" class="firstHeading page-header" lang="en"><span dir="auto">Crossflashing Controllers</span></h1>
+                          <!-- bodyContent -->
+          <div id="bodyContent">
+                            <div id="siteSub">From Unraid | Docs</div>
+                          <div id="contentSub"></div>
+                                      <div id="jump-to-nav" class="mw-jump">
+                Jump to:                  <a href="#mw-navigation">navigation</a>,                   <a href="#p-search">search</a>
+              </div>
+            <div id="mw-content-text" dir="ltr" class="mw-content-ltr" lang="en"><div class="mw-parser-output"><pre>work in progress, not ready yet
+</pre>
+<p><font color="red">Warning!  While great care has been taken to import
+ the info from the forum thread, it has been done by cut and paste, and 
+it's always possible that errors have been made.  In addition, only the 
+first 4 posts have been brought over so far, so there's over 71 more 
+pages of occasional additions and revisions to bring over!  Good luck, 
+fireball!</font>
+<br>
+</p>
+<div id="toc" class="toc"><input type="checkbox" role="button" id="toctogglecheckbox" class="toctogglecheckbox" style="display:none"><div class="toctitle" dir="ltr" lang="en"><h2>Contents</h2><span class="toctogglespan"><label class="toctogglelabel" for="toctogglecheckbox"></label></span></div>
+<ul>
+<li class="toclevel-1 tocsection-1"><a href="#Crossflashing_Controllers"><span class="tocnumber">1</span> <span class="toctext">Crossflashing Controllers</span></a>
+<ul>
+<li class="toclevel-2 tocsection-2"><a href="#Why_should_we_care_about_firmware_flashing.3F"><span class="tocnumber">1.1</span> <span class="toctext">Why should we care about firmware flashing?</span></a></li>
+<li class="toclevel-2 tocsection-3"><a href="#General_guidelines"><span class="tocnumber">1.2</span> <span class="toctext">General guidelines</span></a>
+<ul>
+<li class="toclevel-3 tocsection-4"><a href="#Important_Warning.21"><span class="tocnumber">1.2.1</span> <span class="toctext">Important Warning!</span></a></li>
+<li class="toclevel-3 tocsection-5"><a href="#Hardware_requirements"><span class="tocnumber">1.2.2</span> <span class="toctext">Hardware requirements</span></a></li>
+<li class="toclevel-3 tocsection-6"><a href="#Terms_and_abbreviations"><span class="tocnumber">1.2.3</span> <span class="toctext">Terms and abbreviations</span></a></li>
+<li class="toclevel-3 tocsection-7"><a href="#Additional_notes_.2F_known_issues"><span class="tocnumber">1.2.4</span> <span class="toctext">Additional notes / known issues</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-8"><a href="#Instructions_for_specific_controllers"><span class="tocnumber">1.3</span> <span class="toctext">Instructions for specific controllers</span></a>
+<ul>
+<li class="toclevel-3 tocsection-9"><a href="#General_instructions_for_flashing"><span class="tocnumber">1.3.1</span> <span class="toctext">General instructions for flashing</span></a>
+<ul>
+<li class="toclevel-4 tocsection-10"><a href="#Boot_to_OS"><span class="tocnumber">1.3.1.1</span> <span class="toctext">Boot to OS</span></a></li>
+<li class="toclevel-4 tocsection-11"><a href="#Start_the_process"><span class="tocnumber">1.3.1.2</span> <span class="toctext">Start the process</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-12"><a href="#LSI_SAS1068E_chipset"><span class="tocnumber">1.3.2</span> <span class="toctext">LSI SAS1068E chipset</span></a>
+<ul>
+<li class="toclevel-4 tocsection-13"><a href="#Applies_to"><span class="tocnumber">1.3.2.1</span> <span class="toctext">Applies to</span></a></li>
+<li class="toclevel-4 tocsection-14"><a href="#Firmware"><span class="tocnumber">1.3.2.2</span> <span class="toctext">Firmware</span></a></li>
+<li class="toclevel-4 tocsection-15"><a href="#Notes"><span class="tocnumber">1.3.2.3</span> <span class="toctext">Notes</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-16"><a href="#LSI_SAS2004_chipset"><span class="tocnumber">1.3.3</span> <span class="toctext">LSI SAS2004 chipset</span></a>
+<ul>
+<li class="toclevel-4 tocsection-17"><a href="#Applies_to_2"><span class="tocnumber">1.3.3.1</span> <span class="toctext">Applies to</span></a></li>
+<li class="toclevel-4 tocsection-18"><a href="#Firmware_2"><span class="tocnumber">1.3.3.2</span> <span class="toctext">Firmware</span></a></li>
+<li class="toclevel-4 tocsection-19"><a href="#Notes_2"><span class="tocnumber">1.3.3.3</span> <span class="toctext">Notes</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-20"><a href="#LSI_SAS2008_chipset"><span class="tocnumber">1.3.4</span> <span class="toctext">LSI SAS2008 chipset</span></a>
+<ul>
+<li class="toclevel-4 tocsection-21"><a href="#Applies_to_3"><span class="tocnumber">1.3.4.1</span> <span class="toctext">Applies to</span></a></li>
+<li class="toclevel-4 tocsection-22"><a href="#Firmware_3"><span class="tocnumber">1.3.4.2</span> <span class="toctext">Firmware</span></a></li>
+<li class="toclevel-4 tocsection-23"><a href="#Notes_3"><span class="tocnumber">1.3.4.3</span> <span class="toctext">Notes</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-24"><a href="#LSI_MegaRAID_with_SAS2008_chipsets"><span class="tocnumber">1.3.5</span> <span class="toctext">LSI MegaRAID with SAS2008 chipsets</span></a>
+<ul>
+<li class="toclevel-4 tocsection-25"><a href="#Applies_to_4"><span class="tocnumber">1.3.5.1</span> <span class="toctext">Applies to</span></a></li>
+<li class="toclevel-4 tocsection-26"><a href="#Firmware_4"><span class="tocnumber">1.3.5.2</span> <span class="toctext">Firmware</span></a></li>
+<li class="toclevel-4 tocsection-27"><a href="#Notes_4"><span class="tocnumber">1.3.5.3</span> <span class="toctext">Notes</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-28"><a href="#LSI_SAS2116_chipset"><span class="tocnumber">1.3.6</span> <span class="toctext">LSI SAS2116 chipset</span></a>
+<ul>
+<li class="toclevel-4 tocsection-29"><a href="#Applies_to_5"><span class="tocnumber">1.3.6.1</span> <span class="toctext">Applies to</span></a></li>
+<li class="toclevel-4 tocsection-30"><a href="#Firmware_5"><span class="tocnumber">1.3.6.2</span> <span class="toctext">Firmware</span></a></li>
+<li class="toclevel-4 tocsection-31"><a href="#Notes_5"><span class="tocnumber">1.3.6.3</span> <span class="toctext">Notes</span></a></li>
+</ul>
+</li>
+<li class="toclevel-3 tocsection-32"><a href="#LSI_SAS2_Series_Flash_via_ESXi_5.0"><span class="tocnumber">1.3.7</span> <span class="toctext">LSI SAS2 Series Flash via ESXi 5.0</span></a>
+<ul>
+<li class="toclevel-4 tocsection-33"><a href="#Applies_to_6"><span class="tocnumber">1.3.7.1</span> <span class="toctext">Applies to</span></a></li>
+<li class="toclevel-4 tocsection-34"><a href="#Firmware_6"><span class="tocnumber">1.3.7.2</span> <span class="toctext">Firmware</span></a></li>
+<li class="toclevel-4 tocsection-35"><a href="#Notes_6"><span class="tocnumber">1.3.7.3</span> <span class="toctext">Notes</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-36"><a href="#Boot_drives"><span class="tocnumber">1.4</span> <span class="toctext">Boot drives</span></a>
+<ul>
+<li class="toclevel-3 tocsection-37"><a href="#Basics"><span class="tocnumber">1.4.1</span> <span class="toctext">Basics</span></a></li>
+<li class="toclevel-3 tocsection-38"><a href="#DOS"><span class="tocnumber">1.4.2</span> <span class="toctext">DOS</span></a></li>
+<li class="toclevel-3 tocsection-39"><a href="#UEFI"><span class="tocnumber">1.4.3</span> <span class="toctext">UEFI</span></a></li>
+<li class="toclevel-3 tocsection-40"><a href="#Windows_without_UEFI"><span class="tocnumber">1.4.4</span> <span class="toctext">Windows without UEFI</span></a></li>
+<li class="toclevel-3 tocsection-41"><a href="#Windows_with_UEFI"><span class="tocnumber">1.4.5</span> <span class="toctext">Windows with UEFI</span></a></li>
+</ul>
+</li>
+<li class="toclevel-2 tocsection-42"><a href="#Tools"><span class="tocnumber">1.5</span> <span class="toctext">Tools</span></a>
+<ul>
+<li class="toclevel-3 tocsection-43"><a href="#megaCLI"><span class="tocnumber">1.5.1</span> <span class="toctext">megaCLI</span></a></li>
+<li class="toclevel-3 tocsection-44"><a href="#megaREC"><span class="tocnumber">1.5.2</span> <span class="toctext">megaREC</span></a></li>
+<li class="toclevel-3 tocsection-45"><a href="#sas2flash"><span class="tocnumber">1.5.3</span> <span class="toctext">sas2flash</span></a></li>
+<li class="toclevel-3 tocsection-46"><a href="#Other"><span class="tocnumber">1.5.4</span> <span class="toctext">Other</span></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+<h1><span class="mw-headline" id="Crossflashing_Controllers">Crossflashing Controllers</span></h1>
+<dl><dd>Some controllers come ready to plug in and use, and on first 
+boot all attached drives are immediately visible and available.  If that
+ were true of all controllers, then you wouldn't need this page! But 
+unfortunately there are a number of very good controllers that do need 
+to be reflashed, in order to work correctly with unRAID.  Sometimes they
+ need a firmware upgrade, sometimes they need to be flashed to look like
+ a different controller, and sometimes they need to be put into a 
+different mode.</dd>
+<dd>This page is designed to collect and present all known info for 
+crossflashing drive controllers for unRAID systems. In fact, it is 
+nothing unRAID specific, it can be also used for other systems that need
+ to have the disk drives accessible without any intermediate layer, e.g.
+ FreeNAS</dd>
+<dd>It describes both firmware and tools, and the appropriate versions.  The information is dynamic, will be updated as needed.</dd>
+<dd>This page is derived from the excellent work spread throughout the forum thread entitled <a rel="nofollow" class="external text" href="http://lime-technology.com/forum/index.php?topic=12767">LSI Controller FW updates IR/IT modes</a>, first started by <b>madburg</b>.</dd>
+<dd>Considerable credit goes to <b>madburg</b> for his many contributions to this effort. Some of the text on this page is a direct quote of his work.</dd>
+<dd>Later, <b>fireball3</b> took on much of the labor of keeping the 
+forum thread updated, and going forward will be working hard to maintain
+ this wiki page now.</dd>
+<dd>Since <b>madburg</b>s initial post there have been following over 1k
+ posts and finding the right information has become hard to find in his 
+thread. The intention is to channel all available information on the 
+following pages.</dd>
+<dd>Nevertheless, this is an ongoing effort and the result will not 
+cover all available controllers but the most popular ones. If you are 
+looking for specific information not available here, please have a look 
+at the <a rel="nofollow" class="external text" href="http://www.lime-technology.com/wiki/index.php/Hardware_Compatibility#PCI_SATA_Controllers">hardware compatibility section in the wiki</a>. Usually you will find a link leading you to users experience.</dd></dl>
+<h2><span id="Why_should_we_care_about_firmware_flashing?"></span><span class="mw-headline" id="Why_should_we_care_about_firmware_flashing.3F">Why should we care about firmware flashing?</span></h2>
+<ul><li>A quote from <a rel="nofollow" class="external text" href="http://www.servethehome.com/lsi-controller-rebranding-requested/">ServeTheHome.com</a>:</li></ul>
+<dl><dd><dl><dd>"<i>It is a well known practice that many vendors 
+re-brand LSI RAID cards and host bus adapters (HBAs) using different 
+firmware and re-sell them as their own. Oftentimes, re-branded cards are
+ less expensive to acquire than their LSI counterparts making re-brands 
+highly desirable.</i>"</dd></dl></dd></dl>
+<dl><dd><dl><dd>"<i>It is also well known that using the 
+initiator-target (IT) firmware mode is a great way to give up the RAID 
+features of the cards, treating the cards instead as simple HBAs in IT 
+mode. In turn, this allows operating systems that handle parity 
+calculations to directly access the drives, thereby reducing the rate of
+ TLER dropouts from RAID arrays among other things.</i>"</dd></dl></dd></dl>
+<p><br>
+</p>
+<h2><span class="mw-headline" id="General_guidelines">General guidelines</span></h2>
+<ul><li>Ideally you want to check what kind of controller fits your needs before you think of flashing it. The <a rel="nofollow" class="external text" href="http://www.lime-technology.com/wiki/index.php/Hardware_Compatibility#PCI_SATA_Controllers">hardware compatibility section in the wiki</a>
+ can help you find the right piece of hardware. Given, you have it 
+already in your hands and found out you need to flash it, then you have 
+to identify your controller.</li>
+<li>Search for your controller below and carefully follow the 
+instructions. Sometimes there will be 2 ways to do it, and both may be 
+described, use what works best for you.</li>
+<li>If the OS of a tool has an <b>admin</b> mode, make sure you have <b>admin</b> privileges.  DOS does not, but almost everything else does.</li>
+<li>Once you have flashed your controller card to IT mode, it is recommended that you change the "<b>Boot Support</b>" to "<b>Disabled</b>"
+ via the controllers BIOS settings (CTRL-C). This will avoid making any 
+drive bootable in the system BIOS, so the system will post much quicker,
+ and it lets unRAID have sole control over the drives, which is what we 
+want.</li></ul>
+<h5><span id="Important_Warning!"></span><span class="mw-headline" id="Important_Warning.21">Important Warning!</span></h5>
+<ul><li><b>*** Disclaimer – You are doing this at your own risk by performing a flash on a controller ***</b></li></ul>
+<dl><dd>This is done all day long by many people in the world, but 
+sometimes cards are bad or going bad, or you lose power, etc...  Please 
+keep this in mind!</dd>
+<dd>Flashing a card should normally always work, especially if you 
+followed the instructions carefully.  But there are a few cases where 
+cards have been 'bricked', completely unusable thereafter and not 
+recoverable, only suitable for the trash.</dd></dl>
+<ul><li>Best practices are:</li></ul>
+<ol><li>Plug your PC into a UPS, the PC you have installed the 
+controller into.  Flashing is a fragile process.  You don't want *any* 
+power glitches at all. Or for that matter any other interruptions of the
+ flash process, once it has started!</li>
+<li>Don’t boot off a drive that is connected to the controller you will be flashing</li>
+<li>Make sure, you understood the process! Ask your questions before - not after!</li>
+<li>If an error is thrown at you, keep records and ask for help!</li></ol>
+<h5><span class="mw-headline" id="Hardware_requirements">Hardware requirements</span></h5>
+<ol><li>A PC using Windows/Mac OS/Linux is needed to prepare a <a rel="nofollow" class="external text" href="http://lime-technology.com/wiki/index.php/Crossflashing_Controllers#Boot_drives">bootable USB thumb drive</a>.</li>
+<li>A second PC where the controller card that needs to be flashed can be plugged into and where the actual flashing takes place.<br>
+<dl><dd><b>Make sure this system runs stable!</b></dd>
+<dd>If you don't have a spare machine, you can use your unRAID server 
+but you should unplug all drives and remove all other controllers. I 
+don't recommend this as of my credo <b>"Never touch a running system"</b> but sometimes there is no way out.</dd></dl></li>
+<li>The controller card itself of course.</li>
+<li>There can be situations when you need some electrical tape. See known issues.</li></ol>
+<h5><span class="mw-headline" id="Terms_and_abbreviations">Terms and abbreviations</span></h5>
+<dl><dd>FW - firmware - the embedded software that operates a card or chipset (often can be replaced)</dd>
+<dd>BIOS - basic I/O system - basic software that allows to change controller settings without the need to flash</dd>
+<dd>UEFI - Unified Extensible Firmware Interface - the successor of BIOS</dd>
+<dd>flash - to replace all or part of the firmware on a card or chipset</dd>
+<dd>IT - initiator-target - passthrough operating mode of a controller (this is what we need, a card in IT mode)</dd>
+<dd>IR - integrated-RAID - RAID operating mode of a controller (this is how the controllers get shipped usually)</dd>
+<dd>SBR - Serial Boot ROM - tbd</dd>
+<dd>SPD - Serial Presence Detect - tbd</dd></dl>
+<h5><span id="Additional_notes_/_known_issues"></span><span class="mw-headline" id="Additional_notes_.2F_known_issues">Additional notes / known issues</span></h5>
+<ul><li>Some boards will refuse to boot or end up in a boot-loop with a 
+controller plugged into the PCIe slot instead of a graphics card. 
+Another effect, with the same root cause, might be disabled RAM slots.</li></ul>
+<dl><dd>In this case you can try to fix the issue by applying the tape mod.</dd>
+<dd>You need to <a rel="nofollow" class="external text" href="http://lime-technology.com/forum/index.php?topic=29236.msg262090#msg262090">mask the pins</a> B5 (SMCLK, SMBus clock) and B6 (SMDAT, SMBus data) on the controller card.<br></dd>
+<dd>According to the <a rel="nofollow" class="external text" href="ftp://84.237.230.43/PDF/PCI/PCIExpress_Cards.pdf">PCIe spec</a>,
+ those pins can be optionally used for ASF and IPMI applications. If 
+this is implemented on your board, it will affect all PCIe slots. This 
+problem can be on the flashing rig as well as on the unRAID server 
+itself!</dd></dl>
+<ul><li>If you receive a <b>"Failed to initialize PAL"</b> error while 
+trying to flash the controller card, it is most likely due to your 
+motherboard having limited option ROM. You will need to find another 
+motherboard to use to flash the controller card. If your motherboard 
+supports UEFI it will also work if you boot into UEFI shell and perform 
+the necessary steps. See <a rel="nofollow" class="external text" href="http://lime-technology.com/wiki/index.php/Crossflashing_Controllers#Boot_drives">Boot drives</a></li></ul>
+<ul><li>When using the UEFI shell, only the *.efi applications will run.
+ All other e.g. megarec, megacli still need to be executed under DOS 
+environment!</li></ul>
+<ul><li>If you have additions for this page, or see something that needs correction, either do it yourself, or post about it in the <a rel="nofollow" class="external text" href="http://lime-technology.com/forum/index.php?topic=12767">LSI Controller FW updates IR/IT modes</a> forum thread.</li></ul>
+<h2><span class="mw-headline" id="Instructions_for_specific_controllers">Instructions for specific controllers</span></h2>
+<h3><span class="mw-headline" id="General_instructions_for_flashing">General instructions for flashing</span></h3>
+<dl><dd>The next passage shall give you an idea what the procedure 
+should look like. This can vary in certain details, but in general the 
+specific instructions should reflect this tasks.</dd></dl>
+<h4><span class="mw-headline" id="Boot_to_OS">Boot to OS</span></h4>
+<ol><li>Prepare an USB thumb drive to boot off. See chapter <a rel="nofollow" class="external text" href="http://lime-technology.com/wiki/index.php/Crossflashing_Controllers#Boot_drives">Boot drives</a></li>
+<li>Configure your computers BIOS to boot from the USB thumb drive. Finding the right settings can be challenging.</li>
+<li>Once booting from USB is successful, copy the necessary tools to the stick.</li></ol>
+<h4><span class="mw-headline" id="Start_the_process">Start the process</span></h4>
+<dl><dd>The instructions are prepared to guide the user step-by-step
+<dl><dt>Step</dt>
+<dd>Grab the current information of the card and dump it to a file. The file will be used to extract the SAS adress.</dd>
+<dt>Step</dt>
+<dd>Save the current firmware to file as a backup.</dd>
+<dt>Step</dt>
+<dd>Wipe the cards flash (firmware and BIOS)</dd>
+<dt>Step</dt>
+<dd>Reboot. This opportunity can be used to extract the SAS adress and to prepare the last step.</dd>
+<dt>Step</dt>
+<dd>Flash the desired IT firmware.</dd>
+<dd>Dependent on the card, this can be tricky. Better said, we have to trick the card to accept other firmware.</dd>
+<dd>This can result in repeated flashing of different firmwares, so this
+ step might have sub-steps. The card specific instructions will tell you
+ what to do!</dd>
+<dt>Step</dt>
+<dd>Rewrite the SAS adress and you're done. Reboot</dd></dl></dd></dl>
+<hr>
+<h3><span class="mw-headline" id="LSI_SAS1068E_chipset">LSI SAS1068E chipset</span></h3>
+<h5><span class="mw-headline" id="Applies_to">Applies to</span></h5>
+<ol><li>LSI SAS 3081-R</li>
+<li>IBM BR10i</li>
+<li>Intel SASUC8I</li></ol>
+<h5><span class="mw-headline" id="Firmware">Firmware</span></h5>
+<dl><dd><font color="blue">FW:1.32.00.00, BIOS 6.34.00.00 / 20-DEC-10 (LSI P20)</font>
+<dl><dd>Both IT/IR mode available</dd>
+<dd><a rel="nofollow" class="external text" href="http://www.mediafire.com/?q68x8kejyb56qjg">LSI SAS1068E Controllers(P20).zip - 3.8 MB (Windows)</a></dd>
+<dd><a rel="nofollow" class="external text" href="http://www.mediafire.com/?4y0a82nhaqrmz47">LSI SAS1068E Controllers(P20)Linux.zip - 4.5 MB (unRAID)</a></dd></dl></dd></dl>
+<dl><dd><font color="blue">FW:1.33.00.00, BIOS 6.36.00.00 / 22-AUG-11 (LSI P21)</font>
+<dl><dd>Both IT/IR mode available</dd>
+<dd><a rel="nofollow" class="external text" href="http://www.mediafire.com/?d3jj5kg1kssudbe">LSI SAS1068E Controllers(P21).rar - 1.46 MB (Windows)</a></dd>
+<dd><a rel="nofollow" class="external text" href="http://www.mediafire.com/?g1f5vf0lmej6ggn">LSI SAS1068E Controllers(P21)Linux.rar - 2.02 MB (unRAID)</a></dd></dl></dd></dl>
+<h5><span class="mw-headline" id="Notes">Notes</span></h5>
+<dl><dd>Linux Driver: MPTSAS - supports the LSI SAS1064, SAS1064A, 
+SAS1064E, SAS1066, SAS1068, SAS1068E, and SAS1078 chipsets. (Thanks to 
+"BRiT"s prior post)</dd>
+<dd>unRAID Support: Added as of 5.0Beta6a</dd></dl>
+<dl><dd>Drive Spin Down Support: YES (UPDATE: Added as of 5.0Beta7)</dd>
+<dd>Drive Temp Readings: YES</dd></dl>
+<dl><dd>3TB Drive Support with this card: Will only offer 2.2TB out of 
+3TB (UPDATE: even though 5.0Beta7 added 3TB Drive support, this card 
+does NOT support 3TB drives, it only sees and uses 2.2TB from a 3TB 
+drive)</dd></dl>
+<dl><dd>*** Note: Multiple controllers all post under one MPTSAS Bios, 
+there are global setting that affect all controllers and individual 
+settings per controller available ***</dd></dl>
+<p><br>
+</p>
+<h3><span class="mw-headline" id="LSI_SAS2004_chipset">LSI SAS2004 chipset</span></h3>
+<h5><span class="mw-headline" id="Applies_to_2">Applies to</span></h5>
+<ol><li>LSI SAS9211-4i</li></ol>
+<h5><span class="mw-headline" id="Firmware_2">Firmware</span></h5>
+<dl><dd><font color="blue">FW: 10.00.02.00 / BIOS: 7.19.00.00 / 15-JUN-11 (LSI P10)</font>
+<dl><dd>Both IT/IR mode available</dd>
+<dd><a rel="nofollow" class="external text" href="http://www.mediafire.com/?9t3qsh39sh0uw85">LSI SAS2004 Controllers(P10).zip - 2.32 MB (Windows)</a>
+<dl><dd>Important!  After you expand the zip file, please read the file "__ReadMeFirst.txt" before doing anything!</dd></dl></dd>
+<dd><a rel="nofollow" class="external text" href="http://www.mediafire.com/?c4dlnc22c8kcrix">LSI SAS2004 Controllers(P10)Linux.zip - 3.16 MB (unRAID)</a></dd></dl></dd></dl>
+<dl><dd><font color="blue">FW: 11.00.00.00 / BIOS: 7.21.00.00 / 22-AUG-11 (LSI P11)</font>
+<dl><dd>Both IT/IR mode available</dd>
+<dd><a rel="nofollow" class="external text" href="http://www.mediafire.com/?d9vmc237z1eeub9">LSI SAS2004 Controllers(P11).rar - 1.94 MB (Windows)</a>
+<dl><dd>Important!  After you expand the zip file, please read the file "__ReadMeFirst.txt" before doing anything!</dd></dl></dd>
+<dd><a rel="nofollow" class="external text" href="http://www.mediafire.com/?r09534t45g8mjqx">LSI SAS2004 Controllers(P11)Linux.rar - 2.88 MB (unRAID)</a></dd></dl></dd></dl>
+<h5><span class="mw-headline" id="Notes_2">Notes</span></h5>
+<dl><dd>Linux Driver: MPT2SAS - supports the LSI SAS2004, SAS2008, 
+SAS2108, SAS2116, SAS2208, and SAS2308 chipsets. (Thanks to "BRiT"s 
+prior post)</dd>
+<dd>unRAID Support: Added as of 5.0Beta6a</dd></dl>
+<dl><dd>Drive Spin Down Support: YES (UPDATE: Added as of 5.0Beta7)</dd>
+<dd>Drive Temp Readings: YES</dd></dl>
+<dl><dd>3TB Drive Support with this card: YES (UPDATE: 5.0Beta7 added 3TB Drive support)</dd></dl>
+<dl><dd>*** Note: Multiple controllers all post under one MPT2SAS Bios, 
+there are global setting that affect all controllers and individual 
+settings per controller available ***</dd></dl>
+<p><br>
+</p>
+<h3><span class="mw-headline" id="LSI_SAS2008_chipset">LSI SAS2008 chipset</span></h3>
+<h5><span class="mw-headline" id="Applies_to_3">Applies to</span></h5>
+<ol><li>LSI SAS9211-8i</li>
+<li>SuperMicro X8SI6-F with onboard SAS2008 controller</li></ol>
+<h5><span class="mw-headline" id="Firmware_3">Firmware</span></h5>
+<dl><dd><font color="blue">FW: 10.00.02.00 / BIOS: 7.19.00.00 / 15-JUN-11 (LSI P10)</font>
+<dl><dd>Both IT/IR mode available</dd>
+<dd><a rel="nofollow" class="external text" href="http://www.mediafire.com/?gvirwvujmereb2o">LSI SAS2008 Controllers(P10).zip - 2.59 MB (Windows)</a>
+<dl><dd>Important!  After you expand the zip file, please read the file "__ReadMeFirst.txt" before doing anything!</dd></dl></dd>
+<dd><a rel="nofollow" class="external text" href="http://www.mediafire.com/?atil83fbn8yybr7">LSI SAS2008 Controllers(P10)Linux.zip - 3.43 MB (unRAID)</a></dd></dl></dd></dl>
+<dl><dd><font color="blue">FW: 11.00.00.00 / BIOS: 7.21.00.00 / 22-AUG-11 (LSI P11)</font>
+<dl><dd>Both IT/IR mode available</dd>
+<dd><a rel="nofollow" class="external text" href="http://www.mediafire.com/?n5p145c4z03t27r">LSI SAS2008 Controllers(P11).rar - 2.21 MB (Windows)</a>
+<dl><dd>Important!  After you expand the zip file, please read the file "__ReadMeFirst.txt" before doing anything!</dd></dl></dd>
+<dd><a rel="nofollow" class="external text" href="http://www.mediafire.com/?doepi97zo4ao4c7">LSI SAS2008 Controllers(P11)Linux.rar - 3.16 MB (unRAID)</a></dd></dl></dd></dl>
+<h5><span class="mw-headline" id="Notes_3">Notes</span></h5>
+<dl><dd>Linux Driver: MPT2SAS - supports the LSI SAS2004, SAS2008, 
+SAS2108, SAS2116, SAS2208, and SAS2308 chipsets. (Thanks to "BRiT"s 
+prior post)</dd>
+<dd>unRAID Support: Added as of 5.0Beta6a</dd></dl>
+<dl><dd>Drive Spin Down Support: YES (UPDATE: Added as of 5.0Beta7)</dd>
+<dd>Drive Temp Readings: YES</dd></dl>
+<dl><dd>3TB Drive Support with this card: YES (UPDATE: 5.0Beta7 added 3TB Drive support)</dd></dl>
+<dl><dd>*** Note: Multiple controllers all post under one MPT2SAS Bios, 
+there are global setting that affect all controllers and individual 
+settings per controller available ***</dd></dl>
+<dl><dd>*** Note: If combined with any other MPT2SAS Controller/s (ex. 
+(1) LSI SAS2116 and (1) LSI SAS2008 they post under one MPT2SAS BIOs ***</dd></dl>
+<p><br>
+</p>
+<h3><span class="mw-headline" id="LSI_MegaRAID_with_SAS2008_chipsets">LSI MegaRAID with SAS2008 chipsets</span></h3>
+<dl><dd>This cards are rebranded LSI 9240-8i cards. They can be cross-flashed with the 9211-8i firmware.</dd></dl>
+<h5><span class="mw-headline" id="Applies_to_4">Applies to</span></h5>
+<ol><li>IBM ServeRAID M1015</li>
+<li>Intel RS2WC080</li>
+<li>Dell Perc H310 <a rel="nofollow" class="external text" href="http://lime-technology.com/forum/index.php?topic=12767.msg259006#msg259006">dedicated instructions</a> will be included in the wiki later on</li>
+<li>Dell Perc H200 <a rel="nofollow" class="external text" href="http://lime-technology.com/forum/index.php?topic=12767.msg259006#msg259006">dedicated instructions</a> will be included in the wiki later on</li>
+<li>Lenovo RAID 500 <a rel="nofollow" class="external text" href="http://lime-technology.com/forum/index.php?topic=12767.msg352230#msg352230">dedicated instructions</a> will be included in the wiki later on</li></ol>
+<h5><span class="mw-headline" id="Firmware_4">Firmware</span></h5>
+<dl><dd><font color="blue">20.10.1-0037 (APP-2.120.54-1235) / 15-APR-11</font>
+<dl><dd>Only iMR mode available.</dd>
+<dd><a rel="nofollow" class="external text" href="http://www.mediafire.com/?jd1z1dv18hjqjgd">LSI MegaRAID SAS2008 Controller.zip - 5.32 MB (Windows)</a></dd></dl></dd></dl>
+<h5><span class="mw-headline" id="Notes_4">Notes</span></h5>
+<dl><dd>Linux Driver: megaraid_sas - supports the LSI SAS1078, SAS1078 
+GEN2, SAS1079 GEN2, SAS0073 and SAS0071 chipsets. Though is is an old 
+version indeed. (Thanks to "BRiT"s prior post)</dd>
+<dd>unRAID Support: Driver not included at this point.</dd></dl>
+<dl><dd>Drive Spin Down support: YES (UPDATE: Added as of 5.0Beta7)</dd>
+<dd>Drive Temp Readings: YES</dd></dl>
+<dl><dd>3TB Drive Support with this card: YES (UPDATE: 5.0Beta7 added 3TB Drive support)</dd></dl>
+<dl><dd>Update: Convert your LSI MegaRAID controller card with LSI 
+SAS2008 chipset to a Plain SAS2008 controller card (IT or IR mode), will
+ look and feel like a LSI SAS9211-8i, and will be ready to use with 
+unRAID (BIG THANKS to KKM for creating the empty.bin, so you dont need 
+to have to worry about which sbr to obtain and use.)</dd></dl>
+<ol><li>IBM ServeRAID M1015 (tested successfully)</li>
+<li>Intel RS2WC080  (tested successfully)</li></ol>
+<dl><dd><dl><dd><a rel="nofollow" class="external text" href="http://www.mediafire.com/?b893i917wox2zwc">LSI MegaRAID to SAS2008(P10).zip - 6.38 MB (DOS, via bootable usb key)</a></dd>
+<dd><a rel="nofollow" class="external text" href="http://www.mediafire.com/?98j2l2314l6g77w">LSI MegaRAID to SAS2008(P11).zip - 5.87 MB (DOS, via bootable usb key)</a></dd>
+<dd><a rel="nofollow" class="external text" href="http://www.mediafire.com/file/x3ph3lldc5sqjzm/Toolset_M1015_2_LSI9211_P20.00.07.00_efimod.zip">LSI MegaRAID to SAS2008(P20).zip - 4.1 MB (FREEDOS, via bootable usb key)</a></dd></dl></dd></dl>
+<dl><dd>Please read the __READMEFIRST.txt file so you are clear as to all the steps and why it is important not to skip any steps.</dd>
+<dd>Converting it follows all details in the post above for the LSI SAS2008 chipset (firmware release, support, etc.)</dd></dl>
+<dl><dd>Note on converting newer IBM 1015 cards to plain SAS2008 (LSI SAS9211-8i)&nbsp;:
+<dl><dd>If you encounter the "No LSI SAS adapters found!" in step 1 and 
+when launching the LSI SAS2FLSH tool (either DOS or EFI versions) 
+manually, it may be because newer versions of the IBM M1015 firmware 
+prevent the card being recognized by the LSI tool. In this case you will
+ need to:
+<dl><dd>- Obtain a copy of "sbrempty.bin" for example from <a rel="nofollow" class="external free" href="https://www.mediafire.com/folder/5ix2j4jd9n3fi77,x491f4v3ns5i40p,1vcq9f93os76u3o,yc0fsify6eajly0,xkchwsha0yopqmz/shared">https://www.mediafire.com/folder/5ix2j4jd9n3fi77,x491f4v3ns5i40p,1vcq9f93os76u3o,yc0fsify6eajly0,xkchwsha0yopqmz/shared</a></dd>
+<dd>- Manually read out the SAS address from the sticker on the back 
+side of the card, as you aren't able to read it out with the 
+sas2flsh.exe tool. It has the format "500605B   x-xxxx-xxxx", ignore 
+spaces and dashes and note down the sas address in format 
+"500605Bxxxxxxxxx"</dd>
+<dd>- Still read all the instructions and precautions in the guide (have
+ only one controller card in the machine, preferably have the machine on
+ UPS power, etc.)</dd>
+<dd>- Execute "MEGAREC -writesbr 0 sbrempty.bin" (This wipes out the 
+vendor ID, after this command SAS2FLSH can see the card but refuses to 
+read out the sas address or erase the card)</dd>
+<dd>- Execute "MEGAREC -cleanflash 0" (This erases the card incl sas address)</dd>
+<dd>- Reboot the machine.</dd>
+<dd>- From here you can folow the guide in the P20 package after step 3 -
+ Run the "5ITP20.BAT" batch file in 5_LSI_P20\ folder, then 6.bat in the
+ root folder that you modified with your sas address beforehand.</dd>
+<dd>- For ease of reference and because not much is left of the guide at
+ this point, the actual commands remaining are "SAS2FLSH -o -f 
+2118it.bin" to flash the P20 IT mode firmware, and "SAS2FLSH -o -sasadd 
+500605Bxxxxxxxxx" to set the sas address.</dd></dl></dd></dl></dd></dl>
+<h3><span class="mw-headline" id="LSI_SAS2116_chipset">LSI SAS2116 chipset</span></h3>
+<h5><span class="mw-headline" id="Applies_to_5">Applies to</span></h5>
+<ol><li>LSI SAS9201-16i</li></ol>
+<h5><span class="mw-headline" id="Firmware_5">Firmware</span></h5>
+<dl><dd><font color="blue">FW: 10.00.02.00 / BIOS: 7.19.00.00 / 15-JUN-11 (LSI P10)</font>
+<dl><dd>Only IT mode available.</dd>
+<dd><a rel="nofollow" class="external text" href="http://www.mediafire.com/?915ba9p19a7er8p">LSI SAS2116 Controllers(P10).zip - 2.28 MB (Windows)</a>
+<dl><dd>Important!  After you expand the zip file, please read the file "__ReadMeFirst.txt" before doing anything!</dd></dl></dd>
+<dd><a rel="nofollow" class="external text" href="http://www.mediafire.com/?v6uor1uvqmuogr5">LSI SAS2116 Controllers(P10)Linux.zip - 3.12 MB (unRAID)</a></dd></dl></dd></dl>
+<dl><dd><font color="blue">FW: 11.00.00.00 / BIOS: 7.21.00.00 / 22-AUG-11 (LSI P11)</font>
+<dl><dd>Only IT mode available.</dd>
+<dd><a rel="nofollow" class="external text" href="http://www.mediafire.com/?t0wv3hgyv5dx1tw">LSI SAS2116 Controllers(P11).rar - 1.97 MB (Windows)</a>
+<dl><dd>Important!  After you expand the zip file, please read the file "__ReadMeFirst.txt" before doing anything!</dd></dl></dd>
+<dd><a rel="nofollow" class="external text" href="http://www.mediafire.com/?pp68tpv9bcy96py">LSI SAS2116 Controllers(P11)Linux.rar - 2.91 MB (unRAID)</a></dd></dl></dd></dl>
+<h5><span class="mw-headline" id="Notes_5">Notes</span></h5>
+<dl><dd>Linux Driver: MPT2SAS - supports the LSI SAS2004, SAS2008, 
+SAS2108, SAS2116, SAS2208, and SAS2308 chipsets. (Thanks to "BRiT"s 
+prior post)</dd>
+<dd>unRAID Support: Added as of 5.0beta6a</dd></dl>
+<dl><dd>Drive Spin Down Support: YES (UPDATE: Added as of 5.0Beta7)</dd>
+<dd>Drive Temp Readings: YES</dd></dl>
+<dl><dd>3TB Drive Support with this card: YES (UPDATE: 5.0Beta7 added 3TB support)</dd></dl>
+<dl><dd>*** Note: Multiple controllers all post under one MPT2SAS Bios, 
+there are global setting that affect all controllers and individual 
+settings per controller available ***</dd>
+<dd>*** Note: If combined with any other MPT2SAS Controller/s (ex. (1) 
+LSI SAS9201-16i and (1) LSI SAS9211-8i they post under one MPT2SAS BIOs 
+***</dd></dl>
+<h3><span class="mw-headline" id="LSI_SAS2_Series_Flash_via_ESXi_5.0">LSI SAS2 Series Flash via ESXi 5.0</span></h3>
+<dl><dd><b>Note: Not for beginners</b></dd></dl>
+<h5><span class="mw-headline" id="Applies_to_6">Applies to</span></h5>
+<dl><dd>Package includes ALL files to flash via ESX 5.0:</dd></dl>
+<ol><li>LSI SAS2004</li>
+<li>LSI SAS2008</li>
+<li>LSI SAS2116</li></ol>
+<h5><span class="mw-headline" id="Firmware_6">Firmware</span></h5>
+<dl><dd><font color="blue">LSI P10</font>
+<dl><dd><a rel="nofollow" class="external text" href="http://www.mediafire.com/?h3ekz9h7pmv2706">LSI SAS2series Controllers(P10)ESX5.rar - 2.61 MB (ESXi5.0)</a></dd></dl></dd></dl>
+<dl><dd><font color="blue">LSI P11</font>
+<dl><dd><a rel="nofollow" class="external text" href="http://www.mediafire.com/?25590joomm01m92">LSI SAS2series Controllers(P11)ESX5.rar - 2.4 MB (ESXi5.0)</a></dd></dl></dd></dl>
+<h5><span class="mw-headline" id="Notes_6">Notes</span></h5>
+<dl><dd>Important!  After you expand the zip file, please read the file "__ReadMeFirst.txt" before doing anything!</dd></dl>
+<h2><span class="mw-headline" id="Boot_drives">Boot drives</span></h2>
+<h3><span class="mw-headline" id="Basics">Basics</span></h3>
+<h3><span class="mw-headline" id="DOS">DOS</span></h3>
+<p>There are several ways how to get a bootable thumb drive.
+But there are also several reasons why it will not work sometimes.
+</p>
+<dl><dd>e.g. plain thumb drive incompatibility, thumb drive size, wrong filesystem, bootloader issues, BIOS settings</dd></dl>
+<p>The available toolsets should bring all the necessary files to prepare a DOS based thumb drive using Windows.<br>
+<b>Note: The thumb drive will be formatted in the process, so backup the files on the stick before you begin!</b><br>
+Until this section is fully reworked you can use the HP tool from <a rel="nofollow" class="external text" href="http://www3.zippyshare.com/v/xZKIOHaz/file.html">this package</a>.<br>
+Windows 10 users please use <a rel="nofollow" class="external text" href="https://rufus.akeo.ie/?locale=en_US">Rufus</a> instead. The HP tool is buggy with W10.
+</p><p>If you don't have a running Windows OS you can prepare a FreeDOS bootdisk using <a rel="nofollow" class="external text" href="https://unetbootin.github.io/">UNetbootin.</a>
+The FreeDOS distribution can be selected within the tool.
+</p>
+<h3><span class="mw-headline" id="UEFI">UEFI</span></h3>
+<p>EFI and later on UEFI is the successor of the PC-BIOS.
+UEFI is primarily designed for the use in 64-bit systems. It brings a 
+lot of additional functionality (although some of them are quite 
+questionable). For our purpose we need the integrated UEFI shell.
+The benefit is a quite simple boot process.
+</p><p>Depending on the board, the UEFI shell can be part of the firmware or not.
+If it is, plug the thumb drive, enter the UEFI (BIOS) and select your drive to boot from.<br>
+It will show up with UEFI in its name.
+</p><p>If the UEFI shell is not part of the firmware, the <a rel="nofollow" class="external text" href="https://www.dropbox.com/s/pry111m5rzuqqzq/EFI_Shell_SAS2FLASH.rar?dl=0">boot file</a> has to be placed on the root of the thumb drive. <br>
+At this point I can't tell if that is enough or if additional effort is needed - please report missing information in <a rel="nofollow" class="external text" href="https://lime-technology.com/forum/index.php?action=profile;u=86078">the forum</a>.
+</p><p><b>Usage of the UEFI shell</b><br>
+Select your drive by typing "FSx" with x being the drive letter of your USB drive. e.g. FS0, FS1<br>
+Type "ls" to list the content of your drive.<br>
+Type "cd" to change directory.<br>
+The executables are called .efi
+</p><p><b>Note</b><br>
+When booting into the (64bit) UEFI shell, 32bit applications will not work!<br>
+There is a 32bit UEFI shell available, but I can't tell if and how it can be switched - feel free to add your experience here!
+</p>
+<h3><span class="mw-headline" id="Windows_without_UEFI">Windows without UEFI</span></h3>
+<h3><span class="mw-headline" id="Windows_with_UEFI">Windows with UEFI</span></h3>
+<h2><span class="mw-headline" id="Tools">Tools</span></h2>
+<h3><span class="mw-headline" id="megaCLI">megaCLI</span></h3>
+<p>MegaCLI SAS RAID Management Tool<br>
+This utility is used for configuring MegaRAID cards.<br>
+megacli -help / -h: display the help
+</p>
+<h3><span class="mw-headline" id="megaREC">megaREC</span></h3>
+<p>MegaRAID HWR Contoller Recovery tool.<br>
+MegaREC utility for flashing LSI 9240/926x cards.
+</p><p>This utility can handle MegaRAID cards.<br>
+megarec -help&nbsp;: display the list of options
+</p>
+<h3><span class="mw-headline" id="sas2flash">sas2flash</span></h3>
+<p>The SAS2Flash utility provides the ability to flash the Fusion-MPT™ firmware and the
+OptionROM image.<br>
+The utility can program an LSI SAS2 controller and also supports the
+updating of LSI SAS2 controllers.
+</p><p>The binary file is available for DOS, EFI, Windows and several nix based OS.<br>
+It is recommended to use the version of sas2flash that comes with the corresponding firmware.
+</p><p>sas2flsh -h / -help / -?: display the help
+</p>
+<h3><span class="mw-headline" id="Other">Other</span></h3>
+<!-- 
+NewPP limit report
+Cached time: 20220709171919
+Cache expiry: 86400
+Dynamic content: false
+Complications: []
+CPU time usage: 0.034 seconds
+Real time usage: 0.035 seconds
+Preprocessor visited node count: 150/1000000
+Preprocessor generated node count: 0/1000000
+Post‐expand include size: 0/2097152 bytes
+Template argument size: 0/2097152 bytes
+Highest expansion depth: 2/40
+Expensive parser function count: 0/100
+Unstrip recursion depth: 0/20
+Unstrip post‐expand size: 0/5000000 bytes
+-->
+<!--
+Transclusion expansion time report (%,ms,calls,template)
+100.00%    0.000      1 -total
+-->
+
+<!-- Saved in parser cache with key wiki-mwiki_:pcache:idhash:2678-0!canonical!groups=* and timestamp 20220709171919 and revision id 10204
+ -->
+</div></div>                            <div class="printfooter">
+                  Retrieved from "<a dir="ltr" href="https://wiki.unraid.net/index.php?title=Crossflashing_Controllers&amp;oldid=10204">https://wiki.unraid.net/index.php?title=Crossflashing_Controllers&amp;oldid=10204</a>"                </div>
+                                      <div id="catlinks" class="catlinks" data-mw="interface"><div id="mw-normal-catlinks" class="mw-normal-catlinks"><a href="https://wiki.unraid.net/Special:Categories" title="Special:Categories">Categories</a>: <ul><li><a href="https://wiki.unraid.net/Category:Customising_unRAID" title="Category:Customising unRAID">Customising unRAID</a></li><li><a href="https://wiki.unraid.net/Category:How_To" title="Category:How To">How To</a></li><li><a href="https://wiki.unraid.net/Category:Hardware" title="Category:Hardware">Hardware</a></li></ul></div></div>                                      <div class="visualClear"></div>
+                      </div>
+          <!-- /bodyContent -->
+      </div>
+                  </div>
+            </div>
+        </div>
+        <!-- /content -->
+
+              <!-- footer -->
+        <footer class="relative z-10 text-sm flex-no-shrink py-12 md:py-22 bg-gray-darkest" style="box-sizing: inherit;background-color: rgb(43, 42, 41);flex-shrink: 0;padding-top: 3rem;padding-bottom: 3rem;position: relative;font-size: 0.875rem;z-index: 10;">
+            <div class="container">
+                <nav class="w-full flex flex-wrap justify-between mb-4" style="box-sizing: inherit;display: flex;flex-wrap: wrap;-webkit-box-pack: justify;justify-content: space-between;margin-bottom: 1rem;width: 100%;">
+                    <ul class="list-reset w-1/2 md:w-1/4 mt-0 mb-4 md:mb-0" style="box-sizing: inherit;list-style-position: outside;margin-bottom: 1rem;list-style: none;padding: 0px;margin-top: 0px;width: 50%;">
+                        <h6 class="text-white tracking-wide mt-0 mb-4" style="box-sizing: inherit;font-size: 0.875rem;font-family: nudista-web, sans-serif;font-weight: 400;margin-bottom: 1rem;margin-top: 0px;color: rgb(255, 255, 255);letter-spacing: 2px;">
+                            Unraid</h6>
+                        <li class="block mt-0 mb-4" style="box-sizing: inherit;margin-bottom: 1rem;margin-top: 0px;display: block;"><a href="https://unraid.net/product" target="" class="text-gray opacity-50 hover:opacity-100 font-semibold uppercase tracking-wide" style="box-sizing: inherit;background-color: transparent;text-decoration: none;transition: all 0.25s ease-out 0s;text-decoration-skip-ink: auto;letter-spacing: 2px;font-weight: 600;opacity: 0.5;color: rgb(224, 224, 224);text-transform: uppercase;">
+                                Product
+                            </a></li>
+                        <li class="block mt-0 mb-4" style="box-sizing: inherit;margin-bottom: 1rem;margin-top: 0px;display: block;"><a href="https://unraid.net/pricing" target="" class="text-gray opacity-50 hover:opacity-100 font-semibold uppercase tracking-wide" style="box-sizing: inherit;background-color: transparent;text-decoration: none;transition: all 0.25s ease-out 0s;text-decoration-skip-ink: auto;letter-spacing: 2px;font-weight: 600;opacity: 0.5;color: rgb(224, 224, 224);text-transform: uppercase;">
+                                Pricing
+                            </a></li>
+                        <li class="block mt-0 mb-4" style="box-sizing: inherit;margin-bottom: 1rem;margin-top: 0px;display: block;"><a href="https://unraid.net/community" target="" class="text-gray opacity-50 hover:opacity-100 font-semibold uppercase tracking-wide" style="box-sizing: inherit;background-color: transparent;text-decoration: none;transition: all 0.25s ease-out 0s;text-decoration-skip-ink: auto;letter-spacing: 2px;font-weight: 600;opacity: 0.5;color: rgb(224, 224, 224);text-transform: uppercase;">
+                                Community
+                            </a></li>
+                        <li class="block mt-0 mb-4" style="box-sizing: inherit;margin-bottom: 1rem;margin-top: 0px;display: block;"><a href="https://www.zazzle.com/unraid/products" target="_blank" rel="noopener noreferrer" class="text-gray opacity-50 hover:opacity-100 font-semibold uppercase tracking-wide" style="box-sizing: inherit;background-color: transparent;text-decoration: none;transition: all 0.25s ease-out 0s;text-decoration-skip-ink: auto;letter-spacing: 2px;font-weight: 600;opacity: 0.5;color: rgb(224, 224, 224);text-transform: uppercase;">
+                                Merch Shop
+                            </a></li>
+                    </ul>
+                    <ul class="list-reset w-1/2 md:w-1/4 mt-0 mb-4 md:mb-0" style="box-sizing: inherit;list-style-position: outside;margin-bottom: 1rem;list-style: none;padding: 0px;margin-top: 0px;width: 50%;">
+                        <h6 class="text-white tracking-wide mt-0 mb-4" style="box-sizing: inherit;font-size: 0.875rem;font-family: nudista-web, sans-serif;font-weight: 400;margin-bottom: 1rem;margin-top: 0px;color: rgb(255, 255, 255);letter-spacing: 2px;">
+                            Resources</h6>
+                        <li class="block mt-0 mb-4" style="box-sizing: inherit;margin-bottom: 1rem;margin-top: 0px;display: block;"><a href="https://unraid.net/community/apps" target="_blank" rel="noopener noreferrer" class="text-gray opacity-50 hover:opacity-100 font-semibold uppercase tracking-wide" style="box-sizing: inherit;background-color: transparent;text-decoration: none;transition: all 0.25s ease-out 0s;text-decoration-skip-ink: auto;letter-spacing: 2px;font-weight: 600;opacity: 0.5;color: rgb(224, 224, 224);text-transform: uppercase;">
+                                APPS
+                            </a></li>
+                        <li class="block mt-0 mb-4" style="box-sizing: inherit;margin-bottom: 1rem;margin-top: 0px;display: block;"><a href="https://wiki.unraid.net/Official_Documentation" target="_blank" rel="noopener noreferrer" class="text-gray opacity-50 hover:opacity-100 font-semibold uppercase tracking-wide" style="box-sizing: inherit;background-color: transparent;text-decoration: none;transition: all 0.25s ease-out 0s;text-decoration-skip-ink: auto;letter-spacing: 2px;font-weight: 600;opacity: 0.5;color: rgb(224, 224, 224);text-transform: uppercase;">
+                                DOCUMENTATION
+                            </a></li>
+                        <li class="block mt-0 mb-4" style="box-sizing: inherit;margin-bottom: 1rem;margin-top: 0px;display: block;"><a href="https://forums.unraid.net/" target="_blank" rel="noopener noreferrer" class="text-gray opacity-50 hover:opacity-100 font-semibold uppercase tracking-wide" style="box-sizing: inherit;background-color: transparent;text-decoration: none;transition: all 0.25s ease-out 0s;text-decoration-skip-ink: auto;letter-spacing: 2px;font-weight: 600;opacity: 0.5;color: rgb(224, 224, 224);text-transform: uppercase;">
+                                FORUM
+                            </a></li>
+                        <li class="block mt-0 mb-4" style="box-sizing: inherit;margin-bottom: 1rem;margin-top: 0px;display: block;"><a href="https://wiki.unraid.net/UnRAID_6/Changing_The_Flash_Device" target="" class="text-gray opacity-50 hover:opacity-100 font-semibold uppercase tracking-wide" style="box-sizing: inherit;background-color: transparent;text-decoration: none;transition: all 0.25s ease-out 0s;text-decoration-skip-ink: auto;letter-spacing: 2px;font-weight: 600;opacity: 0.5;color: rgb(224, 224, 224);text-transform: uppercase;">
+                                REPLACE REGISTRATION KEY
+                            </a></li>
+                    </ul>
+                    <ul class="list-reset w-1/2 md:w-1/4 mt-0" style="box-sizing: inherit;list-style-position: outside;list-style: none;padding: 0px;margin-top: 0px;width: 50%;">
+                        <h6 class="text-white tracking-wide mt-0 mb-4" style="box-sizing: inherit;font-size: 0.875rem;font-family: nudista-web, sans-serif;font-weight: 400;margin-bottom: 1rem;margin-top: 0px;color: rgb(255, 255, 255);letter-spacing: 2px;">
+                            Company</h6>
+                        <li class="block mt-0 mb-4" style="box-sizing: inherit;margin-bottom: 1rem;margin-top: 0px;display: block;"><a href="https://unraid.net/about" target="" class="text-gray opacity-50 hover:opacity-100 font-semibold uppercase tracking-wide" style="box-sizing: inherit;background-color: transparent;text-decoration: none;transition: all 0.25s ease-out 0s;text-decoration-skip-ink: auto;letter-spacing: 2px;font-weight: 600;opacity: 0.5;color: rgb(224, 224, 224);text-transform: uppercase;">
+                                About
+                            </a></li>
+                        <li class="block mt-0 mb-4" style="box-sizing: inherit;margin-bottom: 1rem;margin-top: 0px;display: block;"><a href="https://unraid.net/contact" target="" class="text-gray opacity-50 hover:opacity-100 font-semibold uppercase tracking-wide" style="box-sizing: inherit;background-color: transparent;text-decoration: none;transition: all 0.25s ease-out 0s;text-decoration-skip-ink: auto;letter-spacing: 2px;font-weight: 600;opacity: 0.5;color: rgb(224, 224, 224);text-transform: uppercase;">
+                                Contact Us
+                            </a></li>
+                        <li class="block mt-0 mb-4" style="box-sizing: inherit;margin-bottom: 1rem;margin-top: 0px;display: block;"><a href="https://unraid.net/blog" target="" class="text-gray opacity-50 hover:opacity-100 font-semibold uppercase tracking-wide" style="box-sizing: inherit;background-color: transparent;text-decoration: none;transition: all 0.25s ease-out 0s;text-decoration-skip-ink: auto;letter-spacing: 2px;font-weight: 600;opacity: 0.5;color: rgb(224, 224, 224);text-transform: uppercase;">
+                                Blog
+                            </a></li>
+                        <li class="block mt-0 mb-4" style="box-sizing: inherit;margin-bottom: 1rem;margin-top: 0px;display: block;"><a href="https://unraid.net/policies" target="" class="text-gray opacity-50 hover:opacity-100 font-semibold uppercase tracking-wide" style="box-sizing: inherit;background-color: transparent;text-decoration: none;transition: all 0.25s ease-out 0s;text-decoration-skip-ink: auto;letter-spacing: 2px;font-weight: 600;opacity: 0.5;color: rgb(224, 224, 224);text-transform: uppercase;">
+                                Policies
+                            </a></li>
+                    </ul>
+                </nav>
+                <hr class="my-0" style="box-sizing: content-box;overflow: visible;background-color: rgb(28, 27, 27);box-shadow: rgb(52, 52, 52) 0px 1px 0px 0px;border-style: none;margin-top: 0px;margin-bottom: 0px;padding: 0px;height: 1px !important;">
+                <section class="w-full flex flex-wrap items-center md:justify-between mt-8 md:mt-12" style="box-sizing: inherit;display: flex;flex-wrap: wrap;width: 100%;-webkit-box-align: center;margin-top: 3.1rem;">
+                    <div id="footer-logo" style="box-sizing: inherit;display: flex;width: 100%;-webkit-box-align: center; margin-top: 2rem;-webkit-box-direction: normal;-webkit-box-ordinal-group: 3;order: 2;-webkit-box-orient: vertical;flex-direction: column;">
+                        <div class="w-113px mx-auto md:mx-0" style="box-sizing: inherit; "><img src="Crossflashing%20Controllers%20-%20Unraid%20|%20Docs-Dateien/unraid-stacked-dark.svg" alt="Unraid" class="w-full" style="box-sizing: inherit;border-style: none;max-width: 100%;vertical-align: middle;width: 100%;">
+                        </div>
+                        <div class="Nav__item mt-6 text-gray opacity-50 hover:opacity-100" style="box-sizing: inherit;opacity: 0.5;color: rgb(28, 27, 27);margin-top: 1.5rem;font-size: 0.875rem;font-weight: 600;text-transform: uppercase;letter-spacing: 2px;position: relative;">
+                        </div>
+                    </div>
+                    <div id="mc_embed_signup" class="w-100 md:w-1/2 order-0 md:order-1 mt-6 md:mt-0" style="box-sizing: inherit;-webkit-box-ordinal-group: 1;order: 0;margin-top: 1.5rem;width:64%;">
+                        <form action="https://unraid.us18.list-manage.com/subscribe/post?u=4ce73a4dbebfb261481909068&amp;id=7d5746a785" method="post" name="mc-embedded-subscribe-form" target="_blank" class="w-full relative" style="box-sizing: inherit;position: relative;width: 100%;">
+                            <div aria-hidden="true" style="position: absolute;left: -5000px;box-sizing: inherit;"><input type="text" name="b_4ce73a4dbebfb261481909068_7d5746a785" tabindex="-1" style="box-sizing: inherit;margin: 0px;appearance: none;font-size: 1rem;transition: all 0.25s ease-out 0s;font-feature-settings: &quot;lnum&quot;, &quot;pnum&quot;, &quot;lnum&quot;, &quot;pnum&quot;;font-variant-numeric: proportional-nums;overflow: visible;line-height: 1;height: 46px;">
+                            </div>
+                            <label for="mce-EMAIL" class="subscribe-label text-white text-sm block mb-2" style="box-sizing: inherit;font-size: 0.875rem;color: rgb(255, 255, 255);line-height: 1.5;display: block;margin-bottom: 0.5rem;">Newsletter
+                                Sign Up</label>
+                            <div class="subscribe-box flex flex-wrap" style="box-sizing: inherit;display: flex;flex-wrap: wrap;">
+                                <input type="email" name="EMAIL" id="mce-EMAIL" placeholder="Email Address" class="font-serif flex-1 inline-block left w-100 h-auto mb-0 mr-2 border-black shadow-gray-bottom" style="box-sizing: inherit;margin: 0px;appearance: none;font-size: 1rem;transition: all 0.25s ease-out 0s;font-feature-settings: &quot;lnum&quot;, &quot;pnum&quot;, &quot;lnum&quot;, &quot;pnum&quot;;font-variant-numeric: proportional-nums;overflow: visible;line-height: 1;height: auto;border-color: rgb(28, 27, 27);display: inline-block;-webkit-box-flex: 1;flex: 1 1 0%;margin-bottom: 0px;margin-right: 0.5rem;box-shadow: rgb(52, 52, 52) 0px 2px 0px 0px;">
+                                <button type="submit" name="subscribe" class="button--skinny button--white-gradientHover left w-auto" style="box-sizing: inherit;margin: 0px;appearance: none;font-size: 0.875rem;transition: none 0s ease 0s;font-feature-settings: &quot;lnum&quot;, &quot;pnum&quot;, &quot;lnum&quot;, &quot;pnum&quot;;font-variant-numeric: proportional-nums;line-height: 1;overflow: visible;text-transform: uppercase;font-weight: 600;letter-spacing: 2px;text-align: center;text-decoration: none;display: inline-block;background-color: transparent;border-radius: 0.125rem;border: 0px;padding: 1rem 1.5rem;color: rgb(255, 255, 255);background: linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255)) 0px 0px / 100% 2px no-repeat, linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255)) 0px 100% / 100% 2px no-repeat, linear-gradient(0deg, rgb(255, 255, 255), rgb(255, 255, 255)) 0px 100% / 2px 100% no-repeat, linear-gradient(0deg, rgb(255, 255, 255), rgb(255, 255, 255)) 100% 100% / 2px 100% no-repeat;width: auto;">
+                                    Subscribe
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                    <div id="social-media" style="box-sizing: inherit;width: 100%;-webkit-box-ordinal-group: 2;order: 1;">
+                        <ul id="social-media-ul" class="list-reset flex flex-row" style="float: right;box-sizing: inherit;list-style-position: outside;display: flex;list-style: none;padding: 0px;flex-direction: row;-webkit-box-orient: horizontal;-webkit-box-direction: normal;">
+                            <li style="box-sizing: inherit;"><a href="https://www.reddit.com/r/unRAID/" target="_blank" rel="noopener noreferrer" title="Unraid on Reddit" class="text-gray fill-gray w-8 h-8 block opacity-50 hover:opacity-100 mr-3" style="box-sizing: inherit;background-color: transparent;text-decoration: none;transition: all 0.25s ease-out 0s;text-decoration-skip-ink: auto;display: block;opacity: 0.5;color: rgb(224, 224, 224);height: 2rem;margin-right: 0.75rem;fill: rgb(224, 224, 224);width: 2rem;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" style="box-sizing: inherit;display: block;width: 100%;height: 100%;"><title style="box-sizing: inherit;">reddit</title>
+                                        <path d="M46,24.61a4.64,4.64,0,0,0-7.87-3.32,24,24,0,0,0-12.2-3.58l2.6-8.17,7,1.65v.1a3.82,3.82,0,1,0,.27-1.38L28.24,8.14a.64.64,0,0,0-.77.43l-2.9,9.11A24.2,24.2,0,0,0,11.8,21.23a4.62,4.62,0,1,0-5.5,7.36,8.29,8.29,0,0,0-.15,1.5c0,6.84,8.42,12.41,18.76,12.41s18.76-5.57,18.76-12.41a8.43,8.43,0,0,0-.13-1.42A4.61,4.61,0,0,0,46,24.61ZM15.86,27.79a2.77,2.77,0,1,1,2.77,2.76A2.77,2.77,0,0,1,15.86,27.79ZM31.71,36C30.32,37.35,28.13,38,25,38h0c-3.11,0-5.3-.68-6.69-2.07a.63.63,0,0,1,0-.91.64.64,0,0,1,.92,0c1.13,1.13,3,1.68,5.77,1.68h0c2.75,0,4.64-.55,5.77-1.69a.66.66,0,0,1,.92,0A.64.64,0,0,1,31.71,36Zm-.33-5.41a2.76,2.76,0,1,1,2.77-2.76A2.77,2.77,0,0,1,31.38,30.55Z" style="box-sizing: inherit;"></path>
+                                    </svg>
+                                </a></li>
+                            <li style="box-sizing: inherit;"><a href="https://www.youtube.com/channel/UC5LYki2fFiiqYnKx1xnIJbg/videos" target="_blank" rel="noopener noreferrer" title="Unraid on YouTube" class="text-gray fill-gray w-8 h-8 block opacity-50 hover:opacity-100 mx-3" style="box-sizing: inherit;background-color: transparent;text-decoration: none;transition: all 0.25s ease-out 0s;text-decoration-skip-ink: auto;display: block;opacity: 0.5;color: rgb(224, 224, 224);height: 2rem;fill: rgb(224, 224, 224);width: 2rem;margin-left: 0.75rem;margin-right: 0.75rem;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" style="box-sizing: inherit;display: block;width: 100%;height: 100%;"><title style="box-sizing: inherit;">youtube</title>
+                                        <path d="M50,15A7.48,7.48,0,0,0,42.53,7.5H7.47A7.47,7.47,0,0,0,0,15V35A7.47,7.47,0,0,0,7.47,42.5H42.53A7.48,7.48,0,0,0,50,35ZM20,33.46V14.63L34.28,24Z" style="box-sizing: inherit;"></path>
+                                    </svg>
+                                </a></li>
+                            <li style="box-sizing: inherit;"><a href="https://twitter.com/UnraidOfficial" target="_blank" rel="noopener noreferrer" title="Unraid on Twitter" class="text-gray fill-gray w-8 h-8 block opacity-50 hover:opacity-100 ml-3" style="box-sizing: inherit;background-color: transparent;text-decoration: none;transition: all 0.25s ease-out 0s;text-decoration-skip-ink: auto;display: block;opacity: 0.5;color: rgb(224, 224, 224);height: 2rem;fill: rgb(224, 224, 224);width: 2rem;margin-left: 0.75rem;">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" style="box-sizing: inherit;display: block;width: 100%;height: 100%;"><title style="box-sizing: inherit;">twitter</title>
+                                        <path d="M46.54,11.64A17.54,17.54,0,0,1,41.47,13a8.85,8.85,0,0,0,3.88-4.88,17.88,17.88,0,0,1-5.61,2.14,8.84,8.84,0,0,0-15.29,6.05,8.37,8.37,0,0,0,.23,2A25.12,25.12,0,0,1,6.46,9.12,8.83,8.83,0,0,0,9.19,20.91a8.65,8.65,0,0,1-4-1.11v.12a8.84,8.84,0,0,0,7.09,8.66,8.91,8.91,0,0,1-2.33.31,8.27,8.27,0,0,1-1.66-.16,8.84,8.84,0,0,0,8.25,6.14,17.71,17.71,0,0,1-11,3.77,18.22,18.22,0,0,1-2.1-.12A24.89,24.89,0,0,0,17,42.5C33.26,42.5,42.15,29,42.15,17.35l0-1.14A17.62,17.62,0,0,0,46.54,11.64Z" style="box-sizing: inherit;"></path>
+                                    </svg>
+                                </a></li>
+                        </ul>
+                    </div>
+                </section>
+<div id="copyright-footer">
+                    <p>Copyright © 2005-2022 Lime Technology, Inc.<br>
+                        Unraid® is a registered trademark of Lime Technology, Inc.</p>
+</div>
+        </div></footer>
+        <!-- /footer -->
+    
+<script>(RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgPageParseReport":{"limitreport":{"cputime":"0.034","walltime":"0.035","ppvisitednodes":{"value":150,"limit":1000000},"ppgeneratednodes":{"value":0,"limit":1000000},"postexpandincludesize":{"value":0,"limit":2097152},"templateargumentsize":{"value":0,"limit":2097152},"expansiondepth":{"value":2,"limit":40},"expensivefunctioncount":{"value":0,"limit":100},"unstrip-depth":{"value":0,"limit":20},"unstrip-size":{"value":0,"limit":5000000},"timingprofile":["100.00%    0.000      1 -total"]},"cachereport":{"timestamp":"20220709171919","ttl":86400,"transientcontent":false}}});});</script>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-53942814-2', 'auto');
+  ga('set', 'anonymizeIp', true);
+  ga('send', 'pageview');
+
+</script>
+
+<script>(RLQ=window.RLQ||[]).push(function(){mw.config.set({"wgBackendResponseTime":43});});</script>      
+      
+    <div style="display: none; font-size: 14px;" class="suggestions"><div class="suggestions-results"></div><div class="suggestions-special"></div></div></body></html>

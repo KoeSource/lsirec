@@ -7,8 +7,9 @@ Use [lsiutil](https://github.com/exactassembly/meta-xa-stm/blob/master/recipes-s
 to crossflash between IT/IR firmwares from Linux, without vendor/product ID
 restrictions.
 
-IT = HBA (ZFS)
-IR = RAID
+IT = HBA, not bootable (ZFS)
+
+IR = RAID, bootable, needs to initialize on boot
 
 ## Quick guide to cleanly crossflash between IT/IR firmwares
 

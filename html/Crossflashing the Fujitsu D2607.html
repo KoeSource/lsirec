@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crossflashing the Fujitsu D2607 - marcan.st</title>
+    <link rel="stylesheet" href="Crossflashing%20the%20Fujitsu%20D2607-Dateien/main.css">
+    <link rel="stylesheet" href="Crossflashing%20the%20Fujitsu%20D2607-Dateien/css.css">
+    <link rel="stylesheet" href="Crossflashing%20the%20Fujitsu%20D2607-Dateien/notosansjapanese.css">
+    
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@marcan42">
+    <meta name="twitter:creator" content="@marcan42">
+    <meta name="twitter:title" content="Crossflashing the Fujitsu D2607">
+    
+    <meta name="twitter:description" content="Beating Rube Goldberg with a hex editor">
+    
+    
+    <meta name="twitter:image" content="https://marcan.st/posts/lsi/sas2008.jpg">
+    <meta property="og:image" content="https://marcan.st/posts/lsi/sas2008.jpg">
+    
+
+    <meta property="og:title" content="Crossflashing the Fujitsu D2607">
+</head>
+<body>
+<div id="layout">
+    <a href="#menu" id="menuLink" class="menu-toggle"><span></span></a>
+    <div id="menu">
+        <div>
+            <a href="https://marcan.st/">marcan.st<div><img src="Crossflashing%20the%20Fujitsu%20D2607-Dateien/arh.svg"></div></a>
+
+            <ul>
+                
+                
+                <li><a href="https://marcan.st/posts/">Posts</a>
+                    
+                </li>
+                
+                <li><a href="https://marcan.st/projects/">Projects</a>
+                    <ul>
+                    
+                        <li><a href="https://marcan.st/projects/blitzloop/">BlitzLoop</a></li>
+                    
+                        <li><a href="https://marcan.st/projects/openlase/">OpenLase</a></li>
+                    
+                    </ul>
+                </li>
+                
+                <li><a href="https://marcan.st/events/">Events</a>
+                    <ul>
+                    
+                        <li><a href="https://marcan.st/events/euskal/">Euskal Encounter</a></li>
+                    
+                    </ul>
+                </li>
+                
+                <li><a href="https://marcan.st/old-stuff/">Old Stuff</a>
+                    
+                </li>
+                
+                <li><a href="https://marcan.st/about/">About</a>
+                    
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    <div id="main">
+
+<div class="header">
+    <h1>Crossflashing the Fujitsu D2607</h1>
+    <h2>Beating Rube Goldberg with a hex editor</h2>
+    
+        
+            <a class="prev" href="https://marcan.st/2016/03/untangling-ios-pin-code-security/">← Untangling iOS PIN code security</a>
+        
+        
+            <a class="next" href="https://marcan.st/2016/06/hacking-and-upgrading-the-korg-kronos/">Hacking and upgrading the Korg Kronos →</a>
+        
+    
+    
+    
+    
+    <div class="clear"></div>
+</div>
+
+<div class="content">
+    
+
+<div class="infobox"><p><strong>Update</strong>: I wrote a <a href="https://github.com/marcan/lsirec">new tool</a> that lets you
+do most of this process from Linux, without rebooting and without needing any
+UEFI or DOS tools, which should work for any LSI SAS2008 card regardless of
+vendor and let you crossflash to any firmware.</p>
+</div>
+
+<p>I own a Fujitsu Primergy server (hosted at a secret location ;-) ) that I use
+for offsite backups and a few misc things (and for which it’s, incidentally,
+grossly overpowered). It came with a Fujitsu D2607 RAID controller, which is
+based on the LSI SAS2008 (“Falcon”) chipset. Unfortunately, its firmware is
+old and only barely supports drives in JBOD mode with some issues  (I want to
+use software RAID 5), and also does not support drives larger than 2TB.</p>
+
+
+<figure class="right">
+    
+        <img src="Crossflashing%20the%20Fujitsu%20D2607-Dateien/sas2008.jpg" width="192">
+    
+    
+    <figcaption>
+        <h4>One chip, many faces</h4>
+        
+    </figcaption>
+    
+</figure>
+
+
+<p>Interestingly, LSI uses the same SAS2008 chipset on both their higher-end RAID
+cards and lower-end SAS HBAs. There are, in fact, two different classes of
+devices, with completely different Linux drivers, that are implemented using the
+same chip: MegaRAID/iMR (the full-featured hardware managed RAID solution) and
+MPT2SAS (a simpler device which comes in two firmware variants: IR, with support
+for basic hardware RAID0/1/10, and IT, which is just a plain HBA with no RAID
+support). I use two SAS disks in hardware RAID1 as boot drives, and four SATA
+disks in software RAID5 as data drives, so I’m interested in the IR mode
+firmware, which has good support for passing through plain drives straight to
+the OS but still lets me have a hardware RAID1 volume to boot off of.</p>
+
+<p>There is in fact quite a bit of documentation on how these LSI-based cards can
+be “crossflashed” to different firmware versions, from different vendors and in
+different modes. Unfortunately, most of this documentation is of the form
+“download these random tools and run them in this order, worked for
+me!“—nobody seems to have done any serious analysis. There are over half a
+dozen tools potentially involved depending on which mode you’re coming from and
+going to, and countless firmware variants. Some tools only work with some
+firmwares, and the tools themselves are available for different combinations of
+DOS, Windows, UEFI, and Linux, depending on which tool and which version you
+stumble across.</p>
+
+<p>Even more unfortunately, the Fujitsu card seems to be a bit oddball, with only
+a few people reporting a successful crossflash, and that involving a really
+bizarre dance through 3 different firmwares. I tried it, and it certainly didn’t
+work for me. So I ditched all of that and made it work the right way. Here’s
+how.</p>
+
+<h2 id="lsi-firmware-basics">LSI firmware basics</h2>
+
+<p>First things first: one nice thing about these cards is that you can’t brick
+them, as long as your BIOS lets you turn off Option ROM loading. Low-level
+recovery is always possible. Just make sure you write down your SAS address
+before starting, as you’ll have to write that back if you wipe and flash from
+scratch.</p>
+
+<p>There are actually 3 different types of nonvolatile memory on these cards:
+there is an “SBR”, which is actually just a serial EEPROM containing the core
+information about the card (but no actual firmware). Then there is the main
+Flash memory, which contains both the firmware that runs on the card (it has
+a PowerPC CPU) and the Option ROM that runs on the host, as well as other misc
+bits. Finally, there is an nvSRAM
+(<a href="https://en.wikipedia.org/wiki/Magnetoresistive_random-access_memory">MRAM memory</a>,
+the modern descendant of
+<a href="https://en.wikipedia.org/wiki/Magnetic-core_memory">core memory</a>!) that holds
+settings and buffers.</p>
+
+<p>To crossflash a card to a different firmware, you first need to write the SBR
+corresponding to the type of card that you want (iMR or IT/IR). Then you
+can wipe the flash memory and flash whatever firmware you need.</p>
+
+<h2 id="sbr-flashing">SBR flashing</h2>
+
+<p>To flash the SBR, the only tool available seems to be a small DOS binary called
+<code>megarec.exe</code>. This tool works on a “dead” card, and doesn’t care whether the
+card is in iMR or IT/IR mode.</p>
+
+<p>Supermicro actually provide tools and documentation on how to crossflash their
+SAS2008 based cards between MegaRAID and IT/IR modes, so I recommend going to
+<a href="http://www.supermicro.com/support/faqs/faq.cfm?faq=13612">their page</a> if you
+need to get ahold of <code>megarec.exe</code>.</p>
+
+<p>Unfortunately, this does mean you need to put together a FreeDOS USB boot disk
+or similar. I recommend <a href="http://www.chtaube.eu/computers/freedos/bootable-usb/">these</a>
+prebuilt bootable USB images if you just want something ready to go. Picking the
+HIMEMX boot config works best.</p>
+
+<p>You should probably back up your SBR first (which, by the way, also contains
+your SAS address):</p>
+
+<pre><code>megarec -readsbr 0 sbr-bak.bin
+</code></pre>
+
+<p>Then write the new SBR:</p>
+
+<pre><code>megarec -writesbr 0 sbr.bin
+</code></pre>
+
+<p>Wiping the flash is recommended at this point:</p>
+
+<pre><code>megarec -cleanflash 0
+</code></pre>
+
+<p>Unfortunately, that didn’t work for me: it only wiped half of the flash (8 out
+of 16MB) before erroring out. My guess is that this version of <code>megarec</code> doesn’t
+properly support my Flash chip. However, this doesn’t seem to cause major
+issues; presumably, wiping the first half of flash is more than enough to make
+sure no remnant firmware is running and the card comes up in a clean state.</p>
+
+<p>So what SBR should you use? At first I used the Supermicro <code>SBRIR.BIN</code>, but
+keep reading. What is critical is that you pick an SBR for the correct mode of
+your card: an iMR one if you want full MegaRAID mode, or an IT/IR one if you
+just want the MPT2SAS mode. The SBR determines which mode the card comes up in,
+and its PCI ID which identifies it to the host as one or the other kind.</p>
+
+<p>As we’ll see, though, the SBR isn’t nearly as mysterious as you might assume,
+judging by the fact that they get tossed around but nobody seems to have
+bothered to throw one in a hex editor yet. But I’m getting ahead of myself…</p>
+
+<h2 id="firmware-flashing">Firmware flashing</h2>
+
+<p>Here’s where it gets all over the place. There are different firmware flashing
+tools depending on which mode you’re in (iMR or IT/IR), and which OS you use.
+I’ll be discussing only the IT/IR flash tool, which is called <code>sas2flash</code>.</p>
+
+<p>I tried a bunch, but what worked best for me was the UEFI version. The DOS ones
+wouldn’t work due to some missing BIOS functionality in my UEFI BIOS, while
+the Linux ones only work if the card is already functional, not if it has been
+wiped (since they rely on the kernel driver to talk to the card, and that won’t
+come up if the card is dead).</p>
+
+<p>I used the P19 version of the LSI <code>sas2flash.efi</code> tool. To use it, boot into an
+EFI shell with the tools on a FAT32 formatted disk (e.g. USB drive), and:</p>
+
+<pre><code>cd fs0:
+sas2flash.efi -o -f 2118ir.bin -b mptsas2.rom
+</code></pre>
+
+<p>Where <code>2118ir.bin</code> is the firmware that you want to flash (I used the P19
+IR firmware from LSI), and mptsas2.rom is the Option ROM (I used version
+07.19.00.00 of the standard BIOS ROM, but I’ll probably try an UEFI version next
+time I get a chance to mess with the server, see how that works).</p>
+
+<p>Then you should write back the original SAS address:</p>
+
+<pre><code>sas2flsh -o -sasadd 5000112233445566
+</code></pre>
+
+<p>At first, I had issues getting this to work at all: the UEFI versions would
+detect the card and attempt to boot it, but fail. However, I think I was hitting
+a strange interaction with my board’s UEFI implementation. I was doing this on
+a consumer miniITX board, not the server, since the server takes ages to boot,
+but consumer hardware probably has a less reliable UEFI implementation. I
+eventually discovered that booting FreeDOS, flashing the SBR with <code>megarec</code>,
+using Ctrl-Alt-Delete to warm-reboot, and going to a UEFI shell would allow
+<code>sas2flash.efi</code> to boot the card properly properly (but only once, I had to
+reboot and repeat the process for subsequent invocations).</p>
+
+<p>Unfortunately, here I hit the first issue with flashing this Fujitsu card, which
+other people had also reported:</p>
+
+<pre><code>Chip is in RESET state. Attempting Host Boot...
+Firmware Host Boot Successful.
+
+Mfg Page 2 Mismatch Detected.
+Writing Current Mfg Page 2 Settings to NVRAM.
+Failed to Validate Mfg Page 2!
+</code></pre>
+
+<p>This is what someone purportedly worked around by using a strange combination
+of tools and firmwares, which didn’t work for me, but we can do better. What is
+this <em>Mfg Page 2</em>? I have no idea. Why is it validating it? There should be
+nothing to validate, as I’m flashing the card from scratch. This sounds like
+an attempt to prevent crossflashing by making sure that e.g. the vendor ID does
+not change.</p>
+
+<h2 id="hacking-sas2flash">Hacking sas2flash</h2>
+
+<p>So instead of trying to come up with a Rube-Goldberg solution as seems to be
+popular with these LSI cards, I threw <code>sas2flash.efi</code> into IDA. It took 5
+minutes to find the function responsible for the <code>Mfg Page 2</code> message (via
+string search) and patch out the check. Interestingly, <code>sas2flash.efi</code> is
+compiled into EFI Byte Code (EBC), a platform-independent bytecode architecture,
+so it should work for both 32-bit and 64-bit EFI implementations. This didn’t
+really make it any harder to patch, though: IDA can disassemble EBC, and the
+patch was so obvious I didn’t even need to look up the EBC instruction encodings
+to work out what to patch.</p>
+
+
+<figure>
+    <a href="https://marcan.st/posts/lsi/sas2hax.png">
+        <img src="Crossflashing%20the%20Fujitsu%20D2607-Dateien/sas2hax.png" width="512">
+    </a>
+    
+    <figcaption>
+        <h4>The culprit</h4>
+        
+    </figcaption>
+    
+</figure>
+
+
+<style type="text/css">
+span.red {
+    background-color: #faa;
+}
+span.green {
+    background-color: #bfb;
+}
+span.yellow {
+    background-color: #ff5;
+}
+span.pink {
+    background-color: #fdd;
+}
+span.cyan {
+    background-color: #dff;
+}
+span.grey {
+    background-color: #ddd;
+}
+span.blue {
+    background-color: #ddf;
+}
+span.fix {
+    color: #c00;
+    font-weight: bold;
+}
+</style>
+
+<pre><span class="red">-0000CC00: 72 84 70 00 1F C4 05 47  C2 03 77 48 7C 00 01 00  r.p....G ..wH|... </span>
+<span class="cyan">+0000CC00: 72 84 70 00 1F C4 05 47  C2 03 77 48 7C 00 <span class="fix">00</span> 00  r.p....G ..wH|... </span>
+</pre>
+
+<p>With that patch, the flashing process completed successfully (actually, I had
+to run it again after a reboot to get the BIOS flashed, probably due to the
+aforementioned UEFI issues). Grab the patched <code>sas2flash.efi</code>
+<a href="https://marcan.st/posts/lsi/sas2hax.efi">here</a>.</p>
+
+<p>Victory! Time to stick the card back into the server, plug the SFF connectors
+back in, and boot. Except… turns out the card only sees 3 drives. One
+connector’s worth. The other connector is dead. This was also reported as an
+issue by someone. They hadn’t managed to Rube-Goldberg their way out of this
+one.</p>
+
+<p>I had a hunch here. One connector working and not the other one is a bit
+strange. The chip only has 8 ports, and they are connected straight to the
+connectors with no intervening logic. There is nothing “special” that the
+Fujitsu card can possibly require to enable both connectors. However, sometimes,
+high-speed interfaces like these have configuration bits that do things like
+flip the polarity of the signal lines, or rearrange them in some way. It’s
+possible that the Fujitsu card requires a slightly different config. What’s
+that SBR all about, anyway?</p>
+
+<h2 id="demystifying-the-sbr">Demystifying the SBR</h2>
+
+<p>What <em>is</em> inside that SBR? It’s only 256 bytes. Is it secret boot code?
+Encrypted information? Satoshi Nakamoto’s Bitcoin wallet?</p>
+
+<p>Turns out comparing a few SBRs you can find around is enough to deduce the interesting
+bits.</p>
+
+<pre>00000000  61 f6 22 61 f7 36 4f b3  f8 00 d7 91 <span class="green">00 10 72 00</span>  |a."a.6O.......r.|
+00000010  00 00 <span class="yellow">04</span> 01 <span class="cyan">34 17 77 11</span>  00 00 00 00 00 00 00 00  |....4.w.........|
+00000020  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+00000030  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+00000040  <span class="red">00</span> 0c 5d 00 5c 30 5a 14  75 05 10 <span class="pink">ab</span> <span class="grey">61 f6 22 61</span>  |..].\0Z.u...a."a|
+00000050  <span class="grey">f7 36 4f b3 f8 00 d7 91  00 10 72 00 00 00 04 01</span>  |.6O.......r.....|
+00000060  <span class="grey">34 17 77 11 00 00 00 00  00 00 00 00 00 00 00 00</span>  |4.w.............|
+00000070  <span class="grey">00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00</span>  |................|
+00000080  <span class="grey">00 00 00 00 00 00 00 00  00 00 00 00 00 0c 5d 00</span>  |..............].|
+00000090  <span class="grey">5c 30 5a 14 75 05 10 ab</span>  00 00 00 00 00 00 00 00  |\0Z.u...........|
+000000a0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+000000b0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+000000c0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+000000d0  00 00 00 00 00 00 00 00  <span class="blue">50 00 11 22 33 44 55 66</span>  |........P..W.z..|
+000000e0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 <span class="blue">a6</span>  |...............a|
+000000f0  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  |................|
+</pre>
+
+<ul>
+<li><span class="green">PCI Vendor and Product ID (little-endian)</span></li>
+<li><span class="cyan">PCI Subsystem Vendor and Product ID (little-endian)</span></li>
+<li><span class="red">Interface mode (iMR: 0x10, IR/IT: 0x00)</span></li>
+<li><span class="pink">Checksum</span></li>
+<li><span class="grey">Copy of bytes 0x00-0x4b (Mfg Page 2?)</span></li>
+<li><span class="blue">SAS address and checksum</span></li>
+</ul>
+
+<p>The checksum is simply calculated such that the sum of all bytes including the
+checksum byte, mod 0x100, is 0x5b.</p>
+
+<p>The above highlighted bits were the only differences between the Supermicro
+IR SBR, the Supermicro iMR SBR, and the original Fujitsu iMR SBR that I had
+backed up… including that lone little mystery
+<span class="yellow">yellow</span> byte, which was 04 in the Fujitsu SBR, but
+07 in every other SBR I’d seen. Could this be the magic fix for the connector
+issue? Only one way to find out: patch up the SBR (both copies), fix the
+checksum, write it with <code>megarec</code>, and see what happens.</p>
+
+<p>Did it work? You bet. All drives detected. Victory.</p>
+
+<p>Grab the patched SBR <a href="https://marcan.st/posts/lsi/sbrfj.bin">here</a>. This one keeps the Fujitsu
+subsystem IDs, but is in IT/IR mode. It’s actually the one above, but with the
+SAS address section blanked out, as seems to be expected from “generic”/vanilla
+SBRs.</p>
+
+<p>15 minutes of reverse engineering beats trying every possible firmware and tool
+combination out there hoping to stumble upon something that works by accident
+:-)</p>
+
+    <div class="meta">2016-05-07 01:15</div>
+    <div class="clear"></div>
+</div>
+
+
+    </div>
+</div>
+<script>menuLink.onclick=function(a){a.preventDefault();var e="active";layout.className=layout.className==e?"":e};</script>
+
+
+
+</body></html>
