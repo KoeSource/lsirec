@@ -39,6 +39,10 @@ Flash the new firmware. Optionally, use
 `4.  Download/erase BIOS and/or FCode (update the FLASH)` to flash the BIOS/EFI
 module (not necessary if you're not booting from the adapter).
 
+x86 = mptsas2.rom
+fcode = return
+efi = mptsas2.rom
+
 Exit lsiutil.
 
 `# lspci | grep -i SAS2008`
@@ -48,6 +52,7 @@ Exit lsiutil.
 Where 0000:01:00.0 is your PCI device ID.
 
 `# python3 sbrtool.py parse sbr_backup.bin sbr.cfg`
+`# python3 sbrtool.py parse sbr_backup.bin FUJITSUHACKSBR.BIN`
 
 Use the example .cfg
 
@@ -57,8 +62,10 @@ sure which firmwares use this, but I've seen it in some SBRs). You may want to
 change the Subsystem VID/PID, or use another SBR as a template.
 
 `# python3 sbrtool.py build sbr.cfg sbr_new.bin`
+`# python3 sbrtool.py build sbr.cfg sbr_hack.bin`
 
 `# ./lsirec 0000:01:00.0 writesbr sbr_new.bin`
+`# ./lsirec 0000:01:00.0 writesbr FUJITSUHACKSBR.BIN`
 
 Reboot and cross your fingers.
 
@@ -68,9 +75,13 @@ use `18.  Change SAS WWID` to update the WWID if necessary, then reboot again
 
 *NEW*: instead of rebooting, you can use:
 
+`# ./lsirec 0000:01:00.0 info`
 `# ./lsirec 0000:01:00.0 reset`
-
 `# ./lsirec 0000:01:00.0 rescan`
+
+`lsiutil -e`
+`18.  Change SAS WWID`
+
 
 Make sure your disks are not in use if you do this. `reset` might fail if you
 have just flashed a new firmware. This is normal, as the adapter takes a while
