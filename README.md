@@ -52,7 +52,7 @@ Tip: Falls dies nicht funktioniert, die Virtualisierungsoptionen im BIOS ausscha
 
 ***Firmware***
 
-www.boradcom.com -> Search
+[www.boradcom.com](https://www.broadcom.com/) -> Search
 
 9211-8i P20 -> 2118ir.bin, 2118it.bin <br>
 UEFI BSD_P20 -> mptsas2.rom, x64sas2.rom
