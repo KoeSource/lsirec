@@ -50,6 +50,18 @@ Kontrolle, IOMMU sollte nicht verfügbar sein.
 
 Tip: Falls dies nicht funktioniert, die Virtualisierungsoptionen im BIOS ausschalten.
 
+***Firmware***
+
+www.boradcom.com -> Search
+
+9211-8i P20 -> 2118ir.bin, 2118it.bin <br>
+UEFI BSD_P20 -> mptsas2.rom, x64sas2.rom
+
+Unzip
+```
+apt install unzip
+unzip Firmware_9211.zip
+```
 
 ## Crosflass guide  - Kurz
 

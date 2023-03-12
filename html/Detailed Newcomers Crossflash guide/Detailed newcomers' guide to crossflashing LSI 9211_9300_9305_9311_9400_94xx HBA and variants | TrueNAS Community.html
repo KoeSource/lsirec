@@ -1,0 +1,4205 @@
+<!DOCTYPE html>
+<html id="XF" dir="LTR" data-app="public" data-template="xfrm_resource_view" data-container-key="xfrmCategory-1" data-content-key="" data-logged-in="false" data-cookie-prefix="xf_" data-csrf="1678623174,73a66bd96a98431af4d9820008e6a72e" class="has-js template-xfrm_resource_view has-no-touchevents has-passiveeventlisteners has-no-hiddenscroll has-os-linux has-browser-mozilla" lang="en-US"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+	
+	
+	
+
+	<title>Detailed newcomers' guide to crossflashing LSI 9211/9300/9305/9311/9400/94xx HBA and variants | TrueNAS Community</title>
+	<!-- Google Tag Manager -->
+<script async="" src="Detailed%20newcomers'%20guide%20to%20crossflashing%20LSI%209211_9300_9305_9311_9400_94xx%20HBA%20and%20variants%20|%20TrueNAS%20Community-Dateien/gtm.js"></script><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5RQGQF');</script>
+<!-- End Google Tag Manager -->
+	<link rel="manifest" href="https://www.truenas.com/community/webmanifest.php">
+	
+		<meta name="theme-color" content="#000000">
+	
+
+	<meta name="apple-mobile-web-app-title" content="TrueNAS Community">
+	
+
+	
+		
+		<meta name="description" content="There's hundreds of threads on crossflashing variants of LSI 9211/9300/9305/9311/94xx cards here, on ServeTheHome, and on blogs. But they don't always...">
+		<meta property="og:description" content="There's hundreds of threads on crossflashing variants of LSI 9211/9300/9305/9311/94xx cards here, on ServeTheHome, and on blogs. But they don't always discuss the subtleties of doing it on an EFI board for users who may never have used EFI...">
+		<meta property="twitter:description" content="There's hundreds of threads on crossflashing variants of LSI 9211/9300/9305/9311/94xx cards here, on ServeTheHome, and on blogs. But they don't always discuss the subtleties of doing it on an EFI...">
+	
+	
+		<meta property="og:url" content="https://www.truenas.com/community/resources/detailed-newcomers-guide-to-crossflashing-lsi-9211-9300-9305-9311-9400-94xx-hba-and-variants.54/">
+	
+		<link rel="canonical" href="https://www.truenas.com/community/resources/detailed-newcomers-guide-to-crossflashing-lsi-9211-9300-9305-9311-9400-94xx-hba-and-variants.54/">
+	
+
+	
+		
+	
+	
+	<meta property="og:site_name" content="TrueNAS Community">
+
+
+	
+	
+		
+	
+	
+	<meta property="og:type" content="website">
+
+
+	
+	
+		
+	
+	
+	
+		<meta property="og:title" content="Detailed newcomers' guide to crossflashing LSI 9211/9300/9305/9311/9400/94xx HBA and variants">
+		<meta property="twitter:title" content="Detailed newcomers' guide to crossflashing LSI...">
+	
+
+
+	
+	
+	
+	
+
+	
+	
+
+	
+
+
+	<link rel="preload" href="https://www.truenas.com/community/styles/fonts/fa/fa-regular-400.woff2?_v=5.15.3" as="font" type="font/woff2" crossorigin="anonymous">
+
+
+	<link rel="preload" href="https://www.truenas.com/community/styles/fonts/fa/fa-solid-900.woff2?_v=5.15.3" as="font" type="font/woff2" crossorigin="anonymous">
+
+
+<link rel="preload" href="https://www.truenas.com/community/styles/fonts/fa/fa-brands-400.woff2?_v=5.15.3" as="font" type="font/woff2" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="Detailed%20newcomers'%20guide%20to%20crossflashing%20LSI%209211_9300_9305_9311_9400_94xx%20HBA%20and%20variants%20|%20TrueNAS%20Community-Dateien/css.css">
+
+	<link rel="stylesheet" href="Detailed%20newcomers'%20guide%20to%20crossflashing%20LSI%209211_9300_9305_9311_9400_94xx%20HBA%20and%20variants%20|%20TrueNAS%20Community-Dateien/css_002.css">
+
+	
+		<script src="Detailed%20newcomers'%20guide%20to%20crossflashing%20LSI%209211_9300_9305_9311_9400_94xx%20HBA%20and%20variants%20|%20TrueNAS%20Community-Dateien/preamble.js"></script><style type="text/css">.notice[data-notice-id="-1"] { display: none !important } </style>
+	
+
+
+	
+	
+<script>window._epn = {campaign:5337967823};</script><script src="Detailed%20newcomers'%20guide%20to%20crossflashing%20LSI%209211_9300_9305_9311_9400_94xx%20HBA%20and%20variants%20|%20TrueNAS%20Community-Dateien/epn-smart-tools.js"></script>
+
+</head>
+<body data-template="xfrm_resource_view">
+
+	
+
+		
+			
+		
+
+		
+	
+
+
+	
+
+		
+			
+		
+
+		
+	
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5RQGQF"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div class="p-pageWrapper" id="top">
+
+
+
+
+
+<header class="p-header" id="header">
+	<div class="p-header-inner">
+		<div class="p-header-content">
+
+			<div class="p-header-logo p-header-logo--image">
+				<a href="https://www.truenas.com/community/">
+					<img src="Detailed%20newcomers'%20guide%20to%20crossflashing%20LSI%209211_9300_9305_9311_9400_94xx%20HBA%20and%20variants%20|%20TrueNAS%20Community-Dateien/publicLogoUrl.png" srcset="" alt="TrueNAS Community" width="" height="">
+				</a>
+			</div>
+
+			<div class="samLinkUnit" data-position="container_header"><div class="samItem tnad"><a href="https://www.truenas.com/" target="_blank">TrueNAS</a></div><div class="samItem ixad"><a href="https://www.ixsystems.com/" target="_blank">iX</a></div></div>
+
+		</div>
+	</div>
+</header>
+
+
+
+
+
+	<div class="p-navSticky p-navSticky--primary" data-xf-init="sticky-header">
+		
+	<nav class="p-nav">
+		<div class="p-nav-inner">
+			<button type="button" class="button--plain p-nav-menuTrigger button" data-xf-click="off-canvas" data-menu=".js-headerOffCanvasMenu" tabindex="0" aria-label="Menu"><span class="button-text">
+				<i aria-hidden="true"></i>
+			</span></button>
+
+			<div class="p-nav-smallLogo">
+				<a href="https://www.truenas.com/community/">
+					<img src="Detailed%20newcomers'%20guide%20to%20crossflashing%20LSI%209211_9300_9305_9311_9400_94xx%20HBA%20and%20variants%20|%20TrueNAS%20Community-Dateien/publicLogoUrl.png" srcset="" alt="TrueNAS Community" width="" height="">
+				</a>
+			</div>
+
+			<div class="p-nav-scroller hScroller" data-xf-init="h-scroller" data-auto-scroll=".p-navEl.is-selected">
+				<div class="hScroller-scroll is-calculated" style="margin-bottom: -42px;">
+					<ul class="p-nav-list js-offCanvasNavSource">
+					
+						<li>
+							
+	<div class="p-navEl " data-has-children="true">
+		
+
+			
+	
+	<a href="https://www.truenas.com/community/" class="p-navEl-link p-navEl-link--splitMenu " data-nav-id="forums">Forums</a>
+
+
+			<a data-xf-key="1" data-xf-click="menu" data-menu-pos-ref="&lt; .p-navEl" class="p-navEl-splitTrigger" role="button" tabindex="0" aria-label="Toggle expanded" aria-expanded="false" aria-haspopup="true"></a>
+
+		
+		
+			<div class="menu menu--structural" data-menu="menu" aria-hidden="true">
+				<div class="menu-content">
+					
+						
+	
+	
+	<a href="https://www.truenas.com/community/whats-new/posts/" class="menu-linkRow u-indentDepth0 js-offCanvasCopy " data-nav-id="newPosts">New posts</a>
+
+	
+
+					
+						
+	
+	
+	<a href="https://www.truenas.com/community/search/?type=post" class="menu-linkRow u-indentDepth0 js-offCanvasCopy " data-nav-id="searchForums">Search forums</a>
+
+	
+
+					
+						
+	
+	
+	<a href="https://www.truenas.com/blog/" class="menu-linkRow u-indentDepth0 js-offCanvasCopy " data-nav-id="iXblog">Blog</a>
+
+	
+
+					
+						
+	
+	
+	<a href="https://www.truenas.com/community/threads/forum-guidelines.45124" class="menu-linkRow u-indentDepth0 js-offCanvasCopy " data-nav-id="forumGuidelines">Forum Rules</a>
+
+	
+
+					
+				</div>
+			</div>
+		
+	</div>
+
+						</li>
+					
+						<li>
+							
+	<div class="p-navEl " data-has-children="true">
+		
+
+			
+	
+	<a href="https://www.truenas.com/community/whats-new/" class="p-navEl-link p-navEl-link--splitMenu " data-nav-id="whatsNew">What's new</a>
+
+
+			<a data-xf-key="2" data-xf-click="menu" data-menu-pos-ref="&lt; .p-navEl" class="p-navEl-splitTrigger" role="button" tabindex="0" aria-label="Toggle expanded" aria-expanded="false" aria-haspopup="true"></a>
+
+		
+		
+			<div class="menu menu--structural" data-menu="menu" aria-hidden="true">
+				<div class="menu-content">
+					
+						
+	
+	
+	<a href="https://www.truenas.com/community/whats-new/posts/" class="menu-linkRow u-indentDepth0 js-offCanvasCopy " rel="nofollow" data-nav-id="whatsNewPosts">New posts</a>
+
+	
+
+					
+						
+	
+	
+	<a href="https://www.truenas.com/community/whats-new/resources/" class="menu-linkRow u-indentDepth0 js-offCanvasCopy " rel="nofollow" data-nav-id="xfrmNewResources">New resources</a>
+
+	
+
+					
+						
+	
+	
+	<a href="https://www.truenas.com/community/whats-new/latest-activity" class="menu-linkRow u-indentDepth0 js-offCanvasCopy " rel="nofollow" data-nav-id="latestActivity">Latest activity</a>
+
+	
+
+					
+				</div>
+			</div>
+		
+	</div>
+
+						</li>
+					
+						<li>
+							
+	<div class="p-navEl " data-has-children="true">
+		<a data-xf-key="3" data-xf-click="menu" data-menu-pos-ref="&lt; .p-navEl" class="p-navEl-linkHolder" role="button" tabindex="0" aria-expanded="false" aria-haspopup="true">
+			
+	
+	<span class="p-navEl-link p-navEl-link--menuTrigger " data-nav-id="Documentation">Documentation</span>
+
+		</a>
+
+		
+		
+			<div class="menu menu--structural" data-menu="menu" aria-hidden="true">
+				<div class="menu-content">
+					
+						
+	
+	
+	<a href="https://www.ixsystems.com/documentation/freenas/" class="menu-linkRow u-indentDepth0 js-offCanvasCopy " data-nav-id="freenasDocs">FreeNAS</a>
+
+	
+
+					
+						
+	
+	
+	<a href="https://www.truenas.com/docs/" class="menu-linkRow u-indentDepth0 js-offCanvasCopy " data-nav-id="TrueNAS_Docs">TrueNAS</a>
+
+	
+
+					
+						
+	
+	
+	<a href="https://www.truenas.com/docs/truecommand/" class="menu-linkRow u-indentDepth0 js-offCanvasCopy " data-nav-id="truecommandDocs">TrueCommand</a>
+
+	
+
+					
+				</div>
+			</div>
+		
+	</div>
+
+						</li>
+					
+						<li>
+							
+	<div class="p-navEl " data-has-children="true">
+		<a data-xf-key="4" data-xf-click="menu" data-menu-pos-ref="&lt; .p-navEl" class="p-navEl-linkHolder" role="button" tabindex="0" aria-expanded="false" aria-haspopup="true">
+			
+	
+	<span class="p-navEl-link p-navEl-link--menuTrigger " data-nav-id="Download">Download</span>
+
+		</a>
+
+		
+		
+			<div class="menu menu--structural" data-menu="menu" aria-hidden="true">
+				<div class="menu-content">
+					
+						
+	
+	
+	<a href="https://www.truenas.com/download-truenas-core/" class="menu-linkRow u-indentDepth0 js-offCanvasCopy " data-nav-id="TrueNASCOREDL">TrueNAS CORE</a>
+
+	
+
+					
+						
+	
+	
+	<a href="https://www.truenas.com/download-truenas-scale/" class="menu-linkRow u-indentDepth0 js-offCanvasCopy " data-nav-id="TrueNASSCALEDL">TrueNAS SCALE</a>
+
+	
+
+					
+						
+	
+	
+	<a href="https://www.ixsystems.com/truecommand/download/" class="menu-linkRow u-indentDepth0 js-offCanvasCopy " data-nav-id="downloadTruecommand">TrueCommand</a>
+
+	
+
+					
+				</div>
+			</div>
+		
+	</div>
+
+						</li>
+					
+						<li>
+							
+	<div class="p-navEl is-selected" data-has-children="true">
+		
+
+			
+	
+	<a href="https://www.truenas.com/community/resources/" class="p-navEl-link p-navEl-link--splitMenu " data-nav-id="xfrm">Resources</a>
+
+
+			<a data-xf-key="5" data-xf-click="menu" data-menu-pos-ref="&lt; .p-navEl" class="p-navEl-splitTrigger" role="button" tabindex="0" aria-label="Toggle expanded" aria-expanded="false" aria-haspopup="true"></a>
+
+		
+		
+			<div class="menu menu--structural" data-menu="menu" aria-hidden="true">
+				<div class="menu-content">
+					
+						
+	
+	
+	<a href="https://www.truenas.com/software-status/" class="menu-linkRow u-indentDepth0 js-offCanvasCopy " data-nav-id="softwarestatus">Software Status</a>
+
+	
+
+					
+						
+	
+	
+	<a href="https://www.truenas.com/community/resources/latest-reviews" class="menu-linkRow u-indentDepth0 js-offCanvasCopy " data-nav-id="xfrmLatestReviews">Latest reviews</a>
+
+	
+
+					
+						
+	
+	
+	<a href="https://www.truenas.com/community/search/?type=resource" class="menu-linkRow u-indentDepth0 js-offCanvasCopy " data-nav-id="xfrmSearchResources">Search resources</a>
+
+	
+
+					
+				</div>
+			</div>
+		
+	</div>
+
+						</li>
+					
+						<li>
+							
+	<div class="p-navEl " data-has-children="true">
+		
+
+			
+	
+	<a href="https://ixsystems.atlassian.net/jira/software/c/projects/NAS/issues" class="p-navEl-link p-navEl-link--splitMenu " data-nav-id="ReportBug">Report a Bug</a>
+
+
+			<a data-xf-key="6" data-xf-click="menu" data-menu-pos-ref="&lt; .p-navEl" class="p-navEl-splitTrigger" role="button" tabindex="0" aria-label="Toggle expanded" aria-expanded="false" aria-haspopup="true"></a>
+
+		
+		
+			<div class="menu menu--structural" data-menu="menu" aria-hidden="true">
+				<div class="menu-content">
+					
+						
+	
+	
+	<a href="https://ixsystems.atlassian.net/jira/software/c/projects/NAS/issues" class="menu-linkRow u-indentDepth0 js-offCanvasCopy " target="_blank" data-nav-id="freenasBug">Report TrueNAS Bug</a>
+
+	
+
+					
+						
+	
+	
+	<a href="https://jira.ixsystems.com/projects/TC" class="menu-linkRow u-indentDepth0 js-offCanvasCopy " target="_blank" data-nav-id="truecommandBug">Report TrueCommand Bug</a>
+
+	
+
+					
+						
+	
+	
+	<a href="https://www.truenas.com/docs/contributing/issuereporting/#:~:text=A%20good%20bug%20report%20includes%20these%20elements%3A" class="menu-linkRow u-indentDepth0 js-offCanvasCopy " target="_blank" data-nav-id="HowToMakeaGoodTicket">How To Make a Good Bug Report</a>
+
+	
+
+					
+				</div>
+			</div>
+		
+	</div>
+
+						</li>
+					
+						<li>
+							
+	<div class="p-navEl ">
+		
+
+			
+	
+	<a href="https://www.truenas.com/careers/" class="p-navEl-link " data-xf-key="7" data-nav-id="Careers">Careers</a>
+
+
+			
+
+		
+		
+	</div>
+
+						</li>
+					
+					</ul>
+				</div><i class="hScroller-action hScroller-action--end" aria-hidden="true"></i><i class="hScroller-action hScroller-action--start" aria-hidden="true"></i>
+			</div>
+
+			<div class="p-nav-opposite">
+				<div class="p-navgroup p-account p-navgroup--guest">
+					
+						<a href="https://www.truenas.com/community/login/" class="p-navgroup-link p-navgroup-link--textual p-navgroup-link--logIn" data-xf-click="overlay" data-follow-redirects="on">
+							<span class="p-navgroup-linkText">Log in</span>
+						</a>
+						
+							<a href="https://www.truenas.com/community/register/" class="p-navgroup-link p-navgroup-link--textual p-navgroup-link--register" data-xf-click="overlay" data-follow-redirects="on">
+								<span class="p-navgroup-linkText">Register</span>
+							</a>
+						
+					
+				</div>
+
+				<div class="p-navgroup p-discovery">
+					<a href="https://www.truenas.com/community/whats-new/" class="p-navgroup-link p-navgroup-link--iconic p-navgroup-link--whatsnew" aria-label="What's new" title="What's new">
+						<i aria-hidden="true"></i>
+						<span class="p-navgroup-linkText">What's new</span>
+					</a>
+
+					
+						<a href="https://www.truenas.com/community/search/" class="p-navgroup-link p-navgroup-link--iconic p-navgroup-link--search" data-xf-click="menu" data-xf-key="/" aria-label="Search" aria-expanded="false" aria-haspopup="true" title="Search">
+							<i aria-hidden="true"></i>
+							<span class="p-navgroup-linkText">Search</span>
+						</a>
+						<div class="menu menu--structural menu--wide" data-menu="menu" aria-hidden="true">
+							<form action="/community/search/search" method="post" class="menu-content" data-xf-init="quick-search">
+
+								<h3 class="menu-header">Search</h3>
+								
+								<div class="menu-row">
+									
+										<div class="inputGroup inputGroup--joined">
+											<input type="text" class="input" name="keywords" placeholder="Search…" aria-label="Search" data-menu-autofocus="true">
+											
+			<select name="constraints" class="js-quickSearch-constraint input" aria-label="Search within" style="width: 110px; flex-grow: 0; flex-shrink: 0;">
+				<option value="" selected="selected">Everywhere</option>
+<option value="{&quot;search_type&quot;:&quot;resource&quot;}">Resources</option>
+<option value="{&quot;search_type&quot;:&quot;resource&quot;,&quot;c&quot;:{&quot;categories&quot;:[1],&quot;child_categories&quot;:1}}">This category</option>
+
+			</select>
+		
+										</div>
+									
+								</div>
+
+								
+								<div class="menu-row">
+									<label class="iconic"><input type="checkbox" name="c[title_only]" value="1"><i aria-hidden="true"></i><span class="iconic-label">Search titles only
+
+												
+													<span tabindex="0" role="button" data-xf-init="tooltip" data-trigger="hover focus click" data-original-title="Tags will also be searched" aria-label="Tags will also be searched" id="js-XFUniqueId1">
+
+														<i class="fa--xf far fa-question-circle u-muted u-smaller" aria-hidden="true"></i>
+													</span></span></label>
+
+								</div>
+								
+								<div class="menu-row">
+									<div class="inputGroup">
+										<span class="inputGroup-text" id="ctrl_search_menu_by_member">By:</span>
+										<input type="text" class="input" name="c[users]" data-xf-init="auto-complete" placeholder="Member" aria-labelledby="ctrl_search_menu_by_member" autocomplete="off">
+									</div>
+								</div>
+								
+<div class="menu-footer">
+									<span class="menu-footer-controls">
+										<button type="submit" class="button--primary button button--icon button--icon--search"><span class="button-text">Search</span></button>
+										<a href="https://www.truenas.com/community/search/" class="button"><span class="button-text">Advanced search…</span></a>
+									</span>
+								</div>
+
+								<input type="hidden" name="_xfToken" value="1678623174,73a66bd96a98431af4d9820008e6a72e">
+							</form>
+						</div>
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+
+	</div>
+	
+	
+		<div class="p-sectionLinks">
+			<div class="p-sectionLinks-inner hScroller" data-xf-init="h-scroller">
+				<div class="hScroller-scroll is-calculated" style="margin-bottom: -42px;">
+					<ul class="p-sectionLinks-list">
+					
+						<li>
+							
+	<div class="p-navEl ">
+		
+
+			
+	
+	<a href="https://www.truenas.com/software-status/" class="p-navEl-link " data-xf-key="alt+1" data-nav-id="softwarestatus">Software Status</a>
+
+
+			
+
+		
+		
+	</div>
+
+						</li>
+					
+						<li>
+							
+	<div class="p-navEl ">
+		
+
+			
+	
+	<a href="https://www.truenas.com/community/resources/latest-reviews" class="p-navEl-link " data-xf-key="alt+2" data-nav-id="xfrmLatestReviews">Latest reviews</a>
+
+
+			
+
+		
+		
+	</div>
+
+						</li>
+					
+						<li>
+							
+	<div class="p-navEl ">
+		
+
+			
+	
+	<a href="https://www.truenas.com/community/search/?type=resource" class="p-navEl-link " data-xf-key="alt+3" data-nav-id="xfrmSearchResources">Search resources</a>
+
+
+			
+
+		
+		
+	</div>
+
+						</li>
+					
+					</ul>
+				</div><i class="hScroller-action hScroller-action--end" aria-hidden="true"></i><i class="hScroller-action hScroller-action--start" aria-hidden="true"></i>
+			</div>
+		</div>
+	
+
+
+
+<div class="offCanvasMenu offCanvasMenu--nav js-headerOffCanvasMenu" data-menu="menu" aria-hidden="true" data-ocm-builder="navigation">
+	<div class="offCanvasMenu-backdrop" data-menu-close="true"></div>
+	<div class="offCanvasMenu-content">
+		<div class="offCanvasMenu-header">
+			Menu
+			<a class="offCanvasMenu-closer" data-menu-close="true" role="button" tabindex="0" aria-label="Close"></a>
+		</div>
+		
+			<div class="p-offCanvasRegisterLink">
+				<div class="offCanvasMenu-linkHolder">
+					<a href="https://www.truenas.com/community/login/" class="offCanvasMenu-link" data-xf-click="overlay" data-menu-close="true">
+						Log in
+					</a>
+				</div>
+				<hr class="offCanvasMenu-separator">
+				
+					<div class="offCanvasMenu-linkHolder">
+						<a href="https://www.truenas.com/community/register/" class="offCanvasMenu-link" data-xf-click="overlay" data-menu-close="true">
+							Register
+						</a>
+					</div>
+					<hr class="offCanvasMenu-separator">
+				
+			</div>
+		
+		<div class="js-offCanvasNavTarget"></div>
+		<div class="offCanvasMenu-installBanner js-installPromptContainer" style="display: none;" data-xf-init="install-prompt">
+			<div class="offCanvasMenu-installBanner-header">Install the app</div>
+			<button type="button" class="js-installPromptButton button"><span class="button-text">Install</span></button>
+		</div>
+	</div>
+</div>
+
+<div class="p-body">
+	<div class="p-body-inner">
+		<!--XF:EXTRA_OUTPUT-->
+
+
+		
+
+		
+
+		<div class="samTextUnit" data-position="container_breadcrumb_top_above"><div class="samItem" data-xf-init="sam-item" data-id="17" data-cc="true"><div class="samItemContent"><div class="samItemTitle"><a href="https://www.ixsystems.com/community/register/" target="_blank" rel="nofollow">Register Now!</a></div><div class="samItemDescription">Register for the iXsystems Community to get an ad-free experience</div></div></div></div>
+
+		
+	
+		<ul class="p-breadcrumbs " itemscope="" itemtype="https://schema.org/BreadcrumbList">
+		
+			
+
+			
+			
+
+			
+				
+				
+	<li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
+		<a href="https://www.truenas.com/community/resources/" itemprop="item">
+			<span itemprop="name">Resources</span>
+		</a>
+		<meta itemprop="position" content="1">
+	</li>
+
+			
+			
+				
+				
+	<li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
+		<a href="https://www.truenas.com/community/resources/categories/hardware.1/" itemprop="item">
+			<span itemprop="name">Hardware</span>
+		</a>
+		<meta itemprop="position" content="2">
+	</li>
+
+			
+
+		
+		</ul>
+	
+
+		
+	
+
+		
+			
+		
+
+		
+	
+
+
+
+		
+	<noscript><div class="blockMessage blockMessage--important blockMessage--iconic u-noJsOnly">JavaScript is disabled. For a better experience, please enable JavaScript in your browser before proceeding.</div></noscript>
+
+		
+	
+
+
+		
+			<div class="p-body-header">
+				
+		<div class="contentRow contentRow--hideFigureNarrow">
+			<span class="contentRow-figure">
+				
+					<span class="avatar avatar--s"><img src="Detailed%20newcomers'%20guide%20to%20crossflashing%20LSI%209211_9300_9305_9311_9400_94xx%20HBA%20and%20variants%20|%20TrueNAS%20Community-Dateien/54.jpg" alt="Detailed newcomers' guide to crossflashing LSI 9211/9300/9305/9311/9400/94xx HBA and variants"></span>
+				
+			</span>
+			<div class="contentRow-main">
+				<div class="p-title">
+					<h1 class="p-title-value">
+						
+							Detailed newcomers' guide to crossflashing LSI 9211/9300/9305/9311/9400/94xx HBA and variants
+						
+						
+					</h1>
+					
+				</div>
+				
+					<div class="p-description">
+						
+							<ul class="listInline listInline--bullet">
+								<li>
+									<i class="fa--xf far fa-user" aria-hidden="true" title="Author"></i>
+									<span class="u-srOnly">Author</span>
+
+									<a href="https://www.truenas.com/community/members/stilez.58706/" class="username  u-concealed" dir="auto" itemprop="name" data-user-id="58706" data-xf-init="member-tooltip" id="js-XFUniqueId2">Stilez</a>
+								</li>
+								<li>
+									<i class="fa--xf far fa-clock" aria-hidden="true" title="Creation date"></i>
+									<span class="u-srOnly">Creation date</span>
+
+									<a href="https://www.truenas.com/community/resources/detailed-newcomers-guide-to-crossflashing-lsi-9211-9300-9305-9311-9400-94xx-hba-and-variants.54/" class="u-concealed"><time class="u-dt" dir="auto" datetime="2017-06-04T12:05:32-0700" data-time="1496603132" data-date-string="Jun 4, 2017" data-time-string="12:05 PM" title="Jun 4, 2017 at 12:05 PM">Jun 4, 2017</time></a>
+								</li>
+								
+								
+								
+							</ul>
+						
+					</div>
+				
+			</div>
+		</div>
+	
+			</div>
+		
+
+		<div class="p-body-main  ">
+			
+			<div class="p-body-contentCol"></div>
+			
+
+			
+
+			<div class="p-body-content">
+				<div class="samBannerUnit samAlignCenter" data-xf-init="sam-unit" data-position="container_content_above"><div class="samItem" data-xf-init="sam-item" data-id="30" data-cv="true" data-cc="true"><a href="https://www.truenas.com/truenas-mini/" target="_blank" rel="nofollow"><img data-src="https://www.truenas.com/community/data/siropu/am/user/162b21d69ed24a.png" alt="Western Digital Drives - The Preferred Drives of FreeNAS and TrueNAS CORE" data-carousel="false" data-xf-init="sam-lazy"></a></div></div>
+
+				<div class="p-body-pageContent">
+
+
+
+
+
+	
+
+	
+
+
+
+
+	
+
+
+
+	
+		<div class="tabs tabs--standalone">
+			<div class="hScroller" data-xf-init="h-scroller">
+				<span class="hScroller-scroll is-calculated" style="margin-bottom: -42px;">
+					<a class="tabs-tab is-active" href="https://www.truenas.com/community/resources/detailed-newcomers-guide-to-crossflashing-lsi-9211-9300-9305-9311-9400-94xx-hba-and-variants.54/">Overview</a>
+					
+						
+						
+						
+						
+							<a class="tabs-tab " href="https://www.truenas.com/community/resources/detailed-newcomers-guide-to-crossflashing-lsi-9211-9300-9305-9311-9400-94xx-hba-and-variants.54/reviews">Reviews (16)</a>
+						
+						
+						
+							<a class="tabs-tab " href="https://www.truenas.com/community/threads/detailed-newcomers-guide-to-crossflashing-lsi-9211-9300-9305-9311-9400-94xx-hba-and-variants.55096/">Discussion</a>
+						
+					
+				</span><i class="hScroller-action hScroller-action--end" aria-hidden="true"></i><i class="hScroller-action hScroller-action--start" aria-hidden="true"></i>
+			</div>
+		</div>
+	
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+	
+	
+	
+		
+	
+	
+	
+
+
+	
+	
+	
+		
+	
+	
+	
+
+
+	
+	
+		
+	
+	
+	
+
+
+	
+	
+
+
+
+
+
+
+
+
+
+
+	
+		
+		
+
+		
+			
+		
+		
+	
+
+
+<div class="block">
+	
+	<div class="block-container">
+		<div class="block-body lbContainer js-resourceBody" data-xf-init="lightbox" data-lb-id="resource-54" data-lb-caption-desc="Stilez · Jun 4, 2017 at 12:05 PM">
+
+			<div class="resourceBody">
+				<article class="resourceBody-main js-lbContainer">
+					
+
+	
+
+
+					
+						
+	
+
+		
+			
+		
+
+		
+	
+
+<div class="bbWrapper"><i>There's hundreds of threads on crossflashing 
+variants of LSI 9211/9300/9305/9311/94xx cards here, on ServeTheHome, 
+and on blogs. But they don't always discuss the subtleties of doing it 
+on an EFI board for users who may never have used EFI before, and 
+there's a lot of relevant background that "falls in the cracks" and 
+causes frustration when it doesn't go as expected. <br>
+<br>
+Some answers on the net are piecemeal, some are plain wrong;  there's 
+not much solid, collated summary of the background knowledge as might be
+ needed by a newcomer who wants to know enough, or to have a good chance
+ that it "just works" without days of googling weird errors, and 
+different recipes and software versions. <br>
+<br>
+This guide aims to explain "<b>why</b>" and "<b>how</b>" it's as it is, 
+and enough info on the tools and files for newcomers without experience.
+ I cover EFI and non-LSI (OEM) variant flashing, so that even if the 
+recipe doesn't work, you know enough to do some debugging rather than 
+google and try different flashing tool versions at random, and you know 
+roughly how it needs to work and why.  I've also updated it 
+(2019-01-26,2019-02-16, 2020-01-29,2020-11-03) to cover card+controller 
+information/resources and speed/compatibility/bandwidth "quick start" 
+info, overheating/kernel panic/shutdown issues affecting some cards, and
+ cable selection, for those looking to choose their cards, and a note on
+ Supermicro HBAs.  So it's a bit more thorough than most howto's - 
+enjoy!<br>
+<br>
+I hope this helps someone out there. It's my first guide here. I 
+acknowledge the ton of information on numerous posts and blogs too many 
+to mention.<br>
+<br>
+There's also 2 open questions at the end, for anyone who wants to experiment and find the answers!<br>
+<br>
+<br>
+Stilez</i><br>
+<br>
+<br>
+<u><b>INTRODUCTION</b></u><br>
+<br>
+<b>The boards: </b>LSI (now Avago/Broadcom) 9211/9300/9305/9311/94xx 
+cards are widely recommended and used PCI-e SATA/SAS HBAs (host bus 
+adapters). The most popular is probably the 9211-8i ("8 internal ports")
+ PCIe 2.0 cards. Very cheap OEM versions with virtually identical 
+hardware are widely available new and second hand on EBay (<u><b>Dell H200 PERC</b></u>, <b><u>Fujitsu D2607</u></b>, <b><u>IBM M1015</u></b>, and others, <a href="https://forums.servethehome.com/index.php?threads/lsi-raid-controller-and-hba-complete-listing-plus-oem-models.599/" target="_blank" class="link link--external" rel="nofollow ugc noopener">full list+specs/notes at serverthehome.com</a>).<br>
+<br>
+But the cards often needs crossflashing for several reasons:   They need
+ to be switched over to IT not IR firmware versions ("IT" firmware means
+ it's an HBA firmware which ZFS likes, while "IR" is a hardware RAID 
+firmware which is strongly discouraged by most people for ZFS - the card
+ can run either of these but often comes with the IR version loaded by 
+default).  People might also tend to prefer using LSI/Avago/Broadcom 
+firmware not Dell/Fujitsu versions, which means changing the card's 
+recorded manufacturer.  Last the cards often need updating to latest 
+firmware.<br>
+<br>
+The process is easy given understanding and the right tools.  But with 
+so many slightly different recipes online and the flashing tools and 
+process being pretty fussy about exact versions and steps, it often ends
+ up with guesswork, random trial + error downloading, wasted time, and 
+forum help requests. Not really ideal.<br>
+<br>
+<div style="margin-left: 20px"><i>UPDATES:</i>​</div><div style="margin-left: 20px">​</div><div style="margin-left: 20px"><i>(2019-01-26):
+  added new section on cards, chipsets and their variants at the start 
+of the guide, with a link to a comprehensive resource list. It's useful 
+if you want to be sure which cards are out there, what their 
+capabilities are, and how to make them work - especially PCIe 3 cards 
+such as the more modern 9300/9305/9311/94xx.</i>​</div><div style="margin-left: 20px">​</div><div style="margin-left: 20px"><i>(2020-01-29) - added new sections on overheating/kernel panic/shutdown affecting some cards, and fanout cables.</i>​</div><div style="margin-left: 20px">​</div><div style="margin-left: 20px"><i>(2020-11-03) - added brief note on card/controller generational differences and mention of 94xx NVMe/U.2 cards.</i>​</div><div style="margin-left: 20px">​</div><b>The user:  </b>I'll
+ assume you have (or plan to buy) a non-LSI branded 
+9211/9300/9305/9311/94xx (something like one of the cards named above), 
+and quite probably an EFI motherboard, and you want to crossflash and 
+also understand the ins and outs of the tools and process. If your 
+motherboard won't run EFI sas2flash it should run the MSDOS version - 
+you'll have to figure which one will run for you. I'm also going to 
+assume you 've read carefully online and haven't found information you 
+need, or you've tried following some guides and "it just hasn't worked".<br>
+<br>
+So this guide isn't just a recipe - I will try to cover enough general 
+info and background about the shells, the cards and the 
+softwares/firmwares, so that if it still doesn't work for you, you might
+ be able to work it out and fix it anyway. Please add any comments what 
+else you had to do, for other users' benefit, to the comments on this 
+thread.<br>
+<br>
+<b>Downloads / Files: </b>The files that most people will need, including the hard-to-find ones, are linked in a zip at the end <b>(see 'Resources' at bottom of page)</b>.
+ Unzip and copy to the root of your bootable USB stick and you're good 
+to go.  If you want to be sure it's safe, these were all searchable 
+online and you can confirm that you found the right file (and that it's 
+safe) by checking hashes.  <i>Most of the inline links in the body, are to official download pages</i>.  I renamed some files in the zip file for clarity, because different versions all had the same name and it reduces mistakes.<br>
+<br>
+<b>Obligatory disclaimer:  </b>As best I can tell this is accurate and 
+will do what's needed to crossflash these cards. However as with all 
+other guides, YMMV.  I'm not an expert.  You have to judge it for 
+yourself, I'm not responsible at all if your card doesn't behave as 
+expected or anything goes wrong (even if you follow this guide). That 
+said, all my own 9211s are crossflashed exactly as described  in this 
+guide, and these cards are almost impossible to 'brick' whatever you do 
+with the software provided (at worst, disable the boot rom from your 
+motherboard setup, erase the card's flash memory, reboot, and then 
+choose between starting crossflashing again, asking for help with any 
+errors, or reverting to the original manufacturer's firmware)<br>
+<br>
+<br>
+<u>CONTENTS:</u><br>
+<ol>
+<li data-xf-list-type="ol"><i>Before you start:  <br>
+a) Known cards+variants, LSI chips/specs/capabilities, card/HDD compatibility, and PCIe bandwidth<br>
+b) Supermicro HBA card notes (and possibly some other good quality makes!)<br>
+c) HBA ["mpr"] overheating/cooling/kernel panic/shutdown issue affecting some cards<br>
+ d) Fanout cables (card to HDD/SSD)</i></li>
+<li data-xf-list-type="ol"><i>Safety precautions related to data and other hardware components</i></li>
+<li data-xf-list-type="ol"><i>Preparation - the basic software, and sorting out MSDOS/EFI and your platform</i></li>
+<li data-xf-list-type="ol"><i>Useful commands before starting</i></li>
+<li data-xf-list-type="ol"><i>Getting your card manufacturer's IT firmware (if you don't have it and it's not in the attached zip)</i></li>
+<li data-xf-list-type="ol"><i>Firmware and flasher versions.</i></li>
+<li data-xf-list-type="ol"><i>Using megarec.exe and sas2flash / sas2flsh</i></li>
+<li data-xf-list-type="ol"><i>ERASING/WIPING THE CARD:</i></li>
+<li data-xf-list-type="ol"><i>OVERVIEW OF THE CROSSFLASHING PROCESS</i></li>
+<li data-xf-list-type="ol"><i>CROSSFLASHING DETAILS</i></li>
+<li data-xf-list-type="ol"><i>Other resources (including downloads)</i></li>
+<li data-xf-list-type="ol"><i>Open questions awaiting adventurous flashers!</i></li>
+</ol><br>
+<u><b>THE GUIDE</b><br>
+<br>
+<i>1.  Before you start:</i></u><br>
+<br>
+<i>      <u>a) </u></i><u><i>Known cards+variants, LSI chips/specs/capabilities, card/HDD compatibility, and PCIe bandwidth</i></u><br>
+<i>      (added 2019-01-26)</i><br>
+<br>
+<a href="https://forums.servethehome.com/index.php?threads/lsi-raid-controller-and-hba-complete-listing-plus-oem-models.599/" target="_blank" class="link link--external" rel="nofollow ugc noopener"><i>There is a useful and comprehensive list of HBA and RAID cards and their specs, from old to newest, here</i></a>,
+ sorted by the chip they use (2008, 3008 etc).  Generally, cards in the 
+same section are likely to be interchangeable, at least for simple card 
+uses like HBA and well known chips like the 2008/2108/2208/3008/3108.<br>
+<br>
+For most NAS users, the card you want will be based on an <i>LSI/Avago/Broadcom chip</i>.
+ LSI got taken over by Avago, and is now part of Broadcom. Everyone 
+still talks about "LSI", but cards or chips could have any of these 
+names.  <i>They are the same company</i>.<br>
+<br>
+RAID cards based on LSI chips run with "IR" firmware and in "IR mode". 
+Whatever the brand, they can almost always be crossflashed to operate as
+ the equivalent HBA cards ("IT mode"), which means the card will ignore 
+any cache/raid abilities, which is what you want for ZFS and HBA usage. 
+So you have a wide choice.<br>
+<br>
+For HBAs, usually it's just the chip determines the card's capabilities.
+ Two HBAs using the same chip almost always perform very similarly and 
+use the same driver.   Another giveaway is that their photos are often 
+also extremely similar (because they reuse the manufacturer's reference 
+design, or rebrand their original cards).<br>
+<br>
+<div style="margin-left: 20px">Example:   an IBM M1015 and LSI9211 both 
+use an LSI SAS2008 chip, and they are in fact basically the same card, 
+different brands. But there could be exceptions, so if unsure, it's 
+worth asking on the forum, if unsure whether your SAS2xxx/3xxx based 
+card can actually be crossflashed and is supported by your system.​</div><br>
+This guide will focus on the 9211, which is cheap, very well supported, 
+and incredibly widely used.  It's the most popular card and a good 
+choice for a beginner.  But the same principles do generally apply to 
+the more recent LSI/Avago/Broadcom HBA cards and variants, such as the 
+9300/9311 (SAS3008/3108 chipsets) and newer 94xx.  The crossflash 
+method/details here mostly apply to those cards as well, so you won't 
+have to adapt much to get those on LSI HBA firmware and working with 
+your NAS.<br>
+<br>
+<b>CARD and CHIP (CONTROLLER) Generstions:</b> For reference, the 
+difference in cards and chip.generations is roughly - 2xxx series chips 
+use PCIe 2.0 and up to 6 Gbps SAS. 3xxx series chips use PCIe  3.x and 
+up to.12 Gbps SAS. The chios behind the 94xx boards (haven't yet looked 
+these up, just adding a mention!) can handle those, plus NVMe/U.2 
+devices for high speed SSD as well.<br>
+<br>
+<b>HARD DRIVE/HBA compatibility:  </b>Note that some newer hard drives 
+with updated protocols may NOT work on previous generation cards. 
+Example:  potentially some SAS-3/12 Gbit hard drives may not work with a
+ SAS-2/6 Gbit card like the 9211. But as far as I know, that only 
+affects SAS-3 and the upcoming SAS-4, and perhaps SATA Express/SATA-4 
+drives.  It can be worth quickly looking up the HDD+card manufacturer's 
+documents, to confirm  which SAS/SATA levels each of them supports. I 
+haven't come across a LSI 2xxx/3xxx HBA/RAID card that won't work with 
+SATA or previous generations, right now it's mainly very new drives with
+ older cards that seem to be mentioned. If that changes, please post a 
+comment and I'll update.<br>
+<br>
+<b>PCIe compatibility/speeds/bandwidth:</b>  SAS2008/2108/2208 based 
+cards are PCIe 2 8x cards, meaning PCI Express 2nd generation, with 8 
+"lanes" for data (each "lane" can provide a fixed amount of bandwidth, 
+more lanes=more bandwidth). SAS 3008/3108 are PCIe 3 8x cards. PCIe 3 
+lanes can handle twice the bandwidth of PCIe 2 lanes.<br>
+<br>
+PCIe is very flexible - a PCIe3 card will work in a PCIe 2 slot at PCIe 2
+ speeds, or in a PCIe1x/2x/4x slot with fewer "lanes" and a reduced 
+bandwidth limit. But they will work, and do the best they can, provided 
+they physically fit. So you'll often see something like "PCIe 2.0 4x in 
+8x slot" in motherboard specs, which means 4 lanes are provided, but the
+ slot can accommodate cards designed for 8 lanes (at reduced 4 lane 
+speed).   If space is tight, it's worth going for 8x or 16x slot sizes, 
+even if the actual *lanes* are fewer, because at least your HBA card 
+will fit!<br>
+<br>
+It's hard-to-impossible to max out a 2008/2108/2208 based card with SATA
+ 6 Gbit or even SAS-3 12Gbit HDDs. Bus traffic for SATA/SAS is likely to
+ be nearer half than full duplex, giving a <i>realistic</i> bandwidth of
+ PCIe 2 with 8 lanes used for HDD/SSD storage that is uncertain but at 
+least 250 MB/sec ** per lane, so even attaching 8 HDDs all at maximum 
+burst speed can't usually do better than that.<br>
+<br>
+<i>(** As best as I understand it, the maximum bandwidth quoted for PCIE
+ assumes full duplex activity. But in practice when used for disk 
+control, the duplex capability of SAS doesn't lead to huge extra 
+bandwidth use, for various reasons, and SATA 6Gbit doesn't do full 
+duplex anyway. Hence the system won't be able to get full benefit of 
+PCIE duplex capabilities and the realistic max speed could be 
+significantly closer to half-duplex, or 50% of maximum PCIE bandwidth. 
+Hence why the figure I've given as a safe minimum is 250MB/s not the 
+expected/often quoted 500 MB/s.  Please correct me if I'm wrong on this!
+ Discussed in detail </i><a href="https://www.ixsystems.com/community/resources/detailed-newcomers-guide-to-crossflashing-lsi-9211-9300-9311-hba-and-variants.54/review/309" target="_blank" class="link link--external" rel="nofollow ugc noopener"><i>below</i></a><i>)</i><br>
+<br>
+Generally if your HBA is handling rotating HDDs, even a 9211 is more 
+than enough for 8 drives.   The PCIe bandwidth sets a total, overall, 
+limit, meaning that if say 4 disks are idle, their "share" of bandwidth 
+can be used by other disks that are doing high speed transfers.  SATA 3 
+SSDs are also limited to 6Gbit/sec.  But if you're using multiple SSDs 
+or multiple SAS 3 HDDs, you might need to up your game, or put fewer 
+disks on each HBA, or accept a reduced max total bandwidth.<br>
+<br>
+<a href="https://en.wikipedia.org/wiki/List_of_interface_bit_rates" target="_blank" class="link link--external" rel="nofollow ugc noopener">There's
+ a useful article on Wikipedia which lists bandwidths for various buses 
+(PCIe 2/PCIe 3 etc) and storage protocols (SATA/SAS/NVMe)</a>.   You can
+ easily check if you're pushing the limit. Add up the total bandwidth of
+ all disks attached to the HBA,  and compare it to the total PCIe 
+bandwidth to the motherboard (lanes in use x bandwidth per lane) for 
+PCIe 2 or 3, and for whatever number of lanes the card+slot have (or the
+ lowest if they differ), to see if you'll hit a serious risk of a 
+bottleneck.<br>
+<br>
+<i>      <u>b) Supermicro HBAs (and possibly some others) with "click and run" script</u><br>
+      (added 2019-02-16)</i><br>
+<br>
+Supermicro are a specialist server company. They use the same 3008 chip 
+but their own board design, and from their reputation I'd trust their 
+HBAs completely (check the recommendations for their motherboards on the
+ main FreeNAS site). Also being own design, they are much less likely to
+ be "grey market", "knockoffs", or "seconds" of LSI cards. Supermicro 
+provide good clear drivers for IT, keep them up to date, and provide a 
+full "click and leave" reflash script. If you get one of these, or are 
+looking for 3008 cards, I'd add these to your search and I'd recommend 
+the <a href="https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=1&amp;cad=rja&amp;uact=8&amp;ved=2ahUKEwip07nYucDgAhWpRBUIHUBBCoEQFjAAegQIChAB&amp;url=https%3A%2F%2Fwww.supermicro.com%2Fproducts%2Faccessories%2Faddon%2FAOC-S3008L-L8e.cfm&amp;usg=AOvVaw25Zx0C-8z8anza1q0vntYi" target="_blank" class="link link--external" rel="nofollow ugc noopener">AOC-S3008L-8Le</a> which is the 8 port HBA PCIe-3 version (equivalent 9300/9311), they're often cheap among used 3008 cards.<br>
+<br>
+These are about the <u>only</u> cards I <u>wouldn't</u> bother 
+reflashing to LSI, although it would almost certainly be OK, because I 
+trust their native firmware to be done well and up to date, hence no 
+need. I am pretty sure their RAID cards (L8i) can be reflashed to IT 
+mode using their own flasher as well, but you can easily check this with
+ Supermicro tech support if you find one that's cheap. Their firmware 
+download contains IR and IT drivers and flashers in one ZIP, nice and 
+easy to find.<br>
+<br>
+If you do get one of these, you can probably ignore the entire 
+crossflash procedure below. Read the safety instructions, read the rest 
+to get an idea of it, then follow their release notes and use their 
+flasher and update the cards that way.  There is a small issue with 
+their flasher script. If you have 2 or more cards it will only detect + 
+flash the first. To do the other cards, open the script in Notepad or a 
+text editor, it's got maybe 4 lines that start "!sas2/3flash".  Type 
+these lines manually one at a time, but adding "<b>-c 0</b>" for the first card, "<b>-c 1</b>" for the second card, etc. When done, power off and reboot. End of flash.<br>
+<br>
+For everyone else, it's a bit more work!<br>
+<br>
+<i>      <u>c) HBA ["mpr"] overheating/cooling/kernel panic/shutdown issue (affects some systems and cards with more ports)</u><br>
+      (added 2020-01-29)</i><br>
+<br>
+The LSI HBA chips (2008/3008 and derivatives are used for a huge number 
+of HBAs and RAID cards - both LSI/Avago/Broadcom and used in other 
+cards.  So your card, whatever its brand, almost certainly uses these 
+chips.  The problem is, LSI designed them with puny heatsinks, because 
+it expected them primarily to be used in servers with forced air 
+cooling.  Result, these cards can drastically overheat. Reported temps 
+of 100-110 C are common. The card wont be damaged - theyre designed to 
+run hot and in the end the kernel will panic and the system shut down. 
+But that's not what you want.<br>
+<br>
+To be fair, most people don't have this issue - they aren't using a card
+ intensely enough, or with enough ports. But those who do, there's no 
+real wayt round it. If you are seeing <i>mpr</i> device sensor showing 
+high temps, and a possible eventual kernel panic, you'll need to get a 
+fan blowing on the card's heatsink. It doesn't need to be a big fan - a 
+tiny one will often do. But you'll need to get airflow one way or 
+another before continuing.<br>
+<br>
+<i>      <u>c) <i>Fanout cables (card to HDD/SSD)</i></u><br>
+      (added 2020-01-29)</i><br>
+<br>
+A word of warning -- get good quality cables! Do not skimp on those! 
+Usually in computing, "any cable is pretty much as good as any other", 
+but I've had more issues with poor quality fanout cables for these 
+cards, than anything else, and <a href="https://www.amazon.com/gp/customer-reviews/R28S5VB9PMMVEK/ref=cm_cr_dp_d_rvw_ttl" target="_blank" class="link link--external" rel="nofollow ugc noopener">so have other people</a>.
+ Your best bet are cables by MicroSemi (used to be Adaptec or took them 
+over). Personally I wouldn't buy almost any other brand. Their part 
+number is<br>
+<br>
+- For cards with SFF-8087 connectors (most 2xxx chips/PCIe 2.0 cards): 
+2275300-R (I think: no longer made but easily found online - 
+google/amazon/ebay)<br>
+- For cards with SFF-8643 (most 3xxx chips/PCIe 3.0 cards): 2280100-R<br>
+<br>
+These cables usually need MOLEX (old style 4 pin) connectors but most 
+power supplies provide SATA connectors, so you might need to buy some 
+SATA to MOLEX adapters/splitters, too.<br>
+<br>
+<br>
+<u>2.  Safety precautions related to data and other hardware components</u><br>
+<br>
+Crossflashing is pretty low-risk. This section addresses the three main 
+areas of concern - hardware safety, data safety, and specific 
+hardware/firmware based RAID and data caching/"disk speedup hardware" 
+safety.  Basic common-sense should apply when crossflashing and if in 
+doubt it will not hurt to be a bit more careful.  After all, you're not 
+going to do this every day.<br>
+<br>
+The short answer is that usually it shouldn't be any worry, and you 
+cannot "brick" these cards (render them unusable), but there are 
+precautions you can take if concerned - and there are a few very 
+definite warning signs to watch out for.<br>
+<br>
+The serious risks come with just two situations:<br>
+<ol>
+<li data-xf-list-type="ol"><u><b>Unplug anything with an "under the hood" hidden LSI controller</b></u> that you don't want flashed by mistake, <a href="https://serverfault.com/questions/813484/lsi-updater-appears-to-have-updated-my-intel-ssd-now-cant-recognise-it-what-t" target="_blank" class="link link--external" rel="nofollow ugc noopener"><u>such as some SSDs</u></a>:) if you can't unplug it, take great care not to accidentally erase or flash it.<br>
+<br>
+LSI controllers are often reused for other components, including as 
+"hidden controllers" internal to some SSDs, and are also built in to 
+some motherboards. Some SSDs include customised LSI HBA controllers 
+internally to speed them up, which the flasher might detect and try to 
+overwrite, and then you might have no working method to put back the 
+correct custom firmware it used to have.<br>
+<br>
+<i><u>Don't assume what you have (unless extremely sure)</u></i> - <u><i>always check</i></u> with the <b>sas2flash -listall</b> command to verify <u>exactly</u> what controllers the flasher software thinks it's detecting, before erasing or programming <u>any</u> controller.<br>
+<br>
+<b>If the flasher detects more LSI controllers than you expect, when you do sas2flash  -listall, then *** DO NOT IGNORE IT ***<br>
+                                </b></li>
+<li data-xf-list-type="ol"><u>If your system is actively using any kind of hardware or firmware based RAID, or disk speedup/SSD caching is in active use</u> (<i>especially </i>if
+ you plan to disconnect, flash, or change any of the cards or disks 
+involved before/during the flashing process!), then check carefully what
+ you need to do, to keep your data safe.</li>
+</ol><br>
+If these might describe your setup, read the next sections carefully.  
+Otherwise treat the rest of this section as general information to skim 
+over, and take what action you prefer.<br>
+<br>
+<b>Hardware safety:</b><br>
+<br>
+Temporarily disconnect with care any other hardware or boot/data devices
+ that might get scrambled by this, any drives you might accidentally 
+destroy, or whatever. <b><u>Especially, unplug anything with an "under the hood" hidden LSI controller</u></b> that you don't want flashed by mistake, <a href="https://serverfault.com/questions/813484/lsi-updater-appears-to-have-updated-my-intel-ssd-now-cant-recognise-it-what-t" target="_blank" class="link link--external" rel="nofollow ugc noopener"><span style="color: rgb(0, 102, 204)">such as some SSDs</span></a>:). Note that some motherboards come with <b><u>onboard LSI chips</u></b>; if yours has one then take great care and ask around what to do, before going further.<br>
+<br>
+<b>Data safety:</b><br>
+<br>
+In case you're worried about your storage system -  if you simply and 
+temporarily disconnect the data cables from your entire FreeNAS boot + 
+storage setup while flashing, then ZFS will happily find them all again 
+when you reconnect them afterwards (provided the motherboard remembers 
+its boot device or you remind it via motherboard setup when you're 
+finished!).  The same is true for Windows and almost all other 
+mainstream operating systems - if you tell it the boot device, it'll 
+figure out the storage, any ZFS volumes, dynamic disks, or other stuff, 
+when it boots.<br>
+<br>
+<b>The main exception where much more care is needed, is if you have any
+ drives which are set up as a hardware/firmware RAID array or using any 
+kind of hardware/firmware data caching or speedup system</b>.   <i>(This
+ is strongly discouraged with FreeNAS.  If you're using FreeNAS, 
+hopefully you aren't using HW RAID are you? :D Good - then skip to the 
+next section!<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="smilie smilie--sprite smilie--sprite11" alt=":rolleyes:" title="Roll Eyes    :rolleyes:" loading="lazy" data-shortname=":rolleyes:"> )</i>.
+  This would includes all RAID arrays or SSD caching based on Intel or 
+Marvel's on-board chipset RAID and any other similar functionality.  It 
+also includes any hardware/firmware based disk caching + speedup 
+systems, whether it's SSD based or uses RAM or hardware card memory of 
+any kind.<br>
+<br>
+<u>This concern does <b>not</b> usually affect disk arrays that only exist within an operating system and has no hardware card or motherboard support</u>,
+ such as Microsoft's Dynamic Disk based mirrors+RAID, or any ZFS 
+volumes, because like I said, the operating system will almost always 
+redetect the disks and resync the array when it next boots, and won't 
+make any assumptions about the state of data or how they should be 
+connected.  But if you do have hardware or firmware RAID/caching in use 
+however, <b><u>STOP RIGHT HERE</u></b> and check what's safest for your data before you disconnect drives or unplug controller cards.<br>
+<br>
+Quick checklist (just disconnect the drives, reconnect afterwards, let the OS figure it out):<br>
+<ul>
+<li data-xf-list-type="ul"><i>Should be completely safe to "just disconnect" when powered down </i>-
+ Any ZFS volumes, any Microsoft dynamic disks, any individual disks 
+which have no other RAID or caching  in their data path and are just 
+seen and controlled transparently "as they are", by the OS. Hybrid disks
+ with onboard NVRam caching shouldn't be an issue since they are usually
+ designed not to have their NVRAM cache seen by the OS, and any hard 
+disk <u>onboard</u> cache will always be unaffected by disconnecting the drive from the controller.</li>
+<li data-xf-list-type="ul"><i>Might not be safe to "just disconnect"; check first </i>-
+ Any hardware RAID cards or onboard systems that are in use and that 
+expect disks to remain in a specific state across a reboot, or which 
+expect cached data to remain the same across a reboot;  any onboard or 
+card-based hardware that might expect/configure RAID or caching during 
+the motherboard boot process; any drives configured as hardware RAID 
+using a hardware controller, any drives where Intel, Marvel, AMD or 
+other firmware "soft" RAID is in use and providing caching or RAID 
+(whether it was configured through an orom or from within an OS).</li>
+</ul><br>
+<b>Bricking risk:</b><br>
+<br>
+It's almost impossible to brick the 9211 variant cards or indeed any 
+other hardware (i.e. make them unusable) with the files and actions 
+we're going to use here.  A lot of online "howtos" say you can brick 
+them by erasing them incorrectly or not saving the SAS ID first: they're
+ wrong. Put simply, you <u>cannot</u> render these cards unusable by erasing them the "wrong way" or not having a record of the NVRAM or SAS ID on them. <i>See
+ "Erasing" below, for more about this and how to recover from a bad 
+flash or a 9211 card that's interfering with the motherboard boot 
+process</i>.<br>
+<br>
+<br>
+<u>3. Preparation - the basic software, and sorting out MSDOS/EFI and your platform</u><br>
+<br>
+<i>Flashing software</i><br>
+<br>
+There are two main flashing utilities for these cards, "megarec" and "sas2flash". <b>Megarec.exe</b> only works under MSDOS.  sas2flash comes in 3 versions called <b>sas2flsh.exe, sas2flash.exe, </b>and <b>sas2flash.efi</b>,
+ for MSDOS, Windows and EFI Shell.  All 3 versions of sas2flash have 
+identical commands, they only differ by what they run under. I would 
+strongly suggest not flashing from Windows (less to go wrong!) and 
+keeping to MSDOS or EFI.<br>
+<br>
+A small number of motherboards are pains in the neck - sas2flash detects
+ EFI capability so MSDOS version won't run, but it's also not easy to 
+get EFI shell to run either. If you have one of these boards, then come 
+back to this guide once you've worked out how to get sas2flash to run - 
+that's too specific to each motherboard to cover here. Manufacturer and 
+general computer support is probably a good place to start.<br>
+<br>
+You won't have much choice which version of sas2flash you'll use. If 
+your motherboard appears to support EFI, then the MSDOS version won't 
+run (you can try but you'll get a "PAL cannot be initialised" error) and
+ you'll have to use sas2flash EFI. If it doesn't support EFI then of 
+course <i>only</i> the MSDOS version will run. That means on an EFI 
+board you'll need to boot into MSDOS for some things and EFI for others.
+  The EFI version of sas2flash was actually much nicer and easier than 
+the MSDOS version in use, because EFI supports long filenames, command 
+history, filename completion, and nicer command language<br>
+<br>
+You will need MSDOS for megarec.exe but EFI and MSDOS boot files can 
+coexist on the same FAT32 USB stick and dual-boot on most EFI boards, 
+and the zip file below is set up to dual boot both of MSDOS and EFI, so 
+that's no problem. You could run the MSDOS flashers off FreeDOS but 
+generally blog posts suggest MSDOS seems more solid.<br>
+<br>
+<i>Bootable tools for flashing</i><br>
+<br>
+I'm going to assume you will run this all off a USB stick, but you 
+coiuld do the same off a CD/DVD or spare hard drive. The principle's the
+ same, you might need different software to create a bootable MSDOS 
+device with MSDOS basic system files on a different type of storage 
+device. Once your storage device is set up to boot and look for an 
+operating system or shell, the LSI-related files in the attachment 
+should be copied over to it, and also the MSDOS related files if it 
+can't find MSDOS. In case it's unclear, the "LOCALE" folder is part of 
+MSDOS, it's not LSI related.<br>
+<br>
+1. Get Rufus portable version ( <a href="https://rufus.akeo.ie/" target="_blank" class="link link--external" rel="nofollow ugc noopener">https://rufus.akeo.ie</a>
+ ) and use it to create a bootable MSDOS USB drive (32GB max probably 
+best for compatibility?). Any small stick is fine, the files are only 
+about 8 MB total size. The only file systems MSDOS and EFI can both by 
+default understand are FAT / FAT32 (<b>*not*</b> exFAT, NTFS or 
+ext3/4!), but USB formatters almost always format the stick as FAT32 
+which is fine. If needed, force it to use one of those two.<br>
+<br>
+2. Copy from the zip file, all the files under "USB" to the root of your
+ USB stick.  The download link is at the end of the page.<br>
+<ul>
+<li data-xf-list-type="ul">The files include a v1 EFI shell (compatible 
+with all EFI boards; v2 EFI shells might not work on v1 boards) - note 
+there are 2 copies of it because different boards expect it in different
+ places (in the root dir or in \efi\boot). If you can't boot to EFI 
+check your motherboard bios/settings, and use any other EFI shell, 
+including the motherboard's own built in shell if there is one. It's not
+ important which EFI shell you use, so do whatever's needed to get into 
+the EFI shell and have those files accessible on USB. ( <a href="https://wiki.archlinux.org/index.php/Unified_Extensible_Firmware_Interface#Obtaining_UEFI_Shell" target="_blank" class="link link--external" rel="nofollow ugc noopener">Shell download site</a> )</li>
+<li data-xf-list-type="ul">There's also a file "DOS4GW.EXE", which 
+megarec.exe needs to run and complains if missing. It's easily found 
+online and I think comes from unzipping FreeDOS. Like the EFI shell, 
+there are also two copies, one in the USB root and one with the 
+Megarec.exe file, because the error refers to \dos4gw which suggests 
+it's looking in the root directory.  It was easier to add 2 copies than 
+check what Megarec needed :)</li>
+<li data-xf-list-type="ul">Last there are 2 folders, one has Megarec and
+ the files needed with it, one has sas2flash and the files needed with 
+it. There are different versions of sas2flash in there, you need them. 
+They're renamed to show the version of the flasher and its manufacturer.
+  You shouldn't need other flashers - LSI's flashers will flash anyone 
+else's roms and firmware nicely - but you might need to google and grab 
+other versions of the actual firmware such as Fujitsu's version of the 
+IT firmware for your card. I've included the Dell IT firmware which 
+worked on my H200 PERCs.</li>
+</ul><br>
+3. Once you've done that, you should be able to boot in MSDOS and also 
+if your board allows, into EFI. You usually do this by selecting the 
+boot menu.  On an EFI board the USB stick will show up as 2 options: 
+"USB (NAME)" and "UEFI USB (NAME)" - choose the first for MSDOS and the 
+second for EFI.  They look completely different (EFI has colour!).  On 
+my ASRock test system I hit an oddity that it wouldn't load EFI shell 
+from the boot menu but would run it if I selected "Run EFI from 
+filesystem" from the setup rom's exit menu. On my SuperMicro board I had
+ to go into "Boot options" -&gt; "EFI Boot Order" in the firmware, and 
+manually add "Boot to EFI Shell" as an option, before it would let me 
+boot to EFI shell. On some systems EFI shell startup may be case 
+sensitive and complain at "shellx64" not being called "Shellx64" or 
+whatever, and on some blogs the shell is said to be named "bootx64.efi" 
+not "shellx64.efi". If you rename it, remember to rename both copies (in
+ the root folder and in \efi\boot).<br>
+<br>
+This guide will work whether you have one or multiple 9211-style cards 
+installed, but it's not unreasonable to do them one at a time. I got 3 
+cards as a job lot online for £15 and did them all at the same time, and
+ it was fine.<br>
+<br>
+<br>
+<u>4. Getting your card manufacturer's IT firmware</u><br>
+<b>(if your card is running IR firmware, you don't have the 
+manufacturer's IT firmware, and it's not an LSI 9211-8i/e or Dell H200 
+PERC 8 port card, which are in the attached zip)</b><br>
+<br>
+9211 firmware comes in an "IT" and "IR" versions.  I cover the 
+difference between them below, but for the moment what matters is that 
+if you're using the card with ZFS, as FreeNAS does, you will almost 
+certainly need to have the manufacturer's IT version firmware (for HBAs)
+ not the IR version (for RAID) during the crossflash process. If your 
+card comes with IR firmware not IT (or if you aren't sure which it's 
+running) then you'll have to download and unpack your card 
+manufacturer's version of the IT firmware, if you don't have it already 
+and it's not already in the attached zip file.<br>
+<br>
+How do you tell whether or not your card is already running IT or IR 
+already? If the manufacturer/vendor doesn't make it clear then there 
+isn't a clear-cut way. One way is to boot the computer normally and 
+enter the card's boot rom (orom, option rom, etc). If it shows loads of 
+options and advanced RAID configs such as RAID 5 or caching, it's almost
+ certainly IR version. If not, it <i>might</i> be an IT version but it's not certain. You could just try the flashing instructions and see if you get a <i>"cannot flash IT firmware over IR firmware"</i>
+ error.  Otherwise, the easiest answer is to assume your card has IR 
+firmware and go track down the card manufacturer's IT firmware, unless 
+you know differently.<br>
+<br>
+I've included LSI and Dell's 9211 IT firmware in the zip file, and most 
+IBM M1015 are already supplied with IT firmware installed, so with luck 
+you won't need to look hard, or your card manufacturer will make it easy
+ to find and download (ask online if not). With luck you either have a 
+card whose IT firmware is in the attached zip, or a card that's already 
+running IT firmware.<br>
+<br>
+However in a few cases, you might need to find and download the IT 
+firmware for your card's manufacturer. In a very few cases, the 
+manufacturer only supplies their firmware bundled as part of an EXE, ISO
+ or other file type.   It might also be packed as a file for a different
+ card - for example Dell only supply 9211 IT firmware with their 9211-8e
+ version card, not their 9211-8i version card. But it's the same 
+hardware and works anyway.  If that's your situation, you will need to 
+find and download the firmware, and also perhaps find a tool to unpack 
+it, so you can get the actual IT firmware file.  Tools for this include 
+WinRAR or 7zip. If you're in that situation, then this should be pretty 
+quick and easy to do.  Google is sure to have information to help you as
+ well, and if not, ask on this or other relevant forums.<br>
+<br>
+<br>
+<u>5. Useful commands before starting</u><br>
+<br>
+<i>Useful EFI shell commands (for those not used to EFI shell):</i><br>
+<br>
+   <b>help, ls, cd, cp, mv</b>   - similar to basic linux (ls = list dir contents, cd = change current dir, mv/cp = move/copy files)<br>
+   <b>map</b>   - lists disks. use "map" to quickly see which fs...: device your USB stick is<br>
+<b>   fs0:  fs1: etc</b>   - select a device (Typing <b>fs0:</b> selects the device shown next to <i>fs0:</i> in <b>map</b> as the current device/folder. Like typing a drive letter at the MSDOS prompt)<br>
+   <b>Paths </b>   - directory paths use MSDOS style "\" as a directory separator not linux "/".<br>
+   <b>Tab</b>    - usually does filename completion.<br>
+<br>
+   <b>-h, -help, --h, --help, ?</b>    - most commands will have basic 
+help (if not, Google will help instead). Try these after the command, to
+ get quick help on commands.<br>
+   <b>-b</b>   - most commands accept this option to show the output page at a time (try <b>"help -b"</b> or <b>"map -b"</b>
+ for example). It's useful if the command shows so much that it scrolls 
+off the top of the screen. If "-b" doesn't work you could redirect the 
+command's output to a file, then open the file in EFI's text editor (or 
+even save to a second USB stick and open on another machine if 
+everything else fails). You'll have to look up the details how to do 
+this, though.<br>
+<br>
+  You don't need more than that for this guide.<br>
+<br>
+<i>Useful sas2flash commands:</i><br>
+<br>
+   <b>sas2flash -listall</b>      - lists all LSI 2008 controllers 
+found.  This is the controller in the 9211. Ideally equivalent to 
+listing all 9211 variant cards found, but if it finds additional 
+controllers <b>DO NOT IGNORE THIS!</b>  See above - occasionally extra LSI 2008 controllers may be hidden in SSDs and on the motherboard.<br>
+   <b>sas2flash -c  CARD_ID -list</b>      - provides full details about each card (current firmware, bios, versions, sas ID, manufacturer, whether IR/IT, etc.)<br>
+<br>
+<br>
+<u>6. Firmware and flasher versions.</u><br>
+<br>
+<i>Now we dive into the firmwares and flashers. This is where the fun 
+starts, but it's essential if you want to understand why the 
+instructions are so darn messy and why they often don't work for people 
+first time.</i><br>
+<br>
+<b>CARD_ID FOR FLASHING PURPOSES:  </b>   Both Megarec and sas2flash 
+refer to cards by a CARD_ID. This is basically how they were enumerated 
+at boot, so 0 = first 2008 based card it found, 1 = second 2008 based 
+card it found, and so on.  They are always numbered 0 upwards, 
+whatever's in your box at the time.   The CARD_ID is actually all you 
+need to access the card and program a firmware and SAS ID, and it's how 
+the flashers (all of them) identify which card to flash or program a SAS
+ ID to. See "erasing" below for more on this.<br>
+<br>
+<b>SAS ID:     </b>The 9211 variant cards have a SAS ID in their NVRAM (technically called the "WWM"). It's a straight 16 character hex string, <b>sas2flash -c CARD_ID -list</b>
+ will show the card's SAS ID if assigned.  Two cards in a computer must 
+have different SAS IDs.  (Technically it should be worldwide unique, 
+like a MAC address, but most users here probably don't care about that).
+ Many web pages state that if you delete or lose the SAS ID, or erase 
+then reboot without making a note of it, then you're screwed, but that's
+ incorrect, because you can always access the card by its card ID and 
+you can always write a new SAS ID later (or invent a SAS ID at random if
+ you need to!).<br>
+<br>
+The only time it will really matter is when you have an existing system 
+that relies on that ID.  But if you're crossflashing -  and especially 
+if you're going to use an HBA/IT firmware, and double-especially if 
+you're building a FreeNAS box that doesn't check whose brands are in the
+ box - you probably don't have that situation. So take a note or photo 
+by all means (I'll explain how to find the relevant info) but if you 
+don't, or you can't be bothered, it's probably (=almost always) fine.  
+The card may have the SAS ID on it somewhere, if you look for it - on a 
+small label or whatever, if it matters.    If not, use the above command
+ first of all, to get the info, if you insist on making a note 
+beforehand <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="smilie smilie--sprite smilie--sprite11" alt=":rolleyes:" title="Roll Eyes    :rolleyes:" loading="lazy" data-shortname=":rolleyes:">
+   But if it's a "clean start" situation with no need to preserve 
+existing SAS topology or attached disk info, mostly you just want to be 
+sure the SAS ID is unique in that box and you won't need to have an 
+existing SAS ID to crossflash+prepare your card.<br>
+<br>
+Again worth noting that  it doesn't usually matter what value you give it, and you can update its SAS ID <u>at any time after flashing</u> by booting into MSDOS/EFI and using <b>sas2flash -c CARD_ID -sasadd SAS ID</b>.  The only requirement is no other installed card has the same SAS ID.   Note that <b>sas2flash -list</b> will display the SAS ID with hyphens, but <b>sas2flash -sasadd</b> expects it entered <i>without </i>the hyphens as 16 plain hex characters.<br>
+<br>
+If you do erase the SAS ID (WWN), then you’ll need to reenter it or another SAS ID at the end of flashing, using <b>sas2flash -c CARD_ID -o -sasadd SAS_ID</b>.
+ To mention again, usually the original value is on a sticker somewhere 
+on the card or motherboard, but if not, make a note or even easier, just
+ pick (almost) any 16 hex digits at random.<br>
+<br>
+<b>FLASHABLE SOFTWARES ("BOOT ROM/BIOS" AND "FIRMWARE"):</b>   
+Confusingly, the 9211 cards have their flashable files in *two* parts. 
+There are bios and efi "roms" that provides boot-time options, and these
+ are *<i>separate</i>* files independent from the "firmware" (the part 
+that actually controls the disks and responds to the OS).   For the boot
+ roms one can flash a BIOS orom, an EFI boot rom, or neither or both (as
+ they can coexist).<br>
+<br>
+For HBA use such as FreeNAS, only the "firmware" part normally matters. You <u>don't</u> need to flash the orom or EFI rom.  The boot roms are <u>completely optional</u>
+ and while nice, they cause the boot to be slower and they don't add 
+anything really. It can be flashed onto the card later if you ever 
+change your mind.  To repeat: you do <b><u>not</u></b> need to flash the bios/efi boot roms to get a fully functional HBA card. You <u>only</u> need to flash the firmware to get the card working fully. <br>
+<br>
+The only time you usually <i>need</i> to flash the "rom" firmware 
+(orom/EFI/bios) is if you want to boot the system itself from the card, 
+and the disks attached to the card must be visible at early boot time to
+ do so. Also for some card settings such as built-in staggered spinup or
+ card enable/disable.  But because most users use these cards only for 
+attaching data disks, very few users/systems will ever need to flash the
+ "rom" part of the software. For everyone else, they just slow down the 
+boot process, and the "firmware" part of the firmware is all you'll 
+need.<br>
+<br>
+(If you're interested, the bios/boot roms mainly seem to provide 
+features such as exposing disks to the BIOS/firmware during the boot 
+process (if booting off a disk attached to the card), or showing card 
+ID, SAS topology, list attached devices at boot, and enable/disable. 
+They also allow you to set some options for removable media, card boot 
+order if you have &gt;1 card, number of interrupts used, etc. Most of 
+these options aren't really needed for FreeNAS or for an HBA, especially
+ since FreeNAS itself will tell you what's attached when it boots.)<br>
+<br>
+<b>FIRMWARE/BOOT ROM VERSIONS, VARIANTS AND THEIR USUAL FILENAMES:    </b>The
+ firmware file itself comes in two variants, depending if it's to be 
+used as an HBA (the "IT" version) or a RAID card (the "IR" version). For
+ FreeNAS you almost always want the IT version of the firmware, but the 
+9211 variants mainly seem to come in IR versions so they will need cross
+ flashing, to replace the IR version by the IT version, as well as being
+ flashed again to switch from Dell/whoever's firmware to LSI's firmware 
+builds.<br>
+<br>
+The firmware most people will want to get working is LSI/Avago/Broadcom 
+IT software (currently version P20). It may also be known as the 
+firmware for HBA not RAID cards, but a dell/fujitsu card will usually 
+have dell/fujitsu firmwares as well and you'll probably need that as 
+well. The support website or Google will help you find your own card's 
+firmware. (See "crossflashing process"). The firmware and boot rom 
+files, and sometimes the flashers, are often wrapped up in zip or exe 
+files which need to be unpacked and the relevant files extracted. 
+WinRAR, 7zip or other unpackers that can unpack .exe files can be useful
+ for this.<br>
+<br>
+You will usually need your <u>card manufacturer's IT firmware</u> for 
+this process, even though you only need it temporarily and you'll 
+overwrite it with the LSI firmware almost immediately after flashing it.
+ (I'll explain why below: basically there's a step where LSI have a 
+"lockout" that this helps you to work around). <i>IMPORTANT NOTE: when you go looking for your Dell/IBM/Toshiba/??? IT firmware, you do <u>not</u>
+ need the latest version. Any version, however old (almost!) will do. In
+ fact older versions may be easier to flash. Don't worry at all if it's 
+outdated, since you'll overwrite it a few minutes later with the current
+ LSI firmware. It's only needed for a temporary step in the process.</i><br>
+<br>
+<u>Filenames for the firmware</u> are usually <b>"<u>2118it.bin</u>"</b> (for LSI IT firmware) and <b>"<u>6GBPSAS.FW</u>"</b>
+ (for Dell firmware), whatever version they are.  I haven't checked what
+ filenames IBM, Fujitsu and other OEMs usually give their IT firmware 
+versions.  LSI make their IT versions easy to find. Dell do it like 
+this: the firmware for their 9211-8<u><b>i</b></u> cards is usually IR version ("i"=internal ports, presumed to be RAIDed), and the firmware for their 9211-8<u><b>e</b></u>
+ cards is usually identical but IT version ("e"=external ports, presumed
+ to be HBA). So if you have a Dell card like the H200 or H310, instead 
+of looking for an IT version for the 9211-8i look for the firmware for 
+the external port version (equivalent to the 9211-8e). Dell have an <a href="https://downloads.dell.com/FOLDER01181650M/33/SASHBA_Firmware_6GBPS-SAS-HBA_07.03.06.00_A10_ZPE.exe" target="_blank" class="link link--external" rel="nofollow ugc noopener">A10 version of the firmware</a> titled <i>"SASHBA_Firmware_6GBPS-SAS-HBA_07.03.06.00_A10_ZPE.exe"</i>.
+ Expand the .exe file and grab the "6GBPSAS.FW" file inside it, that's 
+the Dell IT version you need for the 9211-8i or 8e. Once again, if it's 
+some other manufacturer, search their support section, ask on their 
+forums or here, or Google it. But in any case you want their IT (HBA) 
+not IR (RAID) firmware version.<br>
+<br>
+If you want to flash either or both <u>boot roms</u>, their standard filenames are <b><u>x64sas2.rom</u> </b>(for the EFI boot rom) and <b><u>mptsas2.rom</u></b> (for the BIOS boot rom <i>also known as option rom or orom</i>).
+ LSI calls their EFI boot rom a UEFI BSD rom (not to be confused with 
+FreeBSD). You can flash either, neither or any combination. But as I've 
+said, you don't have to, and it won't do much for most people.<br>
+<br>
+<br>
+<u>7. Using megarec.exe and sas2flash/sas2flsh</u><br>
+<br>
+As I mentioned, there are 2 utilities - megarec and sas2flash (AKA 
+sas2flsh).  Megarec uses MSDOS while sas2flash has both MSDOS and EFI 
+versions.<br>
+<br>
+This is a pain, because sas2flash for MSDOS (.exe) will NOT work on a 
+board that's detected as EFI, and sas2flash EFI will NOT work on a board
+ lacking EFI. So you have no choice about whether to use MSDOS EFI 
+versions, it's determined by the motherboard you're using.   If you get 
+an error about <i><b>"unable to initialise PAL"</b></i> when you try to use <b>sas2flsh.exe</b> in MSDOS, that means it's trying to use the MSDOS version on an EFI-detected motherboard. Switch to the EFI version instead.<br>
+<br>
+This mixed MSDOS + EFI  environment isn't an issue (i.e., MSDOS for 
+megarec and EFI for sas2flash) because a single FAT32 USB can contain 
+both MSDOS and EFI boot files, and boot either on demand, so no need to 
+have 2 sticks for this.  See above for how to build a bootable USB 
+stick. The zip file attached to this resource is already set up to allow
+ booting both EFI and MSDOS if your board allows it - just copy its 
+contents to the USB stick root directory and choose which one to boot 
+to.<br>
+<br>
+<i>Using Megarec.exe:</i><br>
+<br>
+Megarec can run off any MSDOS disk on any motherboard. It needs to find 
+the system file DOS4GW.EXE to run, but that's easy to find online (I 
+think it may be part of FreeDOS). Megarec has just two uses, but they're
+ important.  It reliably erases the card (less fussy than sas2flash), 
+and it also backs up/restores the card's SBR sector if you need that 
+(you probably don't).  <b>It'll do this <u>even if sas2flash has screwed up the card flashing/checksums and gives errors</u> when you try and erase it</b>.
+  So it's used to put the card in a known state before crossflashing or 
+if it's screwed up and unflashable, or to backup/restore the SBR data. <b><u>Everything else needs sas2flash / sas2flsh.</u>  </b>Go into MSDOS, use it, quit MSDOS. <i>See below for more on how to erase the cards properly.</i><br>
+<br>
+        Useful Megarec commands (see below):<br>
+        <b>megarec -readbr CARD_ID  FILE</b>      - read and write sbr data<br>
+        <b>megarec -writesbr CARD_ID  FILE</b><br>
+        <b>megarec -cleanflash CARD_ID</b>         - erase the card<br>
+<br>
+As always the card ID is based on whatever cards are in the box at the 
+time. They start at zero, so if you have one card installed it's always 
+called card 0, the second card is always called card 1, and so on.  So 
+to erase the 1st or only installed card, <b>"megarec -cleanflash 0"</b>, and so on.<b>  sas2flash uses the same IDs.</b><br>
+<br>
+Megarec allows the backup and restore of SBR data on the card. Most 
+people won't need this, and you'll have to Google it if interested. One 
+of the links at the bottom of this page gives information on SBR and 
+notes that if the card sees some but not all drives when crossflashed, 
+the SBR data might in some cases be responsible. I have never seen this 
+issue myself and have never needed it, but YMMV. If cautious, perhaps 
+back it up before anything else "just in case", so you have the original
+ to work on if it turns out you need it. But most people won't.<br>
+<br>
+<i>Using sas2flash (a.k.a. sas2flash.exe, sas2flsh.exe, sas2flash.efi - they all have identical commands)</i><br>
+<br>
+Where I write "sas2flash", you may have to type the command in full (sas2flash.efi not just sas2flash)<br>
+<br>
+sas2flash has a quite rich command set, but you don't need most of them for this. The main command line options are:<br>
+     <b>-c CARD_ID</b>    optional if sure there's only one LSI controller present<br>
+     <b>-o         enables "advanced mode" for that command</b>.   Although "-o" does nothing by itself, it's needed as a safety measure when using certain sas2flash commands.  <i><u>If
+ this option is omitted when it's required, some commands will not work,
+ or will fail midway. Check "-o" isn't omitted if a sas2flash command 
+you try doesn't go as expected!</u></i><br>
+<br>
+    Advanced mode commands used here:<br>
+        <b>sas2flash  -c  CARD_ID  -o  -f FILE</b>        = flash a firmware file<br>
+        <b>sas2flash  -c  CARD_ID  -o  -b FILE</b>        = flash a boot rom (bios or EFI) file<br>
+        <b>sas2flash  -c  CARD_ID  -o  -e  SECTION_ID</b>      = erase some part of the card's NVRAM <i>(see below - important!)</i><br>
+        <b>sas2flash  -c  CARD_ID  -o  -sasadd  SAS_ID</b>      = update SAS ID <i>(see above)</i><br>
+        <b>sas2flash  -listall</b>      = lists all cards found. Again, technically it lists all LSI 2008 controllers found. <b>If the number of items listed isn't <u>exactly</u> what you expect, STOP IMMEDIATELY AND REREAD ABOVE. </b>Make sure you don't accidentally flash an SSD or motherboard (or other hidden) LSI 2008 controller before continuing.<br>
+        <b>sas2flash  -c  CARD_ID  -list</b>     = get full details about each card, including current firmware, bios, versions, sas ID, manufacturer, whether IR/IT, etc.<br>
+<br>
+SAS2FLASH often reports errors that can be ignored. For example it tries
+ before and after each command to disconnect/reconnect the EFI driver - 
+but if no EFI driver has been installed it gives an error for both of 
+these (<b>"unable to connect/disconnect EFI DRIVER"</b>) which can be 
+completely ignored.  Also (and especially on non-LSI firmware) it 
+reports  things like "flash succeeded" and then error messages such as <b>"due to errors, remaining commands were not executed"</b>, which can be ignored if the main task was okay but are ambiguous at best.<br>
+<br>
+sas2flash can also take a long time to process some commands. I have no 
+idea how it can take 40 seconds just to figure that "-c 0 list" isn't a 
+valid command (missing '-' before list) , but it does. So if it takes 30
+ - 60 seconds to get going on a command, that's just how it is. Write a 
+few tweets and come back in 30 seconds.<br>
+<br>
+Reboots aren't normally needed between flashes, but it might not hurt in
+ some cases. Where it seems to matter, I've noted it below.<br>
+<br>
+I wan to emphasise here, that sometimes sas2flash seems to get FUBAR'ed.
+  If at any time during flashing,  you find that basic operations like 
+sas2flash -list or flashing aren't just misreporting but are unable to 
+complete any more, and it looks like it's because the card is scrambled 
+or bad NVRAM checksum issues, not just because it's a wrong version of 
+something somewhere, or what it's found isn't what it needs, and you 
+can't figure it out, don't hesitate to go back to wiping the card with 
+megarec and starting the crossflash again.<br>
+<br>
+I've assumed below that you are using EFI. If you aren't then the same 
+should work for MSDOS using the P5 MSDOS flasher instead (also included 
+in the zip), and do everything else the same.<br>
+<br>
+<br>
+<u>8. ERASING/WIPING THE CARD:</u><br>
+<br>
+   Most guides say to use <b>sas2flash -c CARD_ID -o -e 6 (or "7")</b> to erase the card.<br>
+<br>
+   But having played with sas2flash a fair bit, I wouldn't do so.  I did *not* use sas2flash for erasing.<br>
+<br>
+   It just wasn't reliably effective for me, in the sense that some 
+versions of sas2flash worked but some didn't, some worked on one 
+firmware not on another, and I wasn't always convinced it had or hadn't,
+ or whether to use a different version, etc. The crossflash process was 
+complicated enough without that confusion.  For example sas2flash EFI P5
+ said it hit an error on erase (-o -e 7) at some points where megarec 
+was fine.  Sometimes it seemed to part flash and screw up the checksums,
+ so I had to re-erase or other steps failed, and when that happened I 
+wasn't sure whether it was the erase or the next step, which was 
+responsible for the issue.  Basically some versions of sas2flash 
+wouldn't erase everything, or seems to not work, or it was dubious.<br>
+<br>
+Once I discovered that not only megarec was more reliable and explicitly
+ verified (on all manufacturer's versions), and also that I didn't need 
+to preserve the SAS ID like some guides said, so I didn't need to 
+distinguish erasing with -o -e 6 or -o -e 7, it was easy.  I used 
+megarec to erase the cards and it worked first time, every time.   I 
+recommend you to use that instead, as well, and ignore the guides which 
+state to use sas2flash -o -e 6/7 unloess you have some particular reason
+ to do so. In fact I just don't use the sas2flash eraser at all, if I 
+need to erase I reboot MSDOS and use megarec.<br>
+<br>
+I found megarec -cleanflash to be much more reliable; it clearly worked 
+each time and there's a visible verbose percentage counter to watch, and
+ no spurious error messages.  The only downside was loss of NVRAM data 
+such as SBR and SAS ID, both of which can be backed up or aren't 
+important, and really are expected in a full erase.<br>
+<br>
+<i>Erasure + bricking worries info:</i><br>
+<br>
+Some websites warn that erasing the card and rebooting will leave it inaccessible / bricked <i>(OHNOES!)</i>.
+ Some say it's a risk to reboot without reflashing some firmware at 
+least, or without a note of the old SAS ID. So far as I can tell, both 
+of these are just internet myths.<br>
+<br>
+That's not my experience at all.  This is what I've found:<br>
+<br>
+I've been using megarec to fully erase the cards, and rebooted, then 
+used sas2flash to reflash the erased card with the new firmware after 
+it's rebooted. It worked just fine.  <i>It seems you <u>don't</u> need the SAS ID <u>or anything else</u> in firmware to be able to reflash new firmware <u>or</u> add a replacement SAS ID to the erased card after reboot</i>. Just boot the system,  use <b>sas2flash -c (0, 1, 2 etc) -o -f FILENAME</b> to flash the new firmware on the erased card, whether in EFI or MSDOS, add a made-up or previously recorded SAS ID using <b>sas2flash -sasadd HEX_STRING</b> as described below, and carry right on.<br>
+<br>
+If the card or motherboard seems to become unresponsive or bricked 
+because of the flashing process, these are the  recovery instructions, 
+but I should say I have never to do this, it's never been that bad. 
+These cards simply cannot be messed up so badly that megarec can't 
+low-level erase them, as far as I can tell.<br>
+<ul>
+<li data-xf-list-type="ul"><i>If the motherboard itself won't boot</i>, 
+then * Turn off power and remove the card. * Reboot. * Enter your 
+motherboard BIOS/setup panel and disable orom on boot for storage cards 
+or for that specific card, if enabled (so the card's misflashed state 
+can't interfere with proper booting). <b>ORom enable/disable is often buried under the "boot" menu, or in some kind of "CSM/compatibility" submenu, but may be elsewhere.</b>
+ * Save motherboard settings, exit setup, turn off power again and plug 
+the card back in. *  The motherboard will now boot, as the orom won't be
+ relied on or executed at boot-time.</li>
+<li data-xf-list-type="ul"><i>Then in any case,</i> * Reboot MSDOS and 
+erase card's NVRAM using megarec as described above. * Reboot. * If you 
+disabled oroms above, then you can optionally re-enable them again now. 
+Solved. Card will now be erased and flashable, and the system will boot 
+as normal.  Carry on with your crossflashing process as described below.</li>
+</ul><br>
+<u>9. OVERVIEW OF THE CROSSFLASHING PROCESS</u><br>
+<br>
+The crossflashing process has some twists to it, and this is usually where it goes wrong for people.<br>
+<br>
+Before giving the detailed steps and commands to use, here is an 
+overview of what we will be doing. It will give an understanding of the 
+actual crossflash process, and why the "recipe" below is as it is.<br>
+<br>
+- On these cards, you can't usually flash an IT firmware over an 
+existing IR firmware. You have to erase the flash, then flash from IR to
+ IT <i>of the same brand</i>. Only once you've got it running the *IT* firmware can you make the switch to LSI if it's a Dell or other manufacturer card. <i>(When I say "Dell" I really mean "whatever your card brand is")</i>.<br>
+<br>
+- These cards also check who the manufacturer is, and from about version
+ P7 of the LSI flasher, they blocked the flash process if you tried to 
+replace the firmware by equivalent firmware of a different manufacturer 
+(e.g., overwrite Dell with LSI). It will remember its "manufacturer" 
+even when fully erased, until a new manufacturer's firmware is flashed. 
+So even once you've flashed from Dell IR to Dell IT firmware (or 
+whatever brand it is), you still can't jump directly to LSI latest IT 
+firmware using a recent flasher, because the recent flashers just won't 
+let you.<br>
+<br>
+So the "big picture" process for going from Dell IR to LSI P20 IT, is something like this:<br>
+<ol>
+<li data-xf-list-type="ol">Grab the SAS ID (and perhaps the SBR data) if
+ you care about it, check your system is okay and any storage devices 
+safely dealt with (see "preparations"), and download/unzip a known good 
+version of your card's OEM (Dell/Fujitsu) IT firmware to use as a first 
+"jump".<br>
+<br>
+The IT firmware should be easy to find on your card manufacturer's 
+download site; if not then Google it. It's the same firmware line as 
+already installed, just the IT version. LSI's P5 flasher will program 
+the manufacturer's early version IT over IR regardless of the make of 
+card you have. It doesn't matter too much what version you find. As long
+ as its the same manufacturer the LSI flasher will generally let you 
+flash it after you erase the card first. But on the whole, earlier 
+versions are better than latest versions for this bit, if you can find 
+them easily, since the most consistently working LSI software for 
+crossflashing is the early versions before about P7.<br>
+<br>
+</li>
+<li data-xf-list-type="ol">Check the flasher shows the number of LSI 9211 controllers you expect it to.<br>
+<i>LSI controllers can be hidden internally within other hardware such 
+as some enterprise or high-spec SSDs or built into the motherboard. We 
+check before going further, how many LSI controllers the flasher 
+detects, and that it's the same as the number of LSI controllers you 
+expect it to find, so that nothing gets wrongly flashed if there is a 
+hidden controller anywhere.</i></li>
+<li data-xf-list-type="ol">Erase the card's NVRAM.<br>
+<i>This is a place things often go wrong for people following poorly 
+written guides or erasing non-LSI cards with sas2flash - not meaning 
+that you brick the card, but that the card refuses to erase as expected,
+ or isn't properly erased, or you can't be sure it's really been erased,
+ or you get an odd error during erase. Some guides also leave people in 
+doubt what's "safe" or "best" to erase and how much should be erased 
+(Should I use -o -e 6 or -o -e 7? Will I brick my card? HELP!).  The 
+common online suggestions are not (in my experience) usually the best or
+ safest way. Read the detailed sections above (erasing) and below 
+(crossflashing) carefully and make your own choice.  <b><i>You need 
+certainty that the erase process has worked properly, otherwise you'll 
+probably get weird errors or failed flashes in the next steps.</i></b></i><br>
+<br>
+</li>
+<li data-xf-list-type="ol">Even when erased, the card will still 
+"remember" it's an IR card, so we deal with that next, by flashing your 
+manufacturer's IT version firmware onto it, if not already IT. You need 
+to use a flasher that will do this properly. The <a href="https://docs.broadcom.com/docs/12350698" target="_blank" class="link link--external" rel="nofollow ugc noopener">LSI P5 EFI flasher</a>
+ (and MSDOS version if using MSDOS) seems to be very reliable for other 
+OEMs and versions, but if not, you'll have to find a version of 
+sas2flash that does work for it and for you. At a pinch the card 
+manufacturer probably has a flasher to switch firmware to IT mode, if 
+you just can't get LSI's to work.  Contact their support forum or tech 
+desk.   <i>You do *not* need to worry about flashing the bios/efi rom at
+ this stage, it can wait until you're on LSI P20 if you want to do it at
+ all.</i><br>
+<br>
+</li>
+<li data-xf-list-type="ol">You now have a Dell (or whatever) IT card. Yay. Now we need to flash a <u>second</u>
+ time, this time to crossflash it to LSI. Use the same LSI P5 EFI 
+flasher (again!) to flash it a second time, this time taking it from 
+Dell IT to LSI IT version P7, which is roughly where LSI started to lock
+ down the manufacturer ID.  The early flashers such as P5 (but not more 
+modern ones!) will ask if you're sure you want to change manufacturer 
+ID: obviously "Yes". <i>Don't forget the "-o" option or you won't see this prompt.</i><br>
+<br>
+</li>
+<li data-xf-list-type="ol">You're now on mainstream LSI P7 IT firmware, 
+so manufacturer lockout is dealt with. That means you can go directly to
+ using the latest flasher (P20 right now), flash a *third* time to 
+install the latest LSI IT firmware, and give the card a new SAS ID 
+(either same as before or made up). At that point you're done.<br>
+<br>
+</li>
+<li data-xf-list-type="ol">Flashing a BIOS orom, or EFI boot rom, is an 
+optional extra if you want. You can do it, too, but it won't do much on a
+ FreeNAS box other than slow down your boot.</li>
+</ol>In other words flash <b>1) DELL IR -&gt; DELL IT, 2) DELL IT -&gt; LSI IT P7, 3) LSI P7 -&gt; LSI LATEST (P20+).</b><br>
+<br>
+<i>The main reasons flashing doesn't work for people are:</i><br>
+<ul>
+<li data-xf-list-type="ul">odd error messages that take time to work around</li>
+<li data-xf-list-type="ul">version selection of flasher at step 3, and flasher + firmware at step 4.</li>
+<li data-xf-list-type="ul">LSI's flashers and cards are very fussy about
+ which version will or won't work, and are happy to throw up confusing 
+errors or not behave as expected, if they don't like your choice.</li>
+<li data-xf-list-type="ul">not erasing the NVRAM properly when it's needed (almost always do a proper full erase before you do any crossflashing at all, <i>even if it has valid firmware when you first begin</i>)</li>
+<li data-xf-list-type="ul">forgetting the "-o" option in some sas2flash command</li>
+</ul><br>
+<u>10. CROSSFLASHING DETAILS</u><br>
+<br>
+Finally here is a recipe. But with luck the previous information will 
+help a lot to make sense of it, and to figure out what to try if it 
+fails, and why it might fail (if it does).<br>
+<br>
+<ol>
+<li data-xf-list-type="ol">Boot into MSDOS/EFI as needed for sas2flash 
+on your motherboard. You can get the SAS ID and other card firmware info
+ if you want it, at this step (not essential, but doesn't hurt). However
+ the important thing is checking there aren't any hidden LSI 
+controllers, before we do <u>any</u> erasing or flashing.<br>
+<b>sas2flash -listall</b> (TO LIST CARDS)<br>
+<b>sas2flash -c CARDID -list</b> (TO GET SPECIFIC CARD DATA)<br>
+<i>This 2nd step is optional but not a bad idea. You can also confirm the firmware, brand etc from the same output. </i><br>
+<br>
+<u><i>SAFETY WARNING:</i></u><br>
+<i><b>IF THE OUTPUT FROM sas2flash -listall SHOWS MORE LSI CONTROLLERS THAN YOU EXPECT, *** DO NOT IGNORE IT! ***<br>
+<br>
+*** IF THIS HAPPENS, DO NOT ERASE OR FLASH <u>ANYTHING</u> UNTIL YOU ARE SURE WHAT ELSE HAS BEEN DETECTED. *** </b><br>
+ONLY CONTINUE WHEN YOU ARE <u>SURE</u> THAT YOU AREN'T GOING TO ACCIDENTALLY FLASH SOME LSI CONTROLLER YOU DIDN'T REALISE WAS THERE. <br>
+ "sas2flash -c CARD_ID -list"</i> <i>will show each card in turn. Use 
+this to check what you're seeing, and take care to remove (or avoid 
+modifying) any LSI controllers except those you mean to crossflash.</i><br>
+<br>
+After you've noted down or photo'ed any info you want to, reboot.<br>
+<br>
+</li>
+<li data-xf-list-type="ol">Reboot into <u>MSDOS</u>, and using Megarec.exe, backup the existing SBR data (although you probably won't ever need it) and then <u>erase the card and all NVRAM data</u>, including <u>writing empty SBR data to the card</u>.<br>
+<br>
+I'm not sure how important erasing the SBR data is (I never needed it!) 
+but it can't hurt and Megarec allows the original to be rewritten from 
+your backup at a pinch. There's a blog post linked at the end of this 
+post, about it, and Google may help. It seems to be relevant to drive 
+detection in a few (rare?) cases. But flashing a standard default 
+"empty" SBR seems to work absolutely fine for virtually everyone, 
+judging by how rarely it comes up in posts.<br>
+<br>
+The important step is to be sure you have truly erased the card <u>properly</u>.  <b>This is crucial</b> or some of the flashing steps below will probably fail when you get to them.<i><br>
+<br>
+I want to underline that last bit - most versions of sas2flash either did <u>not</u>
+ properly erase the card for me, or hit issues trying to erase it. 
+Basically it looks like sas2flash doesn't always play well with flashing
+ other manufacturer's cards until they had first been erased using 
+Megarec.  Sometimes steps below seemed to work but didn't, sometimes it 
+point-blank refused to flash. Some versions probably do work.  As I've 
+said above, I found it best to use megarec only, and take the guesswork 
+out of it.</i><br>
+<br>
+The 3 commands to run are:<br>
+<br>
+<b>megarec  -readsbr  CARD_ID   FILENAME          </b>backup the card's sbr data to your USB stick "in case"<b><br>
+                                                     </b><i>You probably
+ wont need it but if you do, you can restore it from USB or hard drive 
+at any time with the same program (the command is "Megarec  -writesbr  
+CARD_ID  FILENAME").<br>
+                               </i><b><br>
+                                 megarec  -writesbr  CARD_ID   sbrempty.bin</b>
+ writes blank sbr data to the card. sbrempty.bin is a standard file 
+that's often included when you download Megarec. I've included it in the
+ attached zip file so this command will work.<br>
+<i>If this or the previous action fails, it's probably fine according to guides online, but for me it didn't give an error.</i><br>
+<b>  <br>
+                                 megarec -cleanflash CARD_ID                            </b>erase the card completely</li>
+<li data-xf-list-type="ol">Reboot again.  <i><br>
+From this point on we're done with megarec and we only need to reboot 
+into MSDOS/EFI (whichever sas2flash requires). That is, unless we need 
+to go back to 2 and wipe the card to start again :), or have a rare card
+ that needs its sbr flashed for any reason (I've never had that).<br>
+<br>
+ Note: From here on until we're done, </i>sas2flash -list<i> will give <u>incomplete or inconsistent output</u>,
+ such as "SAS ID undetermined", or "card model = Dell but firmware = 
+LSI". That's fine because we're upgrading the card in stages and it 
+doesn't yet have that info completely or at all.<br>
+                                 </i></li>
+<li data-xf-list-type="ol">Update DELL H200 IR to DELL H200 IT (or the IT firmware version for whatever manufacturer your card is).<br>
+<br>
+<i>Use LSI's <b>**P5 EFI** flasher</b> for this step. If your board doesn't have EFI, then the <b>P5 MSDOS flasher </b>should work and I've included that in the zip file as well.  </i><br>
+<br>
+The command is: <b>sas2flash  -c  CARD_ID  -o  -f  FILENAME<br>
+                               </b><br>
+The reason we use the P5 flasher here and in the next step is that the 
+newer flashers are configured not to work with anything except 
+LSI-branded cards and firmware, so until a few more steps are done, this
+ is the flasher we have to use. Once we've got the card off Dell and 
+onto LSI IT firmware (of any version, however old) then we can switch to
+ using the latest LSI flasher without problems.<br>
+<br>
+<u><i>I found no other version of the flasher that worked reliably, 
+having tried LSI's P7 EFI, a DELL flasher, etc. That was the one that 
+worked.</i></u><br>
+<br>
+For Dell variants of the 9211-8i, the A10 9211-8e firmware is known to 
+work well as an IT firmware to flash in this step, as explained and 
+linked above. The filename within the download is 6GBPSAS.FW. 
+Confusingly, Dell also use the same filename for their IR firmware, you 
+have to check the download package for which it is.<br>
+<br>
+Using any other flasher than the P5 flasher, whatever brand the card was
+ (whether Dell or LSI), gave the error "Cannot flash IT firmware over IR
+ firmware", either at this step or if this step worked, then when 
+crossflashing to LSI P7 at step 5. However when I used the P5 flasher, 
+even if I had got this message and even if "IR" appeared in the 
+sas2flash "-list" printout, the P5 EFI flasher still crossflashed the IT
+ firmware correctly (as verified after reboot). However if the IR-&gt;IT
+ flash screws up badly, or just can't write, go back to step #2 <b>cleanflash CARD_ID</b>, wipe the card again, and redo this step until it works. You need the card to be running your own-brand IT (<u>not</u> IR) firmware first of all, in order to go anywhere else, <i>including switching to LSI IT</i>.<br>
+<br>
+The error <b>"Cannot flash IT firmware over IR firmware"</b> at a future
+ step means that you didn't get this step to work correctly. Either you 
+thought you were flashing IT but you actually weren't, or the firmware 
+flash process didn't work when you thought it had.<br>
+<br>
+In either case the solution is the same - go back to step 2, erase again, and <i><u>double check the firmware you tried to flash really is IT</u> and is one of the earlier firmware versions up to say 2009-2013</i>
+ so there's no doubt it can be flashed using the early flashers such as 
+P5 (this isn't usually an issue but I'm mentioning it "just in case" and
+ in case future updates break compatibility). If in doubt, ask for help 
+finding "known-good" IT firmware for your brand. It will be one of those
+ two things only.<br>
+<br>
+<i> (Note: In theory you could probably flash these two steps the other 
+way round, meaning, crossflashing Dell/Fujitsu IR to LSI IR P7 first, 
+and then LSI IR P7 to LSI IT, but I haven't tried that, nor have I found
+ any post saying that someone else has tried it.  If someone does try 
+it, I'd like to hear if it worked. Post a comment if you do!)</i><br>
+<br>
+The flashing process may give an error at the end, "due to errors, 
+remaining commands were not executed". Provided the flash itself says it
+ successfully completed, this can be ignored.<br>
+<br>
+</li>
+<li data-xf-list-type="ol">Reboot (to ensure all's clean) and check what the card data now says:<br>
+<b>sas2flash -c CARD_ID -list</b><br>
+For my H200's, it showed Dell 0x2713 + 6GBPSAS, and not 0x2713 (IR). So far so good.<br>
+<br>
+</li>
+<li data-xf-list-type="ol">Crossflash Dell A10 IT to LSI P7 IT (usually called <b>2118it.bin</b>)<br>
+<b>   sas2flash -c CARD_ID -o -f FILENAME</b><br>
+<br>
+I used the P5 EFI flasher + LSI P7 IT firmware ("2118it.bin"), which did
+ what was expected and asked if I wanted to change the vendor ID 
+(obviously "Yes"). If it doesn't do that, then something's not right. 
+Check you included the "-o" option in the command, it won't ask if you 
+don't.<br>
+<i><br>
+ This is the other step that most often falls over.  It's very dependent
+ on exactly the right flasher and firmware versions. LSI's P5 flasher + 
+LSI P7 IT FW works well in combination.  </i><br>
+<br>
+I tried dozens of combinations and downloads, that seemed the reliable 
+one. Other combinations of flasher and firmware gave errors such as:<br>
+<br>
+* <b>"Failed to validate MfgPage2"</b>          which really means <i>"Crossflash attempt blocked because your card isn't bought from LSI so we're going to be annoying"</i>
+ (the Vendor IDs in NVRAM and new firmware don't match) - this is why 
+we're using a pre-P7 flasher for the crossflashing step, as the earlier 
+flashers were as reliable but allowed crossflashing. A few minutes with 
+the P20 flasher and a debugger would also probably fix this (see SAS2HAX
+ link at the very bottom).<br>
+<br>
+or:<br>
+* <b>"Cannot flash IT firmware over IR firmware"</b> which really means<br>
+<i>step 3 didn't actually wor</i>k or<br>
+<i>erasing at step 2 didn't work</i>, or<br>
+<i>the card's checksums got screwed by the flasher and you need to start again by rewiping from step 2</i>.<br>
+<br>
+Error messages after the flash succeeds, such as <b>"due to errors, remaining commands were not executed"</b> don't seem to matter provided it looks like the flash itself succeeded.<br>
+<br>
+If you get an unexpected error, check first of all that you didn't leave
+ out the "-o" in the command, it's easy to do. Without that, it won't 
+ask if you want to change vendor ID, even if you're using the right 
+versions.<br>
+<br>
+<i>(Note:  See also the sas2flash analysis and modified efi flasher 
+"SAS2HAX" which skips the manufacturer ID check, at the end of this 
+page.  However as the normal unhacked LSI P5 works fine, I suggest 
+sticking with that for certainty if new to this.)</i></li>
+<li data-xf-list-type="ol">Reboot, and just check you're on LSI IT 
+firmware (see below), and if it's worked, then in theory it's all over 
+except for a last update to P20, a SAS ID and a little tidying up.<br>
+<i><br>
+ From here on, use the P20 not the P5 version of SAS2flash, unless you 
+have to go back to previous steps.  We only used the P5 version to allow
+ crossflashing to LSI and to allow flashing of non-LSI firmware, if that
+ succeeded then we don't need it any more.</i><br>
+<br>
+Use <b>sas2flash -c CARD_ID -list</b> to confirm we're now showing LSI 
+details for the card. Should show "LSI" not Dell, and "(IT)" after the 4
+ hex digits of the firmware product ID in the middle. If it doesn't, you
+ have some troubleshooting ahead of you. Hopefully it did work.<br>
+<br>
+If it does show LSI IT firmware as expected, then there isn't much else 
+to do and you shouldn't have any problems. All that's left is:<br>
+<br>
+* Update the firmware again (also called "2118it.bin"), this time from 
+LSI P7 to LSI P20 or other latest LSI firmware. Use the standard LSI P20
+ (or latest) sas2flash flasher and firmware, it'll be fine now. The 
+flashing command is the same (<b>sas2flash -c CARD_ID -o -f FILENAME</b>). If you need a specific version (P16, P20) for compatibility with your system, choose that version.<br>
+<br>
+* Set a SAS ID ("<b>sas2flash -c CARDID -o -sasadd HEXSTRING</b>).  Some
+ guides suggest starting with some specific first 8 hex digits, or at 
+least keeping the initial digit as "5".  I didn't have a reason not to, 
+so I kept the first 8 digits as they had ended up after wiping and 
+reflashing, and just modified the last 8 hex digits shown in "-list" to 
+something unique for my system, in case any of the first 8 were LSI 
+specific or expected.  Technically the WWN should be unique worldwide, 
+as with MAC addresses, but in practice that's probably a non-issue for 
+most of us here.   The command takes a single string of 16 hex digits, 
+so <u>do not include any hyphens, underscores, spaces or punctuation</u>, even if the original SAS ID included them.<br>
+<br>
+* Consider whether to flash a BIOS boot rom (a.k.a. option rom or orom),
+ and whether to also flash an EFI boot rom. Steps and usual filenames 
+are above, just use the -b option (<b>sas2flash -c CARD_ID -o -b FILENAME</b>).
+ You can flash both, one, or none of these boot roms.  You don't need to
+ flash any boot rom for an HBA, and it slows down boot, so you might 
+decide not to. Unless you really need/want these, it's usually best not 
+to flash a boot rom as it won't do much except slow your system boot.  I
+ didn't bother.</li>
+<li data-xf-list-type="ol">Give it one last reboot to MSDOS/EFI for certainty and check with <b>"sas2flash -c CARD_ID -list"</b>
+ that everything now looks as you expect.  If you flashed either or both
+ boot roms (bios or EFI) that'll be listed as well.  (The EFI boot rom 
+may be described as "UEFI" or "BSD" but it appears on the next line 
+after the bios boot rom).</li>
+<li data-xf-list-type="ol">Done. Enjoy.  Check it can find disks on all ports (if it finds some but not others then sbr <i>might</i>
+ be a factor, it's rare but has been reported, you'll have to Google it 
+or check the link below) and check that the card seems to allow FreeNAS 
+to see a disk on any of its ports, properly.<br>
+<br>
+<i>If there's an issue with disk finding or operation, once on the right
+ firmware, consider the cable first.  Even if a SAS cable can detect 
+SATA drives it still might not work properly for SAS - I've had this and
+ it's a hard one to trouble shoot if you wrongly assume that "my card 
+can see SATA drives" implies that the cable is sure to be good for SAS 
+as well.  If in doubt, Adaptec/Microsemi make reliable cables. Dell's 
+adapter cables which came with my card also look fairly well-made.  The 
+cheap thin SAS cables off EBay that work for SATA but not SAS drives (no
+ idea how that can be but it's what happened to me, first time) could be
+ a hidden issue. <br>
+<br>
+ If the issue's still not solved and it's not the cable, and other 
+troubleshooting fails, then SBR might be a candidate (see link below), 
+or ask for help in the forums.</i></li>
+</ol><u>OTHER RESOURCES</u><br>
+<ul>
+<li data-xf-list-type="ul"><b>ZIP FILE / DOWNLOADS: </b>All the files mentioned in this page, ready to unzip and copy to your bootable USB stick. Download from <a href="https://drive.google.com/open?id=0B7Lk5FHN0xHsWDc3TXJsSGlhUmc" target="_blank" class="link link--external" rel="nofollow ugc noopener">Google Drive</a> (cleanest download) * <a href="https://www.dropbox.com/s/7pyrydbs5sjr9iq/MINIMAL_USB_FOR_9211_v2.zip" target="_blank" class="link link--external" rel="nofollow ugc noopener">Dropbox</a> (ignore flash+installer options) * or <a href="http://s000.tinyupload.com/index.php?file_id=01658354559629140572" target="_blank" class="link link--external" rel="nofollow ugc noopener">TinyUpload</a> (tries to download Flash etc at the same time, best avoided)<br>
+<br>
+</li>
+<li data-xf-list-type="ul"><a href="https://techmattr.wordpress.com/2016/04/11/updated-sas-hba-crossflashing-or-flashing-to-it-mode-dell-perc-h200-and-h310" target="_blank" class="link link--external" rel="nofollow ugc noopener">https://techmattr.wordpress.com/201...r-flashing-to-it-mode-dell-perc-h200-and-h310</a> (<a href="https://web.archive.org/web/20170212110224/https://techmattr.wordpress.com/2016/04/11/updated-sas-hba-crossflashing-or-flashing-to-it-mode-dell-perc-h200-and-h310/" target="_blank" class="link link--external" rel="nofollow ugc noopener">Archive.org permalink</a>)
+ - a nice guide, worth mentioning because the author has put a lot of 
+work into screenshots, including EFI, and also collected a load of 
+different versions of flashers, firmware and other useful files - not 
+just LSI but Dell and others too. Look for the link to <b><i>LSI-9211-8i.zip</i></b> in the blog post. (<a href="https://www.mediafire.com/download/6mtie10d9ud6675/LSI-9211-8i.zip" target="_blank" class="link link--external" rel="nofollow ugc noopener">Direct download zip link @ MediaFire</a> * <a href="https://drive.google.com/open?id=0B7Lk5FHN0xHsMVNWLU5rZW9IdEU" target="_blank" class="link link--external" rel="nofollow ugc noopener">Mirror on Google Drive</a>)<br>
+<br>
+</li>
+<li data-xf-list-type="ul"><a href="https://marcan.st/2016/05/crossflashing-the-fujitsu-d2607/" target="_blank" class="link link--external" rel="nofollow ugc noopener">https://marcan.st/2016/05/crossflashing-the-fujitsu-d2607</a> (<a href="https://web.archive.org/web/20161106152950/https://marcan.st/2016/05/crossflashing-the-fujitsu-d2607/" target="_blank" class="link link--external" rel="nofollow ugc noopener">Archive.org permalink</a>)-
+ Hacker's take on the crossflash process, and analysis of SBR data and 
+fixing drives not recognised after crossflashing.  Covers <b>SAS2HAX</b>.  Tagline: <i>"15
+ minutes of reverse engineering beats trying every possible firmware and
+ tool combination out there hoping to stumble upon something that works 
+by accident :)"</i><br>
+<br>
+</li>
+<li data-xf-list-type="ul"><a href="https://forums.servethehome.com/index.php?threads/lsi-raid-controller-and-hba-complete-listing-plus-oem-models.599/" target="_blank" class="link link--external" rel="nofollow ugc noopener">Comprehensive list of known/common cards, OEM variants, and the chips used/capabilities</a>
+ - with thanks to ServeTheHome.com.   (Also linked from the new section 
+on "cards" above, so if you saw that, it's the same resource link)</li>
+</ul><br>
+<i><u>OPEN QUESTIONS</u></i><br>
+<ol>
+<li data-xf-list-type="ol">Can the P5 flasher, flash recent (P19-20) LSI
+ firmwares? In other words, can you use the LSI P5 flasher to jump in a 
+single step from (say) Dell P7 IT to LSI P20 IT, or do you have to go 
+via the LSI P7 IT?<br>
+<i><b>(Credit to </b></i><a href="https://forums.freenas.org/index.php?members/icebooster.63901/" target="_blank" class="link link--external" rel="nofollow ugc noopener"><u><i><b>IceBoosteR</b></i></u></a><i><b> for this question: </b></i><a href="https://forums.freenas.org/index.php?threads/detailed-newcomers-guide-to-crossflashing-lsi-9211-hba-and-variants.55096/#post-390575" target="_blank" class="link link--external" rel="nofollow ugc noopener"><i><b>LINK</b></i></a><i><b>)<br>
+                                </b></i></li>
+<li data-xf-list-type="ol">Every guide discusses going (for example) 
+Dell IR -&gt; Dell IT -&gt; LSI IT (with update if needed). Can it be 
+done the other way as well: Dell IR -&gt; LSI IR -&gt; LSI IT?</li>
+</ol><br>
+Let me know if this helps you; as I said, it's my first guide.</div>
+
+	
+
+		
+			
+		
+
+		
+	
+
+					
+
+					
+
+	
+
+
+					
+						
+							
+							<ul class="attachmentList resourceBody-attachments">
+								
+									
+										
+	<li class="file file--linked">
+		<a class="u-anchorTarget" id="attachment-23244"></a>
+		
+			
+	
+		
+		
+
+		
+		
+	
+
+
+			<a class="file-preview js-lbImage" href="https://www.truenas.com/community/attachments/upload_2018-3-8_9-2-11-png.23244/" target="_blank" data-fancybox="lb-undefined" style="cursor: pointer;" data-caption="&lt;h4&gt;upload_2018-3-8_9-2-11.png&lt;/h4&gt;&lt;p&gt;&lt;a href=&quot;&quot; class=&quot;js-lightboxCloser&quot;&gt;&lt;/a&gt;&lt;/p&gt;">
+				<img src="Detailed%20newcomers'%20guide%20to%20crossflashing%20LSI%209211_9300_9305_9311_9400_94xx%20HBA%20and%20variants%20|%20TrueNAS%20Community-Dateien/22831-6c618d9c840d32149c2d12c83a39a2ca.jpg" alt="upload_2018-3-8_9-2-11.png" loading="lazy" width="78" height="9">
+			</a>
+		
+
+		<div class="file-content">
+			<div class="file-info">
+				<span class="file-name" title="upload_2018-3-8_9-2-11.png">upload_2018-3-8_9-2-11.png</span>
+				<div class="file-meta">
+					179 bytes · Views: 1,854
+				</div>
+			</div>
+		</div>
+	</li>
+
+									
+								
+							</ul>
+						
+					
+
+					
+
+					<div class="reactionsBar js-reactionsList is-active">
+						
+	
+	
+		<ul class="reactionSummary">
+		
+			<li><span class="reaction reaction--small reaction--1" data-reaction-id="1"><i aria-hidden="true"></i><img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" class="reaction-sprite js-reaction" alt="Like" title="Like"></span></li>
+		
+		</ul>
+	
+
+
+<span class="u-srOnly">Reactions:</span>
+<a class="reactionsBar-link" href="https://www.truenas.com/community/resources/detailed-newcomers-guide-to-crossflashing-lsi-9211-9300-9305-9311-9400-94xx-hba-and-variants.54/update/96/reactions" data-xf-click="overlay" data-cache="false" rel="nofollow"><bdi>zamana</bdi>, <bdi>EckyBrazzz</bdi>, <bdi>F_ShortY</bdi> and 15 others</a>
+					</div>
+
+					
+				</article>
+
+				<div class="resourceBody-sidebar">
+
+	
+
+		
+			
+		
+
+		
+	
+
+					<div class="resourceSidebarGroup">
+						<dl class="pairs pairs--justified">
+							<dt>Author</dt>
+							<dd><a href="https://www.truenas.com/community/members/stilez.58706/" class="username " dir="auto" itemprop="name" data-user-id="58706" data-xf-init="member-tooltip" id="js-XFUniqueId3">Stilez</a></dd>
+						</dl>
+						
+						<dl class="pairs pairs--justified">
+							<dt>Views</dt>
+							<dd>220,939</dd>
+						</dl>
+						<dl class="pairs pairs--justified">
+							<dt>First release</dt>
+							<dd><time class="u-dt" dir="auto" datetime="2017-06-04T12:05:32-0700" data-time="1496603132" data-date-string="Jun 4, 2017" data-time-string="12:05 PM" title="Jun 4, 2017 at 12:05 PM">Jun 4, 2017</time></dd>
+						</dl>
+						<dl class="pairs pairs--justified">
+							<dt>Last update</dt>
+							<dd><time class="u-dt" dir="auto" datetime="2017-06-04T12:05:32-0700" data-time="1496603132" data-date-string="Jun 4, 2017" data-time-string="12:05 PM" title="Jun 4, 2017 at 12:05 PM">Jun 4, 2017</time></dd>
+						</dl>
+						<dl class="pairs pairs--justified">
+							<dt>Rating</dt>
+							<dd>
+								
+	<span class="ratingStarsRow ratingStarsRow--textBlock">
+		
+	
+
+	<span class="ratingStars " title="5.00 star(s)">
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="u-srOnly">5.00 star(s)</span>
+	</span>
+
+		<span class="ratingStarsRow-text">
+			16 ratings
+		</span>
+	</span>
+
+							</dd>
+						</dl>
+					</div>
+
+					
+						<div class="resourceSidebarGroup resourceSidebarGroup--buttons">
+							
+								
+									<a href="https://www.truenas.com/community/threads/detailed-newcomers-guide-to-crossflashing-lsi-9211-9300-9305-9311-9400-94xx-hba-and-variants.55096/" class="button--fullWidth button"><span class="button-text">Join the discussion</span></a>
+								
+
+								
+
+								
+							
+						</div>
+					
+
+
+					
+
+					
+						<div class="resourceSidebarGroup">
+							<h4 class="resourceSidebarGroup-title">
+								<a href="https://www.truenas.com/community/resources/authors/stilez.58706/">More resources from Stilez</a>
+							</h4>
+							<ul class="resourceSidebarList">
+							
+								<li>
+									
+	<div class="contentRow">
+		<div class="contentRow-figure">
+			
+				<a href="https://www.truenas.com/community/resources/a-bit-about-ssd-perfomance-and-optane-ssds-when-youre-planning-your-next-ssd.149/" class="avatar avatar--xxs avatar--resourceIconDefault"><span></span><span class="u-srOnly">Resource icon</span></a>
+			
+		</div>
+		<div class="contentRow-main contentRow-main--close">
+			<a href="https://www.truenas.com/community/resources/a-bit-about-ssd-perfomance-and-optane-ssds-when-youre-planning-your-next-ssd.149/">A bit about SSD perfomance and Optane SSDs, when you're planning your next SSD....</a>
+			<div class="contentRow-lesser">Did you know... watch for the bathtub!</div>
+			
+		</div>
+	</div>
+
+								</li>
+							
+								<li>
+									
+	<div class="contentRow">
+		<div class="contentRow-figure">
+			
+				<a href="https://www.truenas.com/community/resources/my-experiments-in-building-a-home-server-capable-of-handling-fast-consistent-deduplication.148/" class="avatar avatar--xxs avatar--resourceIconDefault"><span></span><span class="u-srOnly">Resource icon</span></a>
+			
+		</div>
+		<div class="contentRow-main contentRow-main--close">
+			<a href="https://www.truenas.com/community/resources/my-experiments-in-building-a-home-server-capable-of-handling-fast-consistent-deduplication.148/">My experiments in building a home server capable of handling fast + consistent deduplication</a>
+			<div class="contentRow-lesser">Notes that may help others going down this path.....</div>
+			
+		</div>
+	</div>
+
+								</li>
+							
+								<li>
+									
+	<div class="contentRow">
+		<div class="contentRow-figure">
+			
+				<a href="https://www.truenas.com/community/resources/how-to-kill-off-smb1-netbios-wins-and-still-have-windows-network-neighbourhood-better-than-ever.106/" class="avatar avatar--xxs avatar--resourceIconDefault"><span></span><span class="u-srOnly">Resource icon</span></a>
+			
+		</div>
+		<div class="contentRow-main contentRow-main--close">
+			<a href="https://www.truenas.com/community/resources/how-to-kill-off-smb1-netbios-wins-and-still-have-windows-network-neighbourhood-better-than-ever.106/">How to kill off SMB1, NetBIOS, WINS and *still* have Windows' Network Neighbourhood better than ever</a>
+			<div class="contentRow-lesser">Did you know Windows Vista onwards already has a better way built in? Just try it out!</div>
+			
+		</div>
+	</div>
+
+								</li>
+							
+							</ul>
+						</div>
+					
+
+					
+						<div class="resourceSidebarGroup">
+							<h4 class="resourceSidebarGroup-title">Share this resource</h4>
+							
+								
+
+	
+		
+
+		<div class="shareButtons shareButtons--iconic" data-xf-init="share-buttons" data-page-url="" data-page-title="" data-page-desc="" data-page-image="">
+			
+
+			<div class="shareButtons-buttons">
+				
+					
+						<a class="shareButtons-button shareButtons-button--brand shareButtons-button--facebook" data-href="https://www.facebook.com/sharer.php?u={url}" id="js-XFUniqueId4">
+							<i aria-hidden="true"></i>
+							<span>Facebook</span>
+						</a>
+					
+
+					
+						<a class="shareButtons-button shareButtons-button--brand shareButtons-button--twitter" data-href="https://twitter.com/intent/tweet?url={url}&amp;text={title}&amp;via=FreeNASTeam" id="js-XFUniqueId5">
+							<i aria-hidden="true"></i>
+							<span>Twitter</span>
+						</a>
+					
+
+					
+						<a class="shareButtons-button shareButtons-button--brand shareButtons-button--reddit" data-href="https://reddit.com/submit?url={url}&amp;title={title}" id="js-XFUniqueId6">
+							<i aria-hidden="true"></i>
+							<span>Reddit</span>
+						</a>
+					
+
+					
+						<a class="shareButtons-button shareButtons-button--brand shareButtons-button--pinterest" data-href="https://pinterest.com/pin/create/bookmarklet/?url={url}&amp;description={title}&amp;media={image}" id="js-XFUniqueId7">
+							<i aria-hidden="true"></i>
+							<span>Pinterest</span>
+						</a>
+					
+
+					
+						<a class="shareButtons-button shareButtons-button--brand shareButtons-button--tumblr" data-href="https://www.tumblr.com/widgets/share/tool?canonicalUrl={url}&amp;title={title}" id="js-XFUniqueId8">
+							<i aria-hidden="true"></i>
+							<span>Tumblr</span>
+						</a>
+					
+
+					
+						<a class="shareButtons-button shareButtons-button--brand shareButtons-button--whatsApp" data-href="https://api.whatsapp.com/send?text={title}&nbsp;{url}" id="js-XFUniqueId9">
+							<i aria-hidden="true"></i>
+							<span>WhatsApp</span>
+						</a>
+					
+
+					
+						<a class="shareButtons-button shareButtons-button--email" data-href="mailto:?subject={title}&amp;body={url}" id="js-XFUniqueId10">
+							<i aria-hidden="true"></i>
+							<span>Email</span>
+						</a>
+					
+
+					
+						<a class="shareButtons-button shareButtons-button--share is-hidden" data-xf-init="web-share" data-title="" data-text="" data-url="" data-hide=".shareButtons-button:not(.shareButtons-button--share)" id="js-XFUniqueId11">
+
+							<i aria-hidden="true"></i>
+							<span>Share</span>
+						</a>
+					
+
+					
+						<a class="shareButtons-button shareButtons-button--link" data-clipboard="{url}" id="js-XFUniqueId12">
+							<i aria-hidden="true"></i>
+							<span>Link</span>
+						</a>
+					
+				
+			</div>
+		</div>
+	
+
+
+	
+
+		
+			
+		
+
+		
+	
+
+							
+						</div>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+	<div class="block">
+		<div class="block-container">
+			<h3 class="block-header">Latest reviews</h3>
+			<div class="block-body">
+			
+				
+
+	
+	
+
+	<div class="message message--simple">
+		<span class="u-anchorTarget" id="resource-review-421"></span>
+		<div class="message-inner">
+			<span class="message-cell message-cell--user">
+				
+					
+	<header itemscope="" itemtype="https://schema.org/Person" class="message-user">
+		<meta itemprop="name" content="zamana">
+		<div class="message-avatar">
+			<div class="message-avatar-wrapper">
+				<a href="https://www.truenas.com/community/members/zamana.75414/" class="avatar avatar--s" data-user-id="75414" data-xf-init="member-tooltip" id="js-XFUniqueId13">
+			<img src="Detailed%20newcomers'%20guide%20to%20crossflashing%20LSI%209211_9300_9305_9311_9400_94xx%20HBA%20and%20variants%20|%20TrueNAS%20Community-Dateien/75414_002.jpg" srcset="Detailed%20newcomers'%20guide%20to%20crossflashing%20LSI%209211_9300_9305_9311_9400_94xx%20HBA%20and%20variants%20|%20TrueNAS%20Community-Dateien/75414.jpg 2x" alt="zamana" class="avatar-u75414-s" loading="lazy" itemprop="image" width="48" height="48"> 
+		</a>
+			</div>
+		</div>
+		<span class="message-userArrow"></span>
+	</header>
+
+				
+			</span>
+			<div class="message-cell message-cell--main">
+				<div class="message-content js-messageContent">
+					<div class="message-attribution message-attribution--plain">
+						
+
+						<ul class="listInline listInline--bullet">
+							<li class="message-attribution-user">
+								
+									<a href="https://www.truenas.com/community/members/zamana.75414/" class="username " dir="auto" itemprop="name" data-user-id="75414" data-xf-init="member-tooltip" id="js-XFUniqueId14">zamana</a>
+								
+							</li>
+							<li>
+								
+	
+
+	<span class="ratingStars ratingStars--smaller" title="5.00 star(s)">
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="u-srOnly">5.00 star(s)</span>
+	</span>
+
+							</li>
+							<li><a href="https://www.truenas.com/community/resources/detailed-newcomers-guide-to-crossflashing-lsi-9211-9300-9305-9311-9400-94xx-hba-and-variants.54/review/421/" class="u-concealed"><time class="u-dt" dir="auto" datetime="2022-07-28T10:29:14-0700" data-time="1659029354" data-date-string="Jul 28, 2022" data-time-string="10:29 AM" title="Jul 28, 2022 at 10:29 AM">Jul 28, 2022</time></a></li>
+							
+						</ul>
+					</div>
+
+					
+
+					
+
+	
+
+
+					<div class="message-body">
+						Awsome article!
+					</div>
+
+					
+
+	
+
+				</div>
+
+				
+
+				
+			</div>
+
+			
+				<div class="message-cell message-cell--vote">
+					<div class="message-column">
+						
+							
+								
+
+	
+	
+	<div class="contentVote  js-contentVote " data-xf-init="content-vote" data-content-id="resource_rating-421">
+		<a href="javascript:" class="contentVote-vote is-disabled contentVote-vote--up " data-vote="up"><span class="u-srOnly">Upvote</span></a>
+
+		<span class="contentVote-score   js-voteCount" data-score="0">0</span>
+
+		
+			<a href="javascript:" class="contentVote-vote is-disabled contentVote-vote--down " data-vote="down"><span class="u-srOnly">Downvote</span></a>
+		
+	</div>
+
+
+							
+						
+					</div>
+				</div>
+			
+		</div>
+	</div>
+
+			
+
+
+
+				
+
+	
+	
+
+	<div class="message message--simple">
+		<span class="u-anchorTarget" id="resource-review-418"></span>
+		<div class="message-inner">
+			<span class="message-cell message-cell--user">
+				
+					
+	<header itemscope="" itemtype="https://schema.org/Person" class="message-user">
+		<meta itemprop="name" content="SuperWhisk">
+		<div class="message-avatar">
+			<div class="message-avatar-wrapper">
+				<a href="https://www.truenas.com/community/members/superwhisk.113422/" class="avatar avatar--s avatar--default avatar--default--dynamic" data-user-id="113422" data-xf-init="member-tooltip" style="background-color: #663399; color: #bf9fdf" id="js-XFUniqueId15">
+			<span class="avatar-u113422-s" role="img" aria-label="SuperWhisk">S</span> 
+		</a>
+			</div>
+		</div>
+		<span class="message-userArrow"></span>
+	</header>
+
+				
+			</span>
+			<div class="message-cell message-cell--main">
+				<div class="message-content js-messageContent">
+					<div class="message-attribution message-attribution--plain">
+						
+
+						<ul class="listInline listInline--bullet">
+							<li class="message-attribution-user">
+								
+									<a href="https://www.truenas.com/community/members/superwhisk.113422/" class="username " dir="auto" itemprop="name" data-user-id="113422" data-xf-init="member-tooltip" id="js-XFUniqueId16">SuperWhisk</a>
+								
+							</li>
+							<li>
+								
+	
+
+	<span class="ratingStars ratingStars--smaller" title="5.00 star(s)">
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="u-srOnly">5.00 star(s)</span>
+	</span>
+
+							</li>
+							<li><a href="https://www.truenas.com/community/resources/detailed-newcomers-guide-to-crossflashing-lsi-9211-9300-9305-9311-9400-94xx-hba-and-variants.54/review/418/" class="u-concealed"><time class="u-dt" dir="auto" datetime="2022-07-10T13:07:30-0700" data-time="1657483650" data-date-string="Jul 10, 2022" data-time-string="1:07 PM" title="Jul 10, 2022 at 1:07 PM">Jul 10, 2022</time></a></li>
+							
+						</ul>
+					</div>
+
+					
+
+					
+
+	
+
+
+					<div class="message-body">
+						Really awesome information here! Thank you for putting this together! Going to flash my H200 and H310 now.<br>
+<br>
+For those who would prefer a more "official" source for megarec.exe, I 
+managed to track one down after an unreasonable amount of searching (it 
+does not appear to be available on the broadcom website, even in the 
+preboot usb). You can get it from supermicro's site at the following 
+link:<br>
+<a href="https://www.supermicro.com/wdl/driver/SAS/Broadcom/2008/iMR/Firmware/Non_Blade/USB.zip" class="link link--external" rel="nofollow" target="_blank">https://www.supermicro.com/wdl/driver/SAS/Broadcom/2008/iMR/Firmware/Non_Blade/USB.zip</a><br>
+Megarec.exe in this zip from supermicro has the same sha256 sum as the 
+one provided at the google drive links above (at the time of writing)<br>
+<br>
+I was able to find all other firmware on the broadcom website. Eg, for SAS2008 boards:<br>
+<a href="https://www.broadcom.com/support/download-search?pg=Storage+Adapters,+Controllers,+and+ICs&amp;pf=Legacy+Host+Bus+Adapters&amp;pn=SAS+9211-8i+Host+Bus+Adapter&amp;pa=&amp;po=&amp;dk=&amp;pl=&amp;l=true" class="link link--external" rel="nofollow" target="_blank">https://www.broadcom.com/support/download-search?pg=Storage+Adapters,+Controllers,+and+ICs&amp;pf=Legacy+Host+Bus+Adapters&amp;pn=SAS+9211-8i+Host+Bus+Adapter&amp;pa=&amp;po=&amp;dk=&amp;pl=&amp;l=true</a><br>
+(click 'archive' under the firmware section to get to older versions, such as the P5 installer (though that is linked above too)
+					</div>
+
+					
+
+	
+
+				</div>
+
+				
+
+				
+			</div>
+
+			
+				<div class="message-cell message-cell--vote">
+					<div class="message-column">
+						
+							
+								
+
+	
+	
+	<div class="contentVote  js-contentVote " data-xf-init="content-vote" data-content-id="resource_rating-418">
+		<a href="javascript:" class="contentVote-vote is-disabled contentVote-vote--up " data-vote="up"><span class="u-srOnly">Upvote</span></a>
+
+		<span class="contentVote-score   js-voteCount" data-score="0">0</span>
+
+		
+			<a href="javascript:" class="contentVote-vote is-disabled contentVote-vote--down " data-vote="down"><span class="u-srOnly">Downvote</span></a>
+		
+	</div>
+
+
+							
+						
+					</div>
+				</div>
+			
+		</div>
+	</div>
+
+			
+
+
+
+				
+
+	
+	
+
+	<div class="message message--simple">
+		<span class="u-anchorTarget" id="resource-review-397"></span>
+		<div class="message-inner">
+			<span class="message-cell message-cell--user">
+				
+					
+	<header itemscope="" itemtype="https://schema.org/Person" class="message-user">
+		<meta itemprop="name" content="roamdad">
+		<div class="message-avatar">
+			<div class="message-avatar-wrapper">
+				<a href="https://www.truenas.com/community/members/roamdad.111543/" class="avatar avatar--s avatar--default avatar--default--dynamic" data-user-id="111543" data-xf-init="member-tooltip" style="background-color: #cc7033; color: #3d220f" id="js-XFUniqueId17">
+			<span class="avatar-u111543-s" role="img" aria-label="roamdad">R</span> 
+		</a>
+			</div>
+		</div>
+		<span class="message-userArrow"></span>
+	</header>
+
+				
+			</span>
+			<div class="message-cell message-cell--main">
+				<div class="message-content js-messageContent">
+					<div class="message-attribution message-attribution--plain">
+						
+
+						<ul class="listInline listInline--bullet">
+							<li class="message-attribution-user">
+								
+									<a href="https://www.truenas.com/community/members/roamdad.111543/" class="username " dir="auto" itemprop="name" data-user-id="111543" data-xf-init="member-tooltip" id="js-XFUniqueId18">roamdad</a>
+								
+							</li>
+							<li>
+								
+	
+
+	<span class="ratingStars ratingStars--smaller" title="5.00 star(s)">
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="u-srOnly">5.00 star(s)</span>
+	</span>
+
+							</li>
+							<li><a href="https://www.truenas.com/community/resources/detailed-newcomers-guide-to-crossflashing-lsi-9211-9300-9305-9311-9400-94xx-hba-and-variants.54/review/397/" class="u-concealed"><time class="u-dt" dir="auto" datetime="2021-10-22T02:46:03-0700" data-time="1634895963" data-date-string="Oct 22, 2021" data-time-string="2:46 AM" title="Oct 22, 2021 at 2:46 AM">Oct 22, 2021</time></a></li>
+							
+						</ul>
+					</div>
+
+					
+
+					
+
+	
+
+
+					<div class="message-body">
+						Had a Dell perc h310 I wanted to use for a Truenas install. 
+Absolutely stellar writeup that gave me enough confidence to cross flash
+ the dell card instead of ordering a different model already LSI 
+branded. Worked perfectly by following this guide.
+					</div>
+
+					
+
+	
+
+				</div>
+
+				
+
+				
+			</div>
+
+			
+				<div class="message-cell message-cell--vote">
+					<div class="message-column">
+						
+							
+								
+
+	
+	
+	<div class="contentVote  js-contentVote " data-xf-init="content-vote" data-content-id="resource_rating-397">
+		<a href="javascript:" class="contentVote-vote is-disabled contentVote-vote--up " data-vote="up"><span class="u-srOnly">Upvote</span></a>
+
+		<span class="contentVote-score   js-voteCount" data-score="0">0</span>
+
+		
+			<a href="javascript:" class="contentVote-vote is-disabled contentVote-vote--down " data-vote="down"><span class="u-srOnly">Downvote</span></a>
+		
+	</div>
+
+
+							
+						
+					</div>
+				</div>
+			
+		</div>
+	</div>
+
+			
+
+
+
+				
+
+	
+	
+
+	<div class="message message--simple">
+		<span class="u-anchorTarget" id="resource-review-389"></span>
+		<div class="message-inner">
+			<span class="message-cell message-cell--user">
+				
+					
+	<header itemscope="" itemtype="https://schema.org/Person" class="message-user">
+		<meta itemprop="name" content="zis8snbt4p">
+		<div class="message-avatar">
+			<div class="message-avatar-wrapper">
+				<a href="https://www.truenas.com/community/members/zis8snbt4p.105271/" class="avatar avatar--s avatar--default avatar--default--dynamic" data-user-id="105271" data-xf-init="member-tooltip" style="background-color: #523314; color: #d18c47" id="js-XFUniqueId19">
+			<span class="avatar-u105271-s" role="img" aria-label="zis8snbt4p">Z</span> 
+		</a>
+			</div>
+		</div>
+		<span class="message-userArrow"></span>
+	</header>
+
+				
+			</span>
+			<div class="message-cell message-cell--main">
+				<div class="message-content js-messageContent">
+					<div class="message-attribution message-attribution--plain">
+						
+
+						<ul class="listInline listInline--bullet">
+							<li class="message-attribution-user">
+								
+									<a href="https://www.truenas.com/community/members/zis8snbt4p.105271/" class="username " dir="auto" itemprop="name" data-user-id="105271" data-xf-init="member-tooltip" id="js-XFUniqueId20">zis8snbt4p</a>
+								
+							</li>
+							<li>
+								
+	
+
+	<span class="ratingStars ratingStars--smaller" title="5.00 star(s)">
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="u-srOnly">5.00 star(s)</span>
+	</span>
+
+							</li>
+							<li><a href="https://www.truenas.com/community/resources/detailed-newcomers-guide-to-crossflashing-lsi-9211-9300-9305-9311-9400-94xx-hba-and-variants.54/review/389/" class="u-concealed"><time class="u-dt" dir="auto" datetime="2021-06-26T13:37:20-0700" data-time="1624739840" data-date-string="Jun 26, 2021" data-time-string="1:37 PM" title="Jun 26, 2021 at 1:37 PM">Jun 26, 2021</time></a></li>
+							
+						</ul>
+					</div>
+
+					
+
+					
+
+	
+
+
+					<div class="message-body">
+						Thank you very much Stilez for this amazing guide. It was pretty 
+much trouble free to crossflash. Just a couple of small comments:<br>
+1. FreeDOS already creates some of the files and when you overwrite them
+ from the zip file you may get some errors like command not found or 
+something. This could be a bit clearer<br>
+2. Booting from a disk within the HBA requires to flash the boot roms. I
+ read the guide multiple times and I didn't find it quite so apparent. 
+So after crossflashing the HBA the disks were not visible in the BIOS 
+when I hadn't flashed the roms. I think it could be stated in a more 
+explicit/clear way.
+					</div>
+
+					
+
+	
+
+				</div>
+
+				
+
+				
+					<div class="message-responses js-messageResponses">
+					
+
+						
+							
+	<div class="message-responseRow">
+		<div class="comment">
+			<div class="comment-inner">
+				<span class="comment-avatar">
+					<a href="https://www.truenas.com/community/members/stilez.58706/" class="avatar avatar--xxs avatar--default avatar--default--dynamic" data-user-id="58706" data-xf-init="member-tooltip" style="background-color: #999966; color: #2e2e1f" id="js-XFUniqueId21">
+			<span class="avatar-u58706-s" role="img" aria-label="Stilez">S</span> 
+		</a>
+				</span>
+				<div class="comment-main">
+					<div class="comment-content">
+						<div class="comment-contentWrapper">
+							<a href="https://www.truenas.com/community/members/stilez.58706/" class="username  comment-user" dir="auto" itemprop="name" data-user-id="58706" data-xf-init="member-tooltip" id="js-XFUniqueId22">Stilez</a>
+							<div class="comment-body">Thanks for (2), I've updated the 
+section FLASHABLE SOFTWARES ("BOOT ROM/BIOS" AND "FIRMWARE") to cover 
+this, as I agree with you, it could be relevant if booting from the 
+card. Its just that few do, so I hadnt thought it relevant. But I guess 
+some will. Hope you like the update, and thank you!</div>
+							
+						</div>
+					</div>
+
+					<div class="comment-actionBar actionBar">
+						<div class="actionBar-set actionBar-set--internal">
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+						
+
+						
+
+					
+					</div>
+				
+			</div>
+
+			
+				<div class="message-cell message-cell--vote">
+					<div class="message-column">
+						
+							
+								
+
+	
+	
+	<div class="contentVote  js-contentVote " data-xf-init="content-vote" data-content-id="resource_rating-389">
+		<a href="javascript:" class="contentVote-vote is-disabled contentVote-vote--up " data-vote="up"><span class="u-srOnly">Upvote</span></a>
+
+		<span class="contentVote-score   js-voteCount" data-score="0">0</span>
+
+		
+			<a href="javascript:" class="contentVote-vote is-disabled contentVote-vote--down " data-vote="down"><span class="u-srOnly">Downvote</span></a>
+		
+	</div>
+
+
+							
+						
+					</div>
+				</div>
+			
+		</div>
+	</div>
+
+			
+
+
+
+				
+
+	
+	
+
+	<div class="message message--simple">
+		<span class="u-anchorTarget" id="resource-review-363"></span>
+		<div class="message-inner">
+			<span class="message-cell message-cell--user">
+				
+					
+	<header itemscope="" itemtype="https://schema.org/Person" class="message-user">
+		<meta itemprop="name" content="zbyte">
+		<div class="message-avatar">
+			<div class="message-avatar-wrapper">
+				<a href="https://www.truenas.com/community/members/zbyte.106302/" class="avatar avatar--s avatar--default avatar--default--dynamic" data-user-id="106302" data-xf-init="member-tooltip" style="background-color: #ebebad; color: #b8b82e" id="js-XFUniqueId23">
+			<span class="avatar-u106302-s" role="img" aria-label="zbyte">Z</span> 
+		</a>
+			</div>
+		</div>
+		<span class="message-userArrow"></span>
+	</header>
+
+				
+			</span>
+			<div class="message-cell message-cell--main">
+				<div class="message-content js-messageContent">
+					<div class="message-attribution message-attribution--plain">
+						
+
+						<ul class="listInline listInline--bullet">
+							<li class="message-attribution-user">
+								
+									<a href="https://www.truenas.com/community/members/zbyte.106302/" class="username " dir="auto" itemprop="name" data-user-id="106302" data-xf-init="member-tooltip" id="js-XFUniqueId24">zbyte</a>
+								
+							</li>
+							<li>
+								
+	
+
+	<span class="ratingStars ratingStars--smaller" title="5.00 star(s)">
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="u-srOnly">5.00 star(s)</span>
+	</span>
+
+							</li>
+							<li><a href="https://www.truenas.com/community/resources/detailed-newcomers-guide-to-crossflashing-lsi-9211-9300-9305-9311-9400-94xx-hba-and-variants.54/review/363/" class="u-concealed"><time class="u-dt" dir="auto" datetime="2021-01-05T07:32:18-0800" data-time="1609860738" data-date-string="Jan 5, 2021" data-time-string="7:32 AM" title="Jan 5, 2021 at 7:32 AM">Jan 5, 2021</time></a></li>
+							
+						</ul>
+					</div>
+
+					
+
+					
+
+	
+
+
+					<div class="message-body">
+						Amazing attention to detail
+					</div>
+
+					
+
+	
+
+				</div>
+
+				
+
+				
+			</div>
+
+			
+				<div class="message-cell message-cell--vote">
+					<div class="message-column">
+						
+							
+								
+
+	
+	
+	<div class="contentVote  js-contentVote " data-xf-init="content-vote" data-content-id="resource_rating-363">
+		<a href="javascript:" class="contentVote-vote is-disabled contentVote-vote--up " data-vote="up"><span class="u-srOnly">Upvote</span></a>
+
+		<span class="contentVote-score   js-voteCount" data-score="0">0</span>
+
+		
+			<a href="javascript:" class="contentVote-vote is-disabled contentVote-vote--down " data-vote="down"><span class="u-srOnly">Downvote</span></a>
+		
+	</div>
+
+
+							
+						
+					</div>
+				</div>
+			
+		</div>
+	</div>
+
+			
+
+
+
+				
+
+	
+	
+
+	<div class="message message--simple">
+		<span class="u-anchorTarget" id="resource-review-351"></span>
+		<div class="message-inner">
+			<span class="message-cell message-cell--user">
+				
+					
+	<header itemscope="" itemtype="https://schema.org/Person" class="message-user">
+		<meta itemprop="name" content="Chris Parisi">
+		<div class="message-avatar">
+			<div class="message-avatar-wrapper">
+				<a href="https://www.truenas.com/community/members/chris-parisi.70674/" class="avatar avatar--s avatar--default avatar--default--dynamic" data-user-id="70674" data-xf-init="member-tooltip" style="background-color: #cccc99; color: #77773c" id="js-XFUniqueId25">
+			<span class="avatar-u70674-s" role="img" aria-label="Chris Parisi">C</span> 
+		</a>
+			</div>
+		</div>
+		<span class="message-userArrow"></span>
+	</header>
+
+				
+			</span>
+			<div class="message-cell message-cell--main">
+				<div class="message-content js-messageContent">
+					<div class="message-attribution message-attribution--plain">
+						
+
+						<ul class="listInline listInline--bullet">
+							<li class="message-attribution-user">
+								
+									<a href="https://www.truenas.com/community/members/chris-parisi.70674/" class="username " dir="auto" itemprop="name" data-user-id="70674" data-xf-init="member-tooltip" id="js-XFUniqueId26">Chris Parisi</a>
+								
+							</li>
+							<li>
+								
+	
+
+	<span class="ratingStars ratingStars--smaller" title="5.00 star(s)">
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="u-srOnly">5.00 star(s)</span>
+	</span>
+
+							</li>
+							<li><a href="https://www.truenas.com/community/resources/detailed-newcomers-guide-to-crossflashing-lsi-9211-9300-9305-9311-9400-94xx-hba-and-variants.54/review/351/" class="u-concealed"><time class="u-dt" dir="auto" datetime="2020-09-05T05:40:50-0700" data-time="1599309650" data-date-string="Sep 5, 2020" data-time-string="5:40 AM" title="Sep 5, 2020 at 5:40 AM">Sep 5, 2020</time></a></li>
+							
+						</ul>
+					</div>
+
+					
+
+					
+
+	
+
+
+					<div class="message-body">
+						WOW! Awesomely thorough guide - I wish I followed this from the 
+start and didn't waste several evenings running into dead ends wiping,  
+flashing, re-flashing, re-wiping, etc... Thank you for putting this 
+together and explaining the background and reasoning for having to 
+follow the steps so specifically. My Dell H310 is now a LSI 9211-8i P20 
+in IT mode finally! (I suppose I have to finally start my "real" project
+ now, lol)
+					</div>
+
+					
+
+	
+
+				</div>
+
+				
+
+				
+			</div>
+
+			
+				<div class="message-cell message-cell--vote">
+					<div class="message-column">
+						
+							
+								
+
+	
+	
+	<div class="contentVote  js-contentVote " data-xf-init="content-vote" data-content-id="resource_rating-351">
+		<a href="javascript:" class="contentVote-vote is-disabled contentVote-vote--up " data-vote="up"><span class="u-srOnly">Upvote</span></a>
+
+		<span class="contentVote-score   js-voteCount" data-score="0">0</span>
+
+		
+			<a href="javascript:" class="contentVote-vote is-disabled contentVote-vote--down " data-vote="down"><span class="u-srOnly">Downvote</span></a>
+		
+	</div>
+
+
+							
+						
+					</div>
+				</div>
+			
+		</div>
+	</div>
+
+			
+
+
+
+				
+
+	
+	
+
+	<div class="message message--simple">
+		<span class="u-anchorTarget" id="resource-review-339"></span>
+		<div class="message-inner">
+			<span class="message-cell message-cell--user">
+				
+					
+	<header itemscope="" itemtype="https://schema.org/Person" class="message-user">
+		<meta itemprop="name" content="TheWasher">
+		<div class="message-avatar">
+			<div class="message-avatar-wrapper">
+				<a href="https://www.truenas.com/community/members/thewasher.68058/" class="avatar avatar--s avatar--default avatar--default--dynamic" data-user-id="68058" data-xf-init="member-tooltip" style="background-color: #336699; color: #9fbfdf" id="js-XFUniqueId27">
+			<span class="avatar-u68058-s" role="img" aria-label="TheWasher">T</span> 
+		</a>
+			</div>
+		</div>
+		<span class="message-userArrow"></span>
+	</header>
+
+				
+			</span>
+			<div class="message-cell message-cell--main">
+				<div class="message-content js-messageContent">
+					<div class="message-attribution message-attribution--plain">
+						
+
+						<ul class="listInline listInline--bullet">
+							<li class="message-attribution-user">
+								
+									<a href="https://www.truenas.com/community/members/thewasher.68058/" class="username " dir="auto" itemprop="name" data-user-id="68058" data-xf-init="member-tooltip" id="js-XFUniqueId28">TheWasher</a>
+								
+							</li>
+							<li>
+								
+	
+
+	<span class="ratingStars ratingStars--smaller" title="5.00 star(s)">
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="u-srOnly">5.00 star(s)</span>
+	</span>
+
+							</li>
+							<li><a href="https://www.truenas.com/community/resources/detailed-newcomers-guide-to-crossflashing-lsi-9211-9300-9305-9311-9400-94xx-hba-and-variants.54/review/339/" class="u-concealed"><time class="u-dt" dir="auto" datetime="2020-05-22T13:28:50-0700" data-time="1590179330" data-date-string="May 22, 2020" data-time-string="1:28 PM" title="May 22, 2020 at 1:28 PM">May 22, 2020</time></a></li>
+							
+						</ul>
+					</div>
+
+					
+
+					
+
+	
+
+
+					<div class="message-body">
+						Really good guide! I had a few questions which you have answered - one about the UEFI BSD.<br>
+Also, agree with you about these cards being bullet proof. I thought 
+that I had bricked my Dell PERC H200E 12DNW. I tried flashing many times
+ to cross flash to LSI 9200-8e and eventually I sorted it by running 
+Megarec.exe -cleanflash again.. Thank you for your time to share
+					</div>
+
+					
+
+	
+
+				</div>
+
+				
+
+				
+			</div>
+
+			
+				<div class="message-cell message-cell--vote">
+					<div class="message-column">
+						
+							
+								
+
+	
+	
+	<div class="contentVote  js-contentVote " data-xf-init="content-vote" data-content-id="resource_rating-339">
+		<a href="javascript:" class="contentVote-vote is-disabled contentVote-vote--up " data-vote="up"><span class="u-srOnly">Upvote</span></a>
+
+		<span class="contentVote-score   js-voteCount" data-score="0">0</span>
+
+		
+			<a href="javascript:" class="contentVote-vote is-disabled contentVote-vote--down " data-vote="down"><span class="u-srOnly">Downvote</span></a>
+		
+	</div>
+
+
+							
+						
+					</div>
+				</div>
+			
+		</div>
+	</div>
+
+			
+
+
+
+				
+
+	
+	
+
+	<div class="message message--simple">
+		<span class="u-anchorTarget" id="resource-review-330"></span>
+		<div class="message-inner">
+			<span class="message-cell message-cell--user">
+				
+					
+	<header itemscope="" itemtype="https://schema.org/Person" class="message-user">
+		<meta itemprop="name" content="gdog0">
+		<div class="message-avatar">
+			<div class="message-avatar-wrapper">
+				<a href="https://www.truenas.com/community/members/gdog0.100756/" class="avatar avatar--s avatar--default avatar--default--dynamic" data-user-id="100756" data-xf-init="member-tooltip" style="background-color: #cccc66; color: #606020" id="js-XFUniqueId29">
+			<span class="avatar-u100756-s" role="img" aria-label="gdog0">G</span> 
+		</a>
+			</div>
+		</div>
+		<span class="message-userArrow"></span>
+	</header>
+
+				
+			</span>
+			<div class="message-cell message-cell--main">
+				<div class="message-content js-messageContent">
+					<div class="message-attribution message-attribution--plain">
+						
+
+						<ul class="listInline listInline--bullet">
+							<li class="message-attribution-user">
+								
+									<a href="https://www.truenas.com/community/members/gdog0.100756/" class="username " dir="auto" itemprop="name" data-user-id="100756" data-xf-init="member-tooltip" id="js-XFUniqueId30">gdog0</a>
+								
+							</li>
+							<li>
+								
+	
+
+	<span class="ratingStars ratingStars--smaller" title="5.00 star(s)">
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="u-srOnly">5.00 star(s)</span>
+	</span>
+
+							</li>
+							<li><a href="https://www.truenas.com/community/resources/detailed-newcomers-guide-to-crossflashing-lsi-9211-9300-9305-9311-9400-94xx-hba-and-variants.54/review/330/" class="u-concealed"><time class="u-dt" dir="auto" datetime="2020-03-10T17:41:30-0700" data-time="1583887290" data-date-string="Mar 10, 2020" data-time-string="5:41 PM" title="Mar 10, 2020 at 5:41 PM">Mar 10, 2020</time></a></li>
+							
+						</ul>
+					</div>
+
+					
+
+					
+
+	
+
+
+					<div class="message-body">
+						Brilliant. I did have to hunt down the p20 sas2flsh DOS file as I 
+didn't find it in the download but that was pretty easy here <a href="https://www.broadcom.com/support/download-search?pg=Legacy+Products&amp;pf=Legacy+Host+Bus+Adapters&amp;pn=&amp;pa=&amp;po=&amp;dk=&amp;pl=" class="link link--external" rel="nofollow" target="_blank">https://www.broadcom.com/support/download-search?pg=Legacy+Products&amp;pf=Legacy+Host+Bus+Adapters&amp;pn=&amp;pa=&amp;po=&amp;dk=&amp;pl=</a>
+					</div>
+
+					
+
+	
+
+				</div>
+
+				
+
+				
+			</div>
+
+			
+				<div class="message-cell message-cell--vote">
+					<div class="message-column">
+						
+							
+								
+
+	
+	
+	<div class="contentVote  js-contentVote " data-xf-init="content-vote" data-content-id="resource_rating-330">
+		<a href="javascript:" class="contentVote-vote is-disabled contentVote-vote--up " data-vote="up"><span class="u-srOnly">Upvote</span></a>
+
+		<span class="contentVote-score   js-voteCount" data-score="0">0</span>
+
+		
+			<a href="javascript:" class="contentVote-vote is-disabled contentVote-vote--down " data-vote="down"><span class="u-srOnly">Downvote</span></a>
+		
+	</div>
+
+
+							
+						
+					</div>
+				</div>
+			
+		</div>
+	</div>
+
+			
+
+
+
+				
+
+	
+	
+
+	<div class="message message--simple">
+		<span class="u-anchorTarget" id="resource-review-318"></span>
+		<div class="message-inner">
+			<span class="message-cell message-cell--user">
+				
+					
+	<header itemscope="" itemtype="https://schema.org/Person" class="message-user">
+		<meta itemprop="name" content="Matt_G">
+		<div class="message-avatar">
+			<div class="message-avatar-wrapper">
+				<a href="https://www.truenas.com/community/members/matt_g.56419/" class="avatar avatar--s" data-user-id="56419" data-xf-init="member-tooltip" id="js-XFUniqueId31">
+			<img src="Detailed%20newcomers'%20guide%20to%20crossflashing%20LSI%209211_9300_9305_9311_9400_94xx%20HBA%20and%20variants%20|%20TrueNAS%20Community-Dateien/56419.jpg" alt="Matt_G" class="avatar-u56419-s" loading="lazy" itemprop="image" width="48" height="48"> 
+		</a>
+			</div>
+		</div>
+		<span class="message-userArrow"></span>
+	</header>
+
+				
+			</span>
+			<div class="message-cell message-cell--main">
+				<div class="message-content js-messageContent">
+					<div class="message-attribution message-attribution--plain">
+						
+
+						<ul class="listInline listInline--bullet">
+							<li class="message-attribution-user">
+								
+									<a href="https://www.truenas.com/community/members/matt_g.56419/" class="username " dir="auto" itemprop="name" data-user-id="56419" data-xf-init="member-tooltip" id="js-XFUniqueId32">Matt_G</a>
+								
+							</li>
+							<li>
+								
+	
+
+	<span class="ratingStars ratingStars--smaller" title="5.00 star(s)">
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="u-srOnly">5.00 star(s)</span>
+	</span>
+
+							</li>
+							<li><a href="https://www.truenas.com/community/resources/detailed-newcomers-guide-to-crossflashing-lsi-9211-9300-9305-9311-9400-94xx-hba-and-variants.54/review/318/" class="u-concealed"><time class="u-dt" dir="auto" datetime="2019-10-25T18:00:57-0700" data-time="1572051657" data-date-string="Oct 25, 2019" data-time-string="6:00 PM" title="Oct 25, 2019 at 6:00 PM">Oct 25, 2019</time></a></li>
+							
+						</ul>
+					</div>
+
+					
+
+					
+
+	
+
+
+					<div class="message-body">
+						Outstanding attention to detail. Thank you for writing all this up.
+					</div>
+
+					
+
+	
+
+				</div>
+
+				
+
+				
+			</div>
+
+			
+				<div class="message-cell message-cell--vote">
+					<div class="message-column">
+						
+							
+								
+
+	
+	
+	<div class="contentVote  js-contentVote " data-xf-init="content-vote" data-content-id="resource_rating-318">
+		<a href="javascript:" class="contentVote-vote is-disabled contentVote-vote--up " data-vote="up"><span class="u-srOnly">Upvote</span></a>
+
+		<span class="contentVote-score   js-voteCount" data-score="0">0</span>
+
+		
+			<a href="javascript:" class="contentVote-vote is-disabled contentVote-vote--down " data-vote="down"><span class="u-srOnly">Downvote</span></a>
+		
+	</div>
+
+
+							
+						
+					</div>
+				</div>
+			
+		</div>
+	</div>
+
+			
+
+
+
+				
+
+	
+	
+
+	<div class="message message--simple">
+		<span class="u-anchorTarget" id="resource-review-309"></span>
+		<div class="message-inner">
+			<span class="message-cell message-cell--user">
+				
+					
+	<header itemscope="" itemtype="https://schema.org/Person" class="message-user">
+		<meta itemprop="name" content="MattTheTechLV">
+		<div class="message-avatar">
+			<div class="message-avatar-wrapper">
+				<a href="https://www.truenas.com/community/members/mattthetechlv.97589/" class="avatar avatar--s avatar--default avatar--default--dynamic" data-user-id="97589" data-xf-init="member-tooltip" style="background-color: #3399cc; color: #0f2e3d" id="js-XFUniqueId33">
+			<span class="avatar-u97589-s" role="img" aria-label="MattTheTechLV">M</span> 
+		</a>
+			</div>
+		</div>
+		<span class="message-userArrow"></span>
+	</header>
+
+				
+			</span>
+			<div class="message-cell message-cell--main">
+				<div class="message-content js-messageContent">
+					<div class="message-attribution message-attribution--plain">
+						
+
+						<ul class="listInline listInline--bullet">
+							<li class="message-attribution-user">
+								
+									<a href="https://www.truenas.com/community/members/mattthetechlv.97589/" class="username " dir="auto" itemprop="name" data-user-id="97589" data-xf-init="member-tooltip" id="js-XFUniqueId34">MattTheTechLV</a>
+								
+							</li>
+							<li>
+								
+	
+
+	<span class="ratingStars ratingStars--smaller" title="5.00 star(s)">
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="ratingStars-star ratingStars-star--full"></span>
+		<span class="u-srOnly">5.00 star(s)</span>
+	</span>
+
+							</li>
+							<li><a href="https://www.truenas.com/community/resources/detailed-newcomers-guide-to-crossflashing-lsi-9211-9300-9305-9311-9400-94xx-hba-and-variants.54/review/309/" class="u-concealed"><time class="u-dt" dir="auto" datetime="2019-09-03T01:20:06-0700" data-time="1567498806" data-date-string="Sep 3, 2019" data-time-string="1:20 AM" title="Sep 3, 2019 at 1:20 AM">Sep 3, 2019</time></a></li>
+							
+						</ul>
+					</div>
+
+					
+
+					
+
+	
+
+
+					<div class="message-body">
+						Hello! New To This Forum, but was looking for a guide to help a 
+friend Flash his 9211 Card I just had him buy, because I didn't have 
+time to walk him through the process, and I found this guide to be 
+INCREDIBLY informative and exactly what he needed! So awesome guide.<br>
+<br>
+However, as a pedantic point, I just had to point out, I am sorry I just
+ couldn't stop myself to signing up to this forum just to say this, I 
+just felt compelled to fix this one small point.<br>
+<br>
+PCIE Gen 1 is 2.5GT/s (or GigaTransfers a Second) which after the 8/10 
+Encoding works out to 250MBps per Lane. PCIE Gen 2 is 5GT/s, which works
+ out to 500Mbps Per Lane. Your Guide says that PCIE Gen 2 is capable of 
+250GBps per lane, which is actually about 500 times faster then PCIE Gen
+ 2 is capable of. <br>
+<br>
+In the grand scheme of this guide, this is really an irrelevant point, 
+as this guide is still one of the best cross flashing resources I have 
+seen on the net, but I still could not stop myself from pointing that 
+out. Sorry, character flaw I know...<br>
+<br>
+Anyways, Awesome fricking guide, thank you for making it, you have 
+literally saved me a nights work that I rather take off to play WOW 
+Classic. Have a great night!
+					</div>
+
+					
+
+	
+
+				</div>
+
+				
+
+				
+					<div class="message-responses js-messageResponses">
+					
+
+						
+							
+	<div class="message-responseRow">
+		<div class="comment">
+			<div class="comment-inner">
+				<span class="comment-avatar">
+					<a href="https://www.truenas.com/community/members/stilez.58706/" class="avatar avatar--xxs avatar--default avatar--default--dynamic" data-user-id="58706" data-xf-init="member-tooltip" style="background-color: #999966; color: #2e2e1f" id="js-XFUniqueId35">
+			<span class="avatar-u58706-s" role="img" aria-label="Stilez">S</span> 
+		</a>
+				</span>
+				<div class="comment-main">
+					<div class="comment-content">
+						<div class="comment-contentWrapper">
+							<a href="https://www.truenas.com/community/members/stilez.58706/" class="username  comment-user" dir="auto" itemprop="name" data-user-id="58706" data-xf-init="member-tooltip" id="js-XFUniqueId36">Stilez</a>
+							<div class="comment-body">"GB/sec" should be "MB/sec". That's a 
+typo and thanks for catching it. Pendantry is welcome and really 
+appreciated when it comes to things like this!<br>
+<br>
+But as best I understand it, the 
+substantially-lower-than-theoretical-maximum bandwidth is correct. 
+Specifically, the realistic figure *is* likely to be more like 250 MB/s 
+than 500 MB/s per lane when a PCIE card (of any speed) tops out - the 
+reduction I've included seems to be correct in principle even if the 
+exact reduction isn't well-defined.<br>
+<br>
+Apparently - and I'd love to be corrected if wrong - the problem is that
+ PCIE 2 bandwidth 5 GT/s is based on PCIE 2 full duplex (2.5 GT/s inward
+ and 2.5 GT/s outward??). So it assumes that at maximum bandwidth usage,
+ whatever's using the card can make full use of that full duplex 
+capability to achieve a total of 5 GT/s. But apparently disk storage use
+ doesn't make good use of full duplex at all efficiently. SATA can't use
+ it at all, and apparently SAS should be able to use it but in practice 
+doesn't make very good/efficient use of it. I can't find a hard answer 
+but that's the suggestion.<br>
+<br>
+I'm not an expert on bandwidth/efficiency aspects of SATA/SAS, so I'd 
+love to either see substantiation or correction. It's based on web pages
+ that note this issue. Ideally it needs corroboration from online 
+benchmarks of maximum bandwidth achieved on LSI 9211 based HBAs hosting 
+8-16 SSDs (testing with both SATA+SAS), and a suitable benchmark that 
+tries to write to all of them at the highest rates, or something. I 
+imagine it would be quite sensitive to setup as well since there are 
+multiple potential ways it could bottleneck.<br>
+<br>
+So in a *realistic* sense, if you attach a bunch of SSD/HDDs to a PCIE 2
+ HBA, I gathere from these, that the *effective* bandwidth ceiling might
+ well be closer to the half-duplex figure based on 2.5 GT/s = 250 MB/s 
+per lane, or at least significantly less than the full duplex 500 MB/s 
+headline bandwidth for PCIE 2 x 8 with optimised use of the PCIE bus. 
+But like I said, I can't find a rigorously tested answer, just hints 
+that that's the case. I've clarified this point in the resource so it 
+won't confuse anyone.<br>
+<br>
+I'd love to have this checked and thank you for picking up on it.</div>
+							
+						</div>
+					</div>
+
+					<div class="comment-actionBar actionBar">
+						<div class="actionBar-set actionBar-set--internal">
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+						
+
+						
+
+					
+					</div>
+				
+			</div>
+
+			
+				<div class="message-cell message-cell--vote">
+					<div class="message-column">
+						
+							
+								
+
+	
+	
+	<div class="contentVote  js-contentVote " data-xf-init="content-vote" data-content-id="resource_rating-309">
+		<a href="javascript:" class="contentVote-vote is-disabled contentVote-vote--up " data-vote="up"><span class="u-srOnly">Upvote</span></a>
+
+		<span class="contentVote-score   js-voteCount" data-score="0">0</span>
+
+		
+			<a href="javascript:" class="contentVote-vote is-disabled contentVote-vote--down " data-vote="down"><span class="u-srOnly">Downvote</span></a>
+		
+	</div>
+
+
+							
+						
+					</div>
+				</div>
+			
+		</div>
+	</div>
+
+			
+
+
+
+			</div>
+			<div class="block-footer">
+				<span class="block-footer-controls"><a href="https://www.truenas.com/community/resources/detailed-newcomers-guide-to-crossflashing-lsi-9211-9300-9305-9311-9400-94xx-hba-and-variants.54/reviews" class="button--link button"><span class="button-text">Read more…</span></a></span>
+			</div>
+		</div>
+	</div>
+</div>
+				
+	
+
+		
+			
+		
+
+		
+	
+
+
+			</div>
+
+			
+		</div>
+
+		
+	
+
+		
+			
+		
+
+		
+	
+
+
+		
+	
+		<ul class="p-breadcrumbs p-breadcrumbs--bottom" itemscope="" itemtype="https://schema.org/BreadcrumbList">
+		
+			
+
+			
+			
+
+			
+				
+				
+	<li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
+		<a href="https://www.truenas.com/community/resources/" itemprop="item">
+			<span itemprop="name">Resources</span>
+		</a>
+		<meta itemprop="position" content="1">
+	</li>
+
+			
+			
+				
+				
+	<li itemprop="itemListElement" itemscope="" itemtype="https://schema.org/ListItem">
+		<a href="https://www.truenas.com/community/resources/categories/hardware.1/" itemprop="item">
+			<span itemprop="name">Hardware</span>
+		</a>
+		<meta itemprop="position" content="2">
+	</li>
+
+			
+
+		
+		</ul>
+	
+
+		
+	
+
+		
+			
+		
+
+		
+	
+
+
+	</div>
+</div>
+
+<footer class="p-footer" id="footer" style="margin-bottom: 0px;">
+	<div class="p-footer-inner">
+
+	
+
+		
+			
+		
+
+		
+	
+
+
+	
+
+		
+			
+		
+
+		
+	
+
+
+		<div class="p-footer-row">
+			
+				<div class="p-footer-row-main">
+					<ul class="p-footer-linkList">
+					
+						
+							<li><a href="https://www.truenas.com/community/misc/style" data-xf-click="overlay" data-xf-init="tooltip" rel="nofollow" data-original-title="Style chooser" id="js-XFUniqueId37">
+								<i class="fa--xf far fa-paint-brush" aria-hidden="true"></i> New Style
+							</a></li>
+						
+						
+					
+					</ul>
+				</div>
+			
+			<div class="p-footer-row-opposite">
+				<ul class="p-footer-linkList">
+					
+
+					
+
+					
+						<li><a href="https://www.truenas.com/community/help/privacy-policy/">Privacy policy</a></li>
+					
+
+					
+						<li><a href="https://www.truenas.com/community/help/">Help</a></li>
+					
+
+					
+						<li><a href="https://www.truenas.com/community/">Home</a></li>
+					
+
+					<li><a href="https://www.truenas.com/community/forums/-/index.rss" target="_blank" class="p-footer-rssLink" title="RSS"><span aria-hidden="true"><i class="fa--xf far fa-rss" aria-hidden="true"></i><span class="u-srOnly">RSS</span></span></a></li>
+				</ul>
+			</div>
+		</div>
+
+		
+
+		
+	</div>
+</footer>
+
+	
+
+		
+			
+		
+
+		
+	
+
+
+</div> <!-- closing p-pageWrapper -->
+
+<div class="u-bottomFixer js-bottomFixTarget">
+	
+	
+		
+	
+		
+		
+		
+
+		
+	
+
+	
+</div>
+
+
+	<div class="u-scrollButtons js-scrollButtons" data-trigger-type="up">
+		<a href="#top" class="button--scroll button" data-xf-click="scroll-to"><span class="button-text"><i class="fa--xf far fa-arrow-up" aria-hidden="true"></i><span class="u-srOnly">Top</span></span></a>
+		
+	</div>
+
+
+
+	<script src="Detailed%20newcomers'%20guide%20to%20crossflashing%20LSI%209211_9300_9305_9311_9400_94xx%20HBA%20and%20variants%20|%20TrueNAS%20Community-Dateien/jquery.js"></script><script>window.jQuery || document.write('<script src="/community/js/vendor/jquery/jquery-3.5.1.min.js?_v=0e9d8d1d"><\/script>')</script>
+	<script src="Detailed%20newcomers'%20guide%20to%20crossflashing%20LSI%209211_9300_9305_9311_9400_94xx%20HBA%20and%20variants%20|%20TrueNAS%20Community-Dateien/vendor-compiled.js"></script>
+	<script src="Detailed%20newcomers'%20guide%20to%20crossflashing%20LSI%209211_9300_9305_9311_9400_94xx%20HBA%20and%20variants%20|%20TrueNAS%20Community-Dateien/core-compiled.js"></script>
+
+	
+
+
+
+<script>
+	XF.samViewCountMethod = "view";
+	XF.samServerTime = 1678623174;
+</script>
+	
+	
+
+		
+			
+		
+
+		
+	
+
+
+	<script src="Detailed%20newcomers'%20guide%20to%20crossflashing%20LSI%209211_9300_9305_9311_9400_94xx%20HBA%20and%20variants%20|%20TrueNAS%20Community-Dateien/lightbox-compiled.js"></script>
+<script src="Detailed%20newcomers'%20guide%20to%20crossflashing%20LSI%209211_9300_9305_9311_9400_94xx%20HBA%20and%20variants%20|%20TrueNAS%20Community-Dateien/comment.js"></script>
+<script src="Detailed%20newcomers'%20guide%20to%20crossflashing%20LSI%209211_9300_9305_9311_9400_94xx%20HBA%20and%20variants%20|%20TrueNAS%20Community-Dateien/core.js"></script>
+<script src="Detailed%20newcomers'%20guide%20to%20crossflashing%20LSI%209211_9300_9305_9311_9400_94xx%20HBA%20and%20variants%20|%20TrueNAS%20Community-Dateien/notice.js"></script>
+
+	<script>
+		jQuery.extend(true, XF.config, {
+			// 
+			userId: 0,
+			enablePush: false,
+			pushAppServerKey: '',
+			url: {
+				fullBase: 'https://www.truenas.com/community/',
+				basePath: '/community/',
+				css: '/community/css.php?css=__SENTINEL__&s=3&l=1&d=1671249256',
+				keepAlive: '/community/login/keep-alive'
+			},
+			cookie: {
+				path: '/',
+				domain: '',
+				prefix: 'xf_',
+				secure: true
+			},
+			cacheKey: '4f078cd626cbaae259bd9d57045f5892',
+			csrf: '1678623174,73a66bd96a98431af4d9820008e6a72e',
+			js: {"\/community\/js\/xf\/lightbox-compiled.js?_v=0e9d8d1d":true,"\/community\/js\/xf\/comment.min.js?_v=0e9d8d1d":true,"\/community\/js\/siropu\/am\/core.min.js?_v=0e9d8d1d":true,"\/community\/js\/xf\/notice.min.js?_v=0e9d8d1d":true},
+			css: {"public:attachments.less":true,"public:lightbox.less":true,"public:message.less":true,"public:notices.less":true,"public:rating_stars.less":true,"public:share_controls.less":true,"public:siropu_ads_manager_ad.less":true,"public:xfrm.less":true,"public:extra.less":true},
+			time: {
+				now: 1678623174,
+				today: 1678608000,
+				todayDow: 0,
+				tomorrow: 1678690800,
+				yesterday: 1678521600,
+				week: 1678089600
+			},
+			borderSizeFeature: '3px',
+			fontAwesomeWeight: 'r',
+			enableRtnProtect: true,
+			
+			enableFormSubmitSticky: true,
+			uploadMaxFilesize: 314572800,
+			allowedVideoExtensions: ["m4v","mov","mp4","mp4v","mpeg","mpg","ogv","webm"],
+			allowedAudioExtensions: ["mp3","ogg","wav"],
+			shortcodeToEmoji: true,
+			visitorCounts: {
+				conversations_unread: '0',
+				alerts_unviewed: '0',
+				total_unread: '0',
+				title_count: true,
+				icon_indicator: true
+			},
+			jsState: {},
+			publicMetadataLogoUrl: '',
+			publicPushBadgeUrl: 'https://www.truenas.com/community/styles/default/xenforo/bell.png'
+		});
+
+		jQuery.extend(XF.phrases, {
+			// 
+			date_x_at_time_y: "{date} at {time}",
+			day_x_at_time_y:  "{day} at {time}",
+			yesterday_at_x:   "Yesterday at {time}",
+			x_minutes_ago:    "{minutes} minutes ago",
+			one_minute_ago:   "1 minute ago",
+			a_moment_ago:     "A moment ago",
+			today_at_x:       "Today at {time}",
+			in_a_moment:      "In a moment",
+			in_a_minute:      "In a minute",
+			in_x_minutes:     "In {minutes} minutes",
+			later_today_at_x: "Later today at {time}",
+			tomorrow_at_x:    "Tomorrow at {time}",
+
+			day0: "Sunday",
+			day1: "Monday",
+			day2: "Tuesday",
+			day3: "Wednesday",
+			day4: "Thursday",
+			day5: "Friday",
+			day6: "Saturday",
+
+			dayShort0: "Sun",
+			dayShort1: "Mon",
+			dayShort2: "Tue",
+			dayShort3: "Wed",
+			dayShort4: "Thu",
+			dayShort5: "Fri",
+			dayShort6: "Sat",
+
+			month0: "January",
+			month1: "February",
+			month2: "March",
+			month3: "April",
+			month4: "May",
+			month5: "June",
+			month6: "July",
+			month7: "August",
+			month8: "September",
+			month9: "October",
+			month10: "November",
+			month11: "December",
+
+			active_user_changed_reload_page: "The active user has changed. Reload the page for the latest version.",
+			server_did_not_respond_in_time_try_again: "The server did not respond in time. Please try again.",
+			oops_we_ran_into_some_problems: "Oops! We ran into some problems.",
+			oops_we_ran_into_some_problems_more_details_console: "Oops! We ran into some problems. Please try again later. More error details may be in the browser console.",
+			file_too_large_to_upload: "The file is too large to be uploaded.",
+			uploaded_file_is_too_large_for_server_to_process: "The uploaded file is too large for the server to process.",
+			files_being_uploaded_are_you_sure: "Files are still being uploaded. Are you sure you want to submit this form?",
+			attach: "Attach files",
+			rich_text_box: "Rich text box",
+			close: "Close",
+			link_copied_to_clipboard: "Link copied to clipboard.",
+			text_copied_to_clipboard: "Text copied to clipboard.",
+			loading: "Loading…",
+			you_have_exceeded_maximum_number_of_selectable_items: "You have exceeded the maximum number of selectable items.",
+
+			processing: "Processing",
+			'processing...': "Processing…",
+
+			showing_x_of_y_items: "Showing {count} of {total} items",
+			showing_all_items: "Showing all items",
+			no_items_to_display: "No items to display",
+
+			number_button_up: "Increase",
+			number_button_down: "Decrease",
+
+			push_enable_notification_title: "Push notifications enabled successfully at TrueNAS Community",
+			push_enable_notification_body: "Thank you for enabling push notifications!"
+		,
+			"svStandardLib_time.day": "{count} day",
+			"svStandardLib_time.days": "{count} days",
+			"svStandardLib_time.hour": "{count} hour",
+			"svStandardLib_time.hours": "{count} hours",
+			"svStandardLib_time.minute": "{count} minutes",
+			"svStandardLib_time.minutes": "{count} minutes",
+			"svStandardLib_time.month": "{count} month",
+			"svStandardLib_time.months": "{count} months",
+			"svStandardLib_time.second": "{count} second",
+			"svStandardLib_time.seconds": "{count} seconds",
+			"svStandardLib_time.week": "time.week",
+			"svStandardLib_time.weeks": "{count} weeks",
+			"svStandardLib_time.year": "{count} year",
+			"svStandardLib_time.years": "{count} years"
+
+		});
+	</script>
+
+	<form style="display:none" hidden="hidden">
+		<input type="text" name="_xfClientLoadTime" value="1678623175,1678623174" id="_xfClientLoadTime" title="_xfClientLoadTime" tabindex="-1">
+	</form>
+
+	
+
+
+
+
+
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "CreativeWork",
+		"@id": "https:\/\/www.truenas.com\/community\/resources\/detailed-newcomers-guide-to-crossflashing-lsi-9211-9300-9305-9311-9400-94xx-hba-and-variants.54\/",
+		"name": "Detailed newcomers' guide to crossflashing LSI 9211\/9300\/9305\/9311\/9400\/94xx HBA and variants",
+		"headline": "Detailed newcomers' guide to crossflashing LSI 9211\/9300\/9305\/9311\/9400\/94xx HBA and variants",
+		"alternativeHeadline": "Making sense of the software, the process, getting it to work first time. Includes EFI and OEMs",
+		"description": "There's hundreds of threads on crossflashing variants of LSI 9211\/9300\/9305\/9311\/94xx cards here, on ServeTheHome, and on blogs. But they don't always discuss the subtleties of doing it on an EFI board for users who may never have used EFI...",
+		
+		
+			"thumbnailUrl": "https:\/\/www.truenas.com\/community\/data\/resource_icons\/0\/54.jpg?1520498653",
+		
+		"dateCreated": "2017-06-04T12:05:32-07:00",
+		"dateModified": "2017-06-04T12:05:32-07:00",
+		"aggregateRating": {
+			"@type": "AggregateRating",
+			"ratingCount": "16",
+			"ratingValue": "5"
+		},
+		
+			"discussionUrl": "https:\/\/www.truenas.com\/community\/threads\/detailed-newcomers-guide-to-crossflashing-lsi-9211-9300-9305-9311-9400-94xx-hba-and-variants.55096\/",
+		
+		"author": {
+			"@type": "Person",
+			"name": "Stilez"
+		}
+	}
+	</script>
+
+
+
+	
+
+		
+			
+		
+
+		
+	
+
+
+
+
+
+
+
+
+
+
+
+
+</body></html>
