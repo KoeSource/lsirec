@@ -59,9 +59,12 @@ UEFI BSD_P20 -> mptsas2.rom, x64sas2.rom
 
 Oder Firmware von Zip Archiv benutzen:
 ```
-apt install unzip
-unzip Firmware_9211.zip
+apt install zip unzip
+unzip Firmware.zip
 ```
+
+Create Zip <br>
+`zip -r Firmware.zip ./*`
 
 ## Crosflass guide  - Kurz
 
@@ -74,8 +77,8 @@ unzip Firmware_9211.zip
 Backup
 
 ```
-1.  Upload FLASH section
-    1. Complete (all sections)
+46.  Upload FLASH section
+    5. Complete (all sections)
 ```
 
 ```
@@ -107,6 +110,8 @@ Flashen
     UEFI = x64sas2.rom
 ```
 
+lsirec verlassen
+
 `lspci | grep -i SAS2008`
 
 `./lsirec 0000:01:00.0 readsbr sbr_backup.bin`
@@ -128,7 +133,7 @@ Neustart oder:
 `lsiutil -e`
 
 ```
-1.   Change SAS WWID
+18.   Change SAS WWID
 ```
 
 ## Crossflash guide - Lang
@@ -146,8 +151,8 @@ In den Pfad wechseln mit der Firmware rom. lsiutil starten.
 Adapter auswählen, Backup erstellen:
 
 ```
-1.  Upload FLASH section
-    1. Complete (all sections)
+46.  Upload FLASH section
+    5. Complete (all sections)
 ```
 
 Folgende Ausgaben in einer Datei Speichern:
