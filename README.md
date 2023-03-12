@@ -38,7 +38,7 @@ IOMMU deaktivieren:
 
 Wie folgt bearbeiten: <br>
 Alt: `GRUB_CMDLINE_LINUX_DEFAULT="quiet"` <br>
-Neu : `GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_iommu=off amd_iommu=off `
+Neu : `GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_iommu=off amd_iommu=off iommu=off iomem=relaxed"`
 
 `update-grub`
 
@@ -57,7 +57,7 @@ Tip: Falls dies nicht funktioniert, die Virtualisierungsoptionen im BIOS ausscha
 9211-8i P20 -> 2118ir.bin, 2118it.bin <br>
 UEFI BSD_P20 -> mptsas2.rom, x64sas2.rom
 
-Unzip
+Oder Firmware von Zip Archiv benutzen:
 ```
 apt install unzip
 unzip Firmware_9211.zip
