@@ -1,222 +1,246 @@
-## lsirec - LSI SAS2008/2108 HBA low-level recovery tool for Linux
+# Linux SAS2008/2108 HBA Crossflash - lsirec
 
-Currently supports reading and writing the SBR and booting the card in host
-boot mode.
+```
+IT Firmware = HBA Modus
+IR Firmware = RAID Modus
+```
 
-Use [lsiutil](https://github.com/exactassembly/meta-xa-stm/blob/master/recipes-support/lsiutil/files/)
-to crossflash between IT/IR firmwares from Linux, without vendor/product ID
-restrictions.
+Für ZFS somit die IT Firmware verwenden. <br>
 
-IT = HBA, not bootable (ZFS)
 
-IR = RAID, bootable, needs to initialize on boot
+## lsiutil  installation
 
-## Quick guide to cleanly crossflash between IT/IR firmwares
+---
 
-`# lsiutil -e`
+Zum Crossflashen wird lsiutil benötigt. <br>
+lsiutil hat keine Produkt/Hersteller beschränkungen. <br>
+Somit können jegliche Karten geflasht werden.
 
-Select your adapter.
+Beispiel installation Debian 11:
 
-`46.  Upload FLASH section` → `5.  Complete (all sections)`
+```
+cd recipes-support/lsiutil/files/lsiutil-1.72.tar.gz
+tar -xvf lsiutil-1.72.tar.gz
+cd lsiutil
+apt-get install build-essential
+make -f Makefile_Linux
+cd ../lsirec
+make
+```
 
-Make a complete Flash backup to be safe.
+## Vorbereitungen
 
-`67.  Dump all port state`
+---
 
-`68.  Show port state summary`
+IOMMU deaktivieren:
 
-Copy and paste these somewhere safe. Take special note of the SAS WWID.
+`vi /etc/default/grub`
 
-`33.  Erase non-volatile adapter storage` → `3.  FLASH`, then also
-`8.  Persistent manufacturing config pages`
+Wie folgt bearbeiten: <br>
+Alt: `GRUB_CMDLINE_LINUX_DEFAULT="quiet"` <br>
+Neu : `GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_iommu=off amd_iommu=off `
 
-Wipe the whole Flash. This will take a while. Option number 3 excludes the
-manufacturing config pages, so you need both.
+`update-grub`
 
-`2.  Download firmware (update the FLASH)`
+Reboot
 
-Flash the new firmware. Optionally, use
-`4.  Download/erase BIOS and/or FCode (update the FLASH)` to flash the BIOS/EFI
-module (not necessary if you're not booting from the adapter).
+Kontrolle, IOMMU sollte nicht verfügbar sein.
 
-x86 = mptsas2.rom
-fcode = return
-efi = mptsas2.rom
+`dmesg|grep -i iommu`
 
-Exit lsiutil.
+Tip: Falls dies nicht funktioniert, die Virtualisierungsoptionen im BIOS ausschalten.
 
-`# lspci | grep -i SAS2008`
 
-`# ./lsirec 0000:01:00.0 readsbr sbr_backup.bin`
+## Crosflass guide  - Kurz
 
-Where 0000:01:00.0 is your PCI device ID.
+---
 
-`# python3 sbrtool.py parse sbr_backup.bin sbr.cfg`
-`# python3 sbrtool.py parse sbr_backup.bin FUJITSUHACKSBR.BIN`
-
-Use the example .cfg
-
-Edit sbr.cfg with your favorite text editor. You may want to add
-`SASAddr = 0xYOUR_SAS_WWID` to make the SAS WWID persist in the SBR (I'm not
-sure which firmwares use this, but I've seen it in some SBRs). You may want to
-change the Subsystem VID/PID, or use another SBR as a template.
-
-`# python3 sbrtool.py build sbr.cfg sbr_new.bin`
-`# python3 sbrtool.py build sbr.cfg sbr_hack.bin`
-
-`# ./lsirec 0000:01:00.0 writesbr sbr_new.bin`
-`# ./lsirec 0000:01:00.0 writesbr FUJITSUHACKSBR.BIN`
-
-Reboot and cross your fingers.
-
-When the system comes back up, if all went well, launch `lsiutil -e` again and
-use `18.  Change SAS WWID` to update the WWID if necessary, then reboot again
-(this writes it to the config section in Flash, not to the SBR).
-
-*NEW*: instead of rebooting, you can use:
-
-`# ./lsirec 0000:01:00.0 info`
-`# ./lsirec 0000:01:00.0 reset`
-`# ./lsirec 0000:01:00.0 rescan`
+***WICHTIG: Zuerst guide unten lesen!*** <br>
 
 `lsiutil -e`
-`18.  Change SAS WWID`
 
-
-Make sure your disks are not in use if you do this. `reset` might fail if you
-have just flashed a new firmware. This is normal, as the adapter takes a while
-to copy the firmware to the backup area on first boot. Wait a few seconds and
-use `# ./lsirec 0000:01:00.0 info` until it returns `IOC is READY`.
-
-## UNTESTED procedure to convert from MegaRAID to IT/IR firmware or recover a bricked card
-
-WARNING: this is completely untested. Host boot support has only been tested
-so far on a card that was already IT/IR. Please report back if you try this.
-This process initially boots the IT/IR firwmare without touching Flash, and I'm
-not sure if it might balk at whatever MegaRAID stuff was left there before we
-have a chance to wipe it.
-
-This procedure (obviously) resets the adapter, so make sure your disks are not
-in use and any dm/md/lvm mappings have been removed!
-
-This mode requires HugeTLB support enabled in your kernel:
-
-`# echo 16 > /proc/sys/vm/nr_hugepages`
-
-This process is also incompatible with IOMMUs. If you have one, make sure it
-is not active (e.g. check that `/sys/kernel/iommu_groups` is an empty
-directory).
-
-Make note of your SAS WWID (e.g. using MegaCLI or the kernel interfaces).
-
-`# ./lsirec 0000:01:00.0 unbind`
-
-Where 0000:01:00.0 is your PCI device ID. Unbind the kernel driver (if any).
-
-`# ./lsirec 0000:01:00.0 halt`
-
-Halt the IOP, so that the firmware will not interfere with subsequent
-operations.
-
-`# ./lsirec 0000:01:00.0 readsbr sbr_backup.bin`
-
-Back up your MegaRAID SBR.
-
-`# python3 sbrtool.py parse sbr_backup.bin sbr.cfg`
-
-Edit sbr.cfg with your favorite text editor. You'll probably want to use an IT
-SBR as a template, such as
-[sbr_sas9211-8i_itir.cfg](sample_sbr/sbr_sas9211-8i_itir.cfg). At the very
-least you need to set `PCIPID` properly (`0x0072` for SAS2008-based cards) and
-set `Interface` to `0x00` for IT/IR mode. You may want to add
-`SASAddr = 0xYOUR_SAS_WWID` to make the SAS WWID persist in the SBR (I'm not
-sure which firmwares use this, but I've seen it in some SBRs).
-
-`# python3 sbrtool.py build sbr.cfg sbr_new.bin`
-
-`# ./lsirec 0000:01:00.0 writesbr sbr_new.bin`
-
-Write the new IT/IR mode SBR. This does not immediately take effect.
-
-`# ./lsirec 0000:01:00.0 hostboot 2118it.bin`
-
-Where 2118it.bin is your desired firmware. If all went well, you should see
-something like this:
+Backup
 
 ```
-# ./lsirec 0000:01:00.0 hostboot 2118it.bin
-Device in MPT mode
-Resetting adapter in HCB mode...
-Trying unlock in MPT mode...
-Device in MPT mode
-IOC is RESET
-Setting up HCB...
-HCDW virtual: 0x7fca79e00000
-HCDW physical: 0x439a00000
-Loading firmware...
-Loaded 722708 bytes
-Booting IOC...
-IOC is READY
-IOC Host Boot successful.
+1.  Upload FLASH section
+    1. Complete (all sections)
 ```
 
-At this point the PCI VID/PID should've changed, but the kernel will not have
-noticed. Check with lspci:
+```
+67.  Dump all port state
+68.  Show port state summary
+    (SAS WWID wird später benötigt)
+```
 
-`# lspci -vns 0000:01:00.0 -A linux-sysfs | head -n 2`
+Löschen
 
-`# lspci -vns 0000:01:00.0 -A intel-conf1 | head -n 2`
+```
+33.  Erase non-volatile adapter storage
+    3.  FLASH
+    8.  Persistent manufacturing config pages
+```
 
-The first command should still show the old VID/PID, but the second one should
-show the new (MPT mode) ones. To make the kernel notice:
+Flashen
 
-`# ./lsirec 0000:01:00.0 rescan`
+```
+2.  Download firmware (update the FLASH)
+    2118it.bin (HBA)
+    oder 2118ir.bin (RAID)
+```
 
-This removes the PCI device from the kernel and requests a rescan. At this point
-the mpt3sas kernel driver should load. Check `dmesg` for any errors.
+```
+4.  Download/erase BIOS and/or FCode (update the FLASH)
+    BIOS = mptsas2.rom
+    FCode -> Return, leer lassen
+    UEFI = x64sas2.rom
+```
 
-If all went well, you can use lsiutil to wipe Flash and flash your new firmware:
+`lspci | grep -i SAS2008`
 
-`# lsiutil -e`
+`./lsirec 0000:01:00.0 readsbr sbr_backup.bin`
 
-Select your adapter.
+`python3 sbrtool.py parse sbr_backup.bin sbr.cfg`
 
-`46.  Upload FLASH section` → `5.  Complete (all sections)`
+sbr.cfg bearbeiten
 
-Make a complete Flash backup to be safe.
+`python3 sbrtool.py build sbr.cfg sbr_new.bin`
 
-`33.  Erase non-volatile adapter storage` → `3.  FLASH`, then also
-`8.  Persistent manufacturing config pages`
+`./lsirec 0000:01:00.0 writesbr sbr_new.bin`
 
-Wipe the whole Flash. This will take a while. Option number 3 excludes the
-manufacturing config pages, so you need both.
+Neustart oder:
 
-`2.  Download firmware (update the FLASH)`
+`./lsirec 0000:01:00.0 info` <br>
+`./lsirec 0000:01:00.0 reset` <br>
+`./lsirec 0000:01:00.0 rescan`
 
-Flash the new firmware. Optionally, use
-`4.  Download/erase BIOS and/or FCode (update the FLASH)` to flash the BIOS/EFI
-module (not necessary if you're not booting from the adapter).
+`lsiutil -e`
 
-Exit lsiutil.
+```
+1.   Change SAS WWID
+```
 
-Finally, if all went well, reset into normal mode:
+## Crossflash guide - Lang
 
-`# ./lsirec 0000:01:00.0 reset`
+---
+<br>
 
-This might complain about IOC not becoming ready, but this is normal, as the
-first boot takes longer. Use `./lsirec 0000:01:00.0 info` after a few seconds
-and check for `IOC is READY`.
+***WICHTIG: ALLE DATENTRÄGER ENTFERNTEN!*** <br>
+***NICHT FLASHEN WENN DATENTRÄGER ANGESCHLOSSEN SIND!***
 
-`# ./lsirec 0000:01:00.0 rescan`
+In den Pfad wechseln mit der Firmware rom. lsiutil starten.
 
-If all went well, `dmesg` should show the driver loading again successfully.
-Launch `lsiutil -e` again and use `18.  Change SAS WWID` to update the WWID
-if necessary, then `reset` and `rescan` again to make sure the kernel sees the
-new WWID.
+`lsiutil -e`
 
-Enjoy your shiny new IT/IR-mode HBA.
+Adapter auswählen, Backup erstellen:
+
+```
+1.  Upload FLASH section
+    1. Complete (all sections)
+```
+
+Folgende Ausgaben in einer Datei Speichern:
+
+```
+67.  Dump all port state
+68.  Show port state summary
+    (SAS WWID wird später benötigt)
+```
+
+FLASH und Manufacturing Config Pages löschen, kann paar Minuten dauern:
+
+```
+33.  Erase non-volatile adapter storage
+    3.  FLASH
+    8.  Persistent manufacturing config pages
+```
+Neue Firmware Flashen:
+
+```
+2.  Download firmware (update the FLASH)
+    2118it.bin (HBA)
+    oder 2118ir.bin (RAID)
+```
+
+Wenn benötigt kann nun das BIOS und UEFI Option ROM geflasht werden:
+```
+4.  Download/erase BIOS and/or FCode (update the FLASH)
+    BIOS = mptsas2.rom
+    FCode -> Return, leer lassen
+    UEFI = x64sas2.rom
+```
+
+Hinweis : BIOS und UEFI ROMs können geflasht werden.
+Somit werden UEFI und BIOS Boot unterstützt.
+
+Hinweis: Das Booten des Rechners dauer länger wenn man das Option ROM verwendet.
+Diesen Schritt kann auch übersprungen werden wenn man den Boot-Support nich benötigt.
+
+lsiutil beenden.
+
+PCIe Adresse auslesen, diese muss ggf. angepasst werden bei den nächsten Schritten:
+
+`lspci | grep -i SAS2008`
+
+SBR Backup erstellen, korrekter PCIe Anschluss verwenden!:
+
+`./lsirec 0000:01:00.0 readsbr sbr_backup.bin`
+
+sbr.cfg anpassen, siehe sample_sbr vorlagen.<br>
+SASAddr eintragen `SASAddr = 0xYOUR_SAS_WWID`. <br> 
+Subsystem VID/PID anpassen oder gleich lassen.
+
+Hinweis: Die SASAddr wird im sbr sehr selten benötigt. <br>
+Der Controller funktioniert auch ohne sie. <br>
+Da wir aber ein Backup erstellt haben tragen wir sie wieder ein.
+
+`python3 sbrtool.py parse sbr_backup.bin sbr.cfg`
+
+`python3 sbrtool.py build sbr.cfg sbr_new.bin`
+
+`./lsirec 0000:01:00.0 writesbr sbr_new.bin`
+
+Neustart
+
+Die SAS WWID beim Controller hinterlegen. <br>
+Hier wird empfohlen die SAS Adresse zu hinterlegen. <br>
+Wenn mehrere Controller im selben System verwendet werden dient diese als ID. <br>
+(Ist nicht das gleiche wie der SBR)
+
+`lsiutil -e`
+
+```
+18.  Change SAS WWID
+```
+
+*NEW*: Anstatt ein neustart können folgende befehle verwendet werden:
+
+`./lsirec 0000:01:00.0 info` <br>
+`./lsirec 0000:01:00.0 reset` <br>
+`./lsirec 0000:01:00.0 rescan`
+
+`reset` Wird am Anfang fehlschlagen da die neue Firmware gestartet werden muss. <br>
+Sobald `IOC is READY` steht ist der Controller bereit.<br>
+Kann mit `info` abgefragt werden.
+
+<br>
+
+## Probleme
+
+---
+
+**mmap bar1**
+
+Add `iomem=relaxed` to /etc/default/grub.<br>
+`update-grub`
+
+<br>
 
 ## Disclaimer
+
+---
+
+***Dieses Tool ist nur für Controller mit einem SAS2x08 Chipset ausgelegt.*** <br>
+***Verwendung auf eingene Gefahr***
 
 This has barely been tested a couple of cards. Don't blame me if this bricks or
 smokes your HBA.
@@ -232,5 +256,7 @@ triggered a PCI error in syslog (though the controller kept working). Your
 mileage may vary. I have not yet tried crossflashing it live to IT/IR mode.
 
 ## License
+
+---
 
 2-clause BSD. See the LICENSE file.
