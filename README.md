@@ -120,20 +120,30 @@ lsirec verlassen
 
 sbr.cfg bearbeiten
 
-`python3 sbrtool.py build sbr.cfg sbr_new.bin`
+`python3 sbrtool.py build sbr.cfg sbr_new.bin`<br>
+oder<br>
+`python3 sbrtool.py parse D2607haxsbr.bin sbr.cfg`
 
 `./lsirec 0000:01:00.0 writesbr sbr_new.bin`
 
-Neustart oder:
+PC Neustart oder:
 
 `./lsirec 0000:01:00.0 info` <br>
 `./lsirec 0000:01:00.0 reset` <br>
+
+Geduld (30s), Controller rebootet. Check with info. <br>
+Reset erneut wenn nötig.
+
+`./lsirec 0000:01:00.0 info` <br>
 `./lsirec 0000:01:00.0 rescan`
+
+
 
 `lsiutil -e`
 
 ```
 18.   Change SAS WWID
+68.  Show port state summary -> Kontrolle
 ```
 
 ## Crossflash guide - Lang
@@ -210,7 +220,9 @@ Hinweis: Die SASAddr wird im sbr sehr selten benötigt. <br>
 Der Controller funktioniert auch ohne sie. <br>
 Da wir aber ein Backup erstellt haben tragen wir sie wieder ein.
 
-`python3 sbrtool.py parse sbr_backup.bin sbr.cfg`
+`python3 sbrtool.py parse sbr_backup.bin sbr.cfg` <br>
+oder<br>
+`python3 sbrtool.py parse D2607haxsbr.bin sbr.cfg`
 
 `python3 sbrtool.py build sbr.cfg sbr_new.bin`
 
@@ -251,6 +263,19 @@ Add `iomem=relaxed` to /etc/default/grub.<br>
 `update-grub`
 
 <br>
+
+
+## Fujitsu D2607 - Notizen
+
+`D2607haxsbr.bin` oder `sbr_fujitsu_d2607_itir.cfg` benutzen.
+
+Wird ein falscher SBR benutzt wird die Karte nicht korrekt erkannt (boot). <br>
+Getestet in einem Supermicro Server Board.<br>
+Im internet gibt es Artikel das der Controller plötzlich HDDs verliert.<br>
+**Daher den korrekten SBR verwenden**
+
+Siehe SMBus issue, ich gehe davon aus das dieser von einem falschen SBR kommt. <br>
+War beim D2607 auf jeden fall so!
 
 ## Disclaimer
 
