@@ -116,19 +116,20 @@ lsirec verlassen
 
 `./lsirec 0000:01:00.0 readsbr sbr_backup.bin`
 
-`python3 sbrtool.py parse sbr_backup.bin sbr.cfg`
+`python3 sbrtool.py parse sbr_backup.bin sbr.cfg` <br>
+oder<br>
+`python3 sbrtool.py parse D2607haxsbr.bin sbr.cfg`
 
 sbr.cfg bearbeiten
 
-`python3 sbrtool.py build sbr.cfg sbr_new.bin`<br>
-oder<br>
-`python3 sbrtool.py parse D2607haxsbr.bin sbr.cfg`
+`python3 sbrtool.py build sbr.cfg sbr_new.bin`
 
 `./lsirec 0000:01:00.0 writesbr sbr_new.bin`
 
 PC Neustart oder:
 
 `./lsirec 0000:01:00.0 info` <br>
+`./lsirec 0000:01:00.0 reset` <br>
 `./lsirec 0000:01:00.0 reset` <br>
 
 Geduld (30s), Controller rebootet. Check with info. <br>
